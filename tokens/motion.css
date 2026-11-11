@@ -1,0 +1,44 @@
+:root {
+  --duration-instant: 90ms; /* @kind other */
+  --duration-fast: 150ms; /* @kind other */
+  --duration-base: 220ms; /* @kind other */
+  --duration-slow: 380ms; /* @kind other */
+  --duration-reveal: 620ms; /* @kind other */
+
+  --ease-standard: cubic-bezier(0.2, 0, 0.2, 1); /* @kind other */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1); /* @kind other */
+
+  --transition-control: background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+  --transition-surface: box-shadow var(--duration-base) var(--ease-standard),
+    transform var(--duration-base) var(--ease-standard);
+
+  --press-scale: 0.985; /* @kind other */
+
+  /* Tooltip entrance: spring, stiffness 380 · damping 19 · mass 1, sampled for CSS */
+  --spring-tooltip: linear(0.000, 0.022, 0.085, 0.176, 0.281, 0.396, 0.520, 0.641, 0.750, 0.849, 0.938, 1.013, 1.070, 1.115, 1.145, 1.164, 1.172, 1.171, 1.162, 1.148, 1.131, 1.112, 1.091, 1.069, 1.050, 1.032, 1.016, 1.002, 0.991, 0.983, 0.977, 0.973, 0.971, 0.970, 0.971, 0.973, 0.976, 0.980, 0.983, 0.987, 1.000); /* @kind other */
+  --duration-tooltip: 450ms; /* @kind other */
+  --duration-tooltip-fade: 150ms; /* @kind other */
+  --tooltip-offset: 32px; /* @kind other */
+  --tooltip-scale-from: 0.92; /* @kind other */
+
+  /* Toast: same spring as the tooltip, over a much shorter travel */
+  --duration-toast: 7000ms; /* @kind other */
+  --duration-toast-fade: 150ms; /* @kind other */
+  --duration-toast-exit: 200ms; /* @kind other */
+  --toast-offset: 8px; /* @kind other */
+  --toast-inset: 16px; /* @kind other */
+
+  /* Menu open */
+  --duration-menu: 200ms; /* @kind other */
+  --duration-menu-close: 150ms; /* @kind other */
+  --ease-menu: cubic-bezier(0.2, 0, 0, 1); /* @kind other */
+  --menu-offset: 8px; /* @kind other */
+  --menu-scale-from: 0.98; /* @kind other */
+  --menu-row-offset: 4px; /* @kind other */
+  --menu-row-delay: 60ms; /* @kind other */
+  --menu-row-stagger: 20ms; /* @kind other */
+}

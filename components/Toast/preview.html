@@ -1,0 +1,45 @@
+<!-- @dsCard group="Overlays" height=300 subtitle="Four tones · 8px rise on the tooltip spring · 7s hold" -->
+<!doctype html>
+<meta charset="utf-8">
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;padding:16px;background:var(--surface-page,#EAEDEE);font:400 16px/1.45 var(--font-sans,"Inter",system-ui,sans-serif)}
+  .stage{position:relative;height:268px;display:flex;flex-direction:column-reverse;align-items:center;gap:8px;padding-bottom:16px}
+  .bar{position:absolute;top:0;left:0;display:flex;gap:8px}
+  .bar button{min-height:44px;padding:0 16px;border:1px solid var(--border-default,#C6CECE);border-radius:var(--radius-control,10px);
+    background:var(--surface-card,#fff);color:var(--text-body,#4F5B5C);font:600 15px/1.4 var(--font-sans,"Inter",system-ui,sans-serif);cursor:pointer}
+</style>
+<div id="root"></div>
+<script>
+  (function () {
+    var ns = window.InternalDesignSystem;
+    var e = React.createElement;
+    var SEED = [
+      { id: 1, tone: "success", message: "Quote sent to the homeowner." },
+      { id: 2, tone: "info", message: "Draft saved.", actionLabel: "Undo" },
+      { id: 3, tone: "warning", message: "Sent, but the permit date is still blank." }
+    ];
+    function Demo() {
+      var s = React.useState(SEED), items = s[0], set = s[1];
+      var n = React.useRef(4);
+      function drop(id) { set(function (xs) { return xs.filter(function (x) { return x.id !== id; }); }); }
+      function add(tone, message) {
+        var id = n.current++;
+        set(function (xs) { return xs.concat([{ id: id, tone: tone, message: message }]).slice(-3); });
+      }
+      return e("div", { className: "stage" },
+        items.map(function (x) {
+          return e(ns.Toast, {
+            key: x.id, tone: x.tone, message: x.message,
+            actionLabel: x.actionLabel, duration: Infinity, onDismiss: function () { drop(x.id); }
+          });
+        }),
+        e("div", { className: "bar" },
+          e("button", { onClick: function () { add("danger", "Couldn't send. Check the email address."); } }, "Fire a toast"),
+          e("button", { onClick: function () { n.current = 4; set(SEED); } }, "Reset")
+        )
+      );
+    }
+    ReactDOM.createRoot(document.getElementById("root")).render(e(Demo));
+  })();
+</script>

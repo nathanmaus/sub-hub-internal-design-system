@@ -1,0 +1,410 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap");
+
+/* Internal Design System, generated from tokens.json. Link this one file. */
+:root, [data-theme="light"] {
+  --teal-025: #F5F9F8; /* Sunken wells in light mode: table headers, inset panels. */
+  --teal-050: #EAF3F1; /* From the board: Text. Light page ground; strong text in dark. */
+  --teal-100: #D6E4E1; /* Light borders and info/neutral fills; body text in dark. */
+  --teal-200: #B5CBC7; /* Default control border in light; muted text in dark. */
+  --teal-300: #93AFAA; /* Strong borders and subtle text in dark. */
+  --teal-400: #71918C; /* Disabled labels, decorative marks. */
+  --teal-500: #55746F; /* Subtle text and strong borders in light; focus ring in light. */
+  --teal-600: #3F5D59; /* Muted text in light. */
+  --teal-700: #2B4A4D; /* Body text in light; subtle borders and ink fills in dark. */
+  --teal-800: #1A4146; /* Lifted card surface in dark, one step above the page. */
+  --teal-900: #0F3438; /* From the board: Background and Surface. Dark page, strong text in light, the label on sand. */
+  --teal-950: #0A2427; /* Sunken wells in dark. */
+  --sand-100: #F8F1E6; /* Brand-subtle fill in light. */
+  --sand-200: #EFE0C8; /* Pressed primary in dark; chart fills. */
+  --sand-300: #E5CDA9; /* Hover on sand in dark; link hover in dark. */
+  --sand-400: #D9B98A; /* From the board: Primary and Accent. Brand fill in both themes; link text in dark. Takes a teal-900 label, never white. */
+  --sand-500: #C29C66; /* Hover on sand in light. */
+  --sand-600: #9E7B48; /* Pressed primary in light; focused field border in light. */
+  --sand-700: #7A5C30; /* Link text in light. The darkest sand that still reads as sand. */
+  --sand-800: #5A4322; /* Link hover in light. */
+  --sand-900: #3A2D18; /* Brand-subtle fill in dark. */
+  --grey-500: #545655; /* From the board: Border. Default control border in dark. */
+  --yellow-800: #8A6208; /* Warning text in light. Darker than yellow-700 so the pill passes 4.5:1. */
+  --white: #ffffff; /* Card surface, text on blue and ink fills, switch thumb. */
+  --green-700: #07784f; /* Success text on green-100 and positive deltas. */
+  --green-900: #0b2f22; /* Deepest green. Success surfaces in dark. */
+  --green-600: #0e9f6e; /* Success dot and chart positives. Not text on white. */
+  --green-300: #5fd6a6; /* Light green. Success text in dark. */
+  --green-100: #ddf5ea; /* Success status background. */
+  --yellow-700: #a8760a; /* Warning text. Same value as amber-700; kept as the status-ramp name. */
+  --yellow-900: #3a2a0a; /* Deepest yellow. Warning surfaces in dark. */
+  --yellow-600: #e09e0a; /* Warning dot. Not text on white. */
+  --yellow-100: #fff6e0; /* Warning status background. Same value as amber-100. */
+  --red-700: #a81c1c; /* Danger text on red-100 and negative deltas. */
+  --red-900: #3a1c1c; /* Deepest red. Danger surfaces in dark. */
+  --red-600: #dc2b2b; /* Invalid field border, required asterisk, danger dot. */
+  --red-300: #f08f8f; /* Light red. Danger text in dark. */
+  --red-100: #fce4e4; /* Danger status background. */
+  --yellow-300: #FFD166; /* Warning text in dark. */
+  --text-strong: var(--teal-900); /* `teal-900` light · `teal-050` dark. Headings, emphasis, stat values. */
+  --text-body: var(--teal-700); /* `teal-700` light · `teal-100` dark. Default paragraph and control text. */
+  --text-muted: var(--teal-600); /* `teal-600` light · `teal-200` dark. Hints, footnotes, inactive tabs, quiet icon buttons. */
+  --text-subtle: var(--teal-500); /* `teal-500` light · `teal-300` dark. Eyebrows, placeholders, column headers. Tertiary only. */
+  --text-inverse: var(--teal-050); /* `teal-050` light · `teal-900` dark. Text on an inverse SURFACE (dark panel in light mode, light panel in dark). */
+  --text-on-brand: var(--teal-900); /* `teal-900`, both modes. Label on a sand FILL: primary buttons, solid icon buttons, badges on sand. Never white; white on sand is 1.9:1. */
+  --text-on-ink: var(--teal-050); /* `teal-050`, both modes. Label on a teal ink FILL: dark buttons. */
+  --text-on-dark: var(--teal-200); /* `teal-200`, both modes. Secondary text on teal-950 panels. */
+  --text-link: var(--sand-700); /* `sand-700` light · `sand-400` dark. Links and ghost button labels. */
+  --text-link-hover: var(--sand-800); /* `sand-800` light · `sand-300` dark. Link hover. */
+  --icon-default: var(--teal-900); /* `teal-900` light · `teal-050` dark. Fallback colour for an icon with no label beside it: a standalone Icon, or an SVG file used directly. Icons inside a control or next to text use currentColor instead, so they always match their label. */
+  --surface-page: var(--teal-050); /* `teal-050` light · `teal-900` dark. Page background. Dark is the board's Background. */
+  --surface-card: var(--white); /* `white` light · `teal-800` dark. Cards, tables, fields, menus. Lifted one step above the page in dark. */
+  --surface-sunken: var(--teal-025); /* `teal-025` light · `teal-950` dark. Table headers, inset wells, hover on light controls. */
+  --surface-inverse: var(--teal-900); /* `teal-900` light · `teal-050` dark. Inverse panels: dark on a light page, light on a dark page. */
+  --surface-ink: var(--teal-900); /* `teal-900` light · `teal-700` dark. Dark button and slab fills. */
+  --surface-brand: var(--sand-400); /* `sand-400`, both modes. Brand fill. */
+  --surface-brand-subtle: var(--sand-100); /* `sand-100` light · `sand-900` dark. Brand-tinted cards and ghost hover. */
+  --surface-accent: var(--sand-400); /* `sand-400`, both modes. Accent fill. Same as brand: Primary and Accent are one colour. */
+  --surface-accent-subtle: var(--sand-100); /* `sand-100` light · `sand-900` dark. Accent and AI badge fill. */
+  --surface-ai-subtle: var(--sand-100); /* `sand-100` light · `sand-900` dark. AI marker ground. */
+  --border-subtle: var(--teal-100); /* `teal-100` light · `teal-700` dark. Card edges, row rules. */
+  --border-default: var(--teal-200); /* `teal-200` light · `grey-500` dark. Resting border on inputs and outline buttons. Dark is the board's Border. */
+  --border-strong: var(--teal-500); /* `teal-500` light · `teal-300` dark. High-contrast dividers. */
+  --border-brand: var(--sand-600); /* `sand-600` light · `sand-400` dark. Focused field border. */
+  --border-accent: var(--sand-400); /* `sand-400`, both modes. Accent edge. */
+  --action-primary: var(--sand-400); /* `sand-400`, both modes. Primary button and switch on-state. Sand in both themes. */
+  --action-primary-hover: var(--sand-300); /* `sand-300`, both modes. Primary hover: lightens in both themes. */
+  --action-primary-active: var(--sand-500); /* `sand-500` light · `sand-200` dark. Primary pressed. Light stops at sand-500 so the teal label keeps 4.5:1. */
+  --action-secondary: var(--teal-900); /* `teal-900` light · `teal-700` dark. Dark button fill. */
+  --action-secondary-hover: var(--teal-800); /* `teal-800` light · `teal-600` dark. Dark button hover. */
+  --action-accent: var(--sand-400); /* `sand-400`, both modes. Accent button fill. */
+  --action-accent-hover: var(--sand-300); /* `sand-300`, both modes. Accent hover. */
+  --action-disabled-bg: var(--teal-100); /* `teal-100` light · `teal-700` dark. Disabled control fill. */
+  --action-disabled-text: var(--teal-400); /* `teal-400` light · `teal-500` dark. Disabled label. Deliberately below 4.5:1 so it reads as unavailable. */
+  --action-danger: var(--red-600); /* `red-600`, both modes. Destructive button fill. */
+  --action-danger-hover: var(--red-700); /* `red-700`, both modes. Destructive hover. */
+  --focus-ring: var(--teal-500); /* `teal-500` light · `sand-400` dark. Focus indicator hue. */
+  --status-success-text: var(--green-700); /* `green-700` light · `green-300` dark. Success labels. */
+  --status-success-bg: var(--green-100); /* `green-100` light · `green-900` dark. Success fill. */
+  --status-warning-text: var(--yellow-800); /* `yellow-800` light · `yellow-300` dark. Warning labels. */
+  --status-warning-bg: var(--yellow-100); /* `yellow-100` light · `yellow-900` dark. Warning fill. */
+  --status-danger-text: var(--red-700); /* `red-700` light · `red-300` dark. Danger labels and field errors. */
+  --status-danger-bg: var(--red-100); /* `red-100` light · `red-900` dark. Danger fill. */
+  --status-info-text: var(--teal-800); /* `teal-800` light · `teal-100` dark. Info labels. */
+  --status-info-bg: var(--teal-100); /* `teal-100` light · `teal-700` dark. Info fill. */
+  --status-neutral-text: var(--teal-600); /* `teal-600` light · `teal-200` dark. Draft and neutral labels. */
+  --status-neutral-bg: var(--teal-050); /* `teal-050` light · `teal-950` dark. Draft and neutral fill. Dark sits below the card so the pill stays visible. */
+  --chart-1: var(--sand-500); /* `sand-500` light · `sand-400` dark. First series. */
+  --chart-2: var(--teal-700); /* `teal-700` light · `teal-200` dark. Second series. */
+  --chart-3: var(--sand-300); /* `sand-300` light · `sand-600` dark. Third series. */
+  --chart-4: var(--teal-400); /* `teal-400`, both modes. Fourth series. */
+  --chart-5: var(--teal-200); /* `teal-200` light · `teal-600` dark. Fifth series. */
+  --border-inverse: rgba(234, 243, 241, 0.14); /* Dividers on inverse panels. */
+  --blueprint-rule-fine: rgba(234, 243, 241, 0.045); /* Minor grid on dark technical panels. */
+  --blueprint-rule-major: rgba(217, 185, 138, 0.16); /* Major grid on dark technical panels. */
+  --blueprint-glow-blue: rgba(85, 116, 111, 0.35); /* Radial teal glow behind blueprint artwork. Name kept for component compatibility. */
+  --blueprint-glow-amber: rgba(217, 185, 138, 0.16); /* Radial sand glow in a blueprint banner. Name kept for component compatibility. */
+  --blueprint-line: #D9B98A; /* Linework stroke. */
+  --blueprint-panel: #0A2427; /* Panel face in blueprint artwork. */
+
+  --shadow-none: none; /* Flat surfaces and ghost buttons. */
+  --shadow-xs: 0 1px 2px rgba(15, 52, 56, 0.06); /* Buttons and the switch thumb. */
+  --shadow-sm: 0 1px 2px rgba(15, 52, 56, 0.06), 0 1px 3px rgba(15, 52, 56, 0.05); /* Resting card and table. */
+  --shadow-md: 0 2px 4px rgba(15, 52, 56, 0.05), 0 8px 20px rgba(15, 52, 56, 0.07); /* Interactive card on hover. */
+  --shadow-lg: 0 4px 8px rgba(15, 52, 56, 0.05), 0 18px 40px rgba(15, 52, 56, 0.1); /* Banners and raised panels. */
+  --shadow-overlay: 0 24px 64px rgba(10, 36, 39, 0.22); /* Modals, popovers and menus. */
+  --shadow-inset-top: inset 0 1px 0 rgba(255, 255, 255, 0.1); /* Top highlight on dark fills. */
+  --ring-focus: 0 0 0 3px rgba(85, 116, 111, 0.45); /* Focus ring on light surfaces. Applied with :focus-visible, never removed. */
+  --ring-focus-inverse: 0 0 0 3px rgba(255, 255, 255, 0.35); /* Focus ring on teal-900 and sand surfaces. */
+  --dt-shadow-chip: 0 1px 3px rgba(15, 52, 56, 0.2); /* Small chips on the map: tree height chip, irradiance legend. */
+  --dt-shadow-loupe: 0 24px 64px rgba(10, 36, 39, 0.22), 0 0 0 1px rgba(25, 27, 36, 0.2); /* The magnifier while drawing. */
+  --dt-shadow-key: inset 0 -1px 0 #c2c7d2; /* Bottom edge on keyboard key caps (`ink-300` light, `ink-800` dark). */
+  --dt-ring-swatch: 0 0 0 1px #191b24; /* Outline on light legend swatches. */
+  --dt-halo-text: 0 0 2px rgba(15, 52, 56, 0.95), 0 1px 3px rgba(15, 52, 56, 0.8); /* text-shadow for labels on the satellite image. */
+  --dt-halo-line: 0 0 1px rgba(25, 27, 36, 0.9); /* Used in filter: drop-shadow() to lift saved facet lines off the image. */
+}
+
+/* Dark. Primitives hold the same value in both modes; only the semantic layer repoints. */
+[data-theme="dark"] {
+  --text-strong: var(--teal-050);
+  --text-body: var(--teal-100);
+  --text-muted: var(--teal-200);
+  --text-subtle: var(--teal-300);
+  --text-inverse: var(--teal-900);
+  --text-link: var(--sand-400);
+  --text-link-hover: var(--sand-300);
+  --icon-default: var(--teal-050);
+  --surface-page: var(--teal-900);
+  --surface-card: var(--teal-800);
+  --surface-sunken: var(--teal-950);
+  --surface-inverse: var(--teal-050);
+  --surface-ink: var(--teal-700);
+  --surface-brand-subtle: var(--sand-900);
+  --surface-accent-subtle: var(--sand-900);
+  --surface-ai-subtle: var(--sand-900);
+  --border-subtle: var(--teal-700);
+  --border-default: var(--grey-500);
+  --border-strong: var(--teal-300);
+  --border-brand: var(--sand-400);
+  --action-primary-active: var(--sand-200);
+  --action-secondary: var(--teal-700);
+  --action-secondary-hover: var(--teal-600);
+  --action-disabled-bg: var(--teal-700);
+  --action-disabled-text: var(--teal-500);
+  --focus-ring: var(--sand-400);
+  --status-success-text: var(--green-300);
+  --status-success-bg: var(--green-900);
+  --status-warning-text: var(--yellow-300);
+  --status-warning-bg: var(--yellow-900);
+  --status-danger-text: var(--red-300);
+  --status-danger-bg: var(--red-900);
+  --status-info-text: var(--teal-100);
+  --status-info-bg: var(--teal-700);
+  --status-neutral-text: var(--teal-200);
+  --status-neutral-bg: var(--teal-950);
+  --chart-1: var(--sand-400);
+  --chart-2: var(--teal-200);
+  --chart-3: var(--sand-600);
+  --chart-5: var(--teal-600);
+  --border-inverse: rgba(15, 52, 56, 0.14);
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.40);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.40), 0 1px 3px rgba(0, 0, 0, 0.32);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.36), 0 8px 20px rgba(0, 0, 0, 0.44);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.36), 0 18px 40px rgba(0, 0, 0, 0.52);
+  --shadow-overlay: 0 24px 64px rgba(0, 0, 0, 0.64);
+  --shadow-inset-top: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --ring-focus: 0 0 0 3px rgba(217, 185, 138, 0.5);
+  --dt-shadow-chip: 0 1px 3px rgba(14, 21, 32, 0.2);
+  --dt-shadow-loupe: 0 24px 64px rgba(8, 13, 20, 0.22), 0 0 0 1px rgba(25, 27, 36, 0.2);
+  --dt-shadow-key: inset 0 -1px 0 #3b4050;
+  --dt-halo-text: 0 0 2px rgba(14, 21, 32, 0.95), 0 1px 3px rgba(14, 21, 32, 0.8);
+}
+
+:root {
+  --space-0: 0px; /* Collapse a gap without removing the rule. */
+  --space-1: 4px; /* Icon to label inside a button; icon-to-dot spacing inside a pill. */
+  --space-2: 8px; /* Label to control. */
+  --space-3: 12px; /* Between sibling controls in a row. */
+  --space-4: 16px; /* Inside a dense card; page gutter at 393px. */
+  --space-5: 20px; /* Table cell horizontal padding. */
+  --space-6: 24px; /* Default card padding and desktop gutter. */
+  --space-7: 32px; /* Between cards in a grid. */
+  --space-8: 40px; /* Between a heading and the block under it. */
+  --space-9: 48px; /* Between sub-sections. */
+  --space-10: 64px; /* Section padding on a narrow screen. */
+  --space-11: 80px; /* Section padding on a tablet. */
+  --space-12: 112px; /* Marketing section padding on desktop. */
+  --container-max: 1240px; /* Widest content column. */
+  --container-narrow: 760px; /* Reading column for long-form text. */
+  --gutter: 24px; /* Page side padding. Step down to space-4 below 480px. */
+  --section-y: 112px; /* Vertical rhythm between marketing sections. */
+  --card-pad: 24px; /* Default padding inside a Card. */
+  --field-height: 44px; /* Input and Select height. Meets the 44px touch target at 393px. */
+  --control-height-sm: 34px; /* Small button. Pointer-only contexts, never a primary mobile action. */
+  --control-height: 44px; /* Default button height and the minimum touch target. */
+  --control-height-lg: 52px; /* Hero and full-width mobile calls to action. */
+  --app-sidebar-w: 244px; /* Platform sidebar. Collapses to an overlay below 768px. */
+  --app-topbar-h: 60px; /* Platform top bar. */
+
+  --radius-xs: 4px; /* Chips and inline tags. */
+  --radius-sm: 8px; /* Focus-visible outline rounding. */
+  --radius-md: 12px; /* Buttons, inputs, selects. */
+  --radius-lg: 16px; /* Cards and tables. */
+  --radius-xl: 20px; /* Panels and modals. */
+  --radius-2xl: 24px; /* Full-bleed feature blocks. */
+  --radius-pill: 999px; /* Badges, status pills, switch tracks. */
+  --radius-control: 8px; /* Alias used by every control. Change this, not radius-md, to restyle controls. */
+  --radius-card: 16px; /* Alias used by Card, StatCard and DataTable. */
+  --radius-panel: 20px; /* Alias used by panels and modals. */
+  --border-width: 1px; /* Default hairline. */
+  --border-width-strong: 1.5px; /* Emphasised edge on dark surfaces. */
+  --focus-width: 3px; /* Thickness of the focus ring. Must match the spread in the ring-focus shadow token. */
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "Inter", system-ui, sans-serif;
+  --type-hero: 700 120px/0.88 var(--font-display); /* One per page, on a banner only. Drops to 34px minimum as the banner narrows. */
+  --type-display-1: 700 80px/0.92 var(--font-display); /* Marketing section openers. */
+  --type-display-2: 700 56px/0.92 var(--font-display); /* Secondary marketing headline. The largest display size that fits a 393px screen. */
+  --type-h1: 700 40px/1.1 var(--font-display); /* Page title in the platform. */
+  --type-h2: 600 28px/1.25 var(--font-display); /* Section heading. */
+  --type-h3: 600 24px/1.25 var(--font-sans); /* Card and panel heading. Inter takes over from Fraunces below 24px. */
+  --type-h4: 600 20px/1.25 var(--font-sans); /* Sub-section heading inside a card. */
+  --type-body-lg: 400 20px/1.45 var(--font-sans); /* Marketing lede under a display headline. */
+  --type-body: 400 16px/1.45 var(--font-sans); /* Default paragraph and control text. */
+  --type-body-sm: 400 14px/1.45 var(--font-sans); /* Table cells, hints and footnotes. */
+  --type-body-xs: 400 12px/1.45 var(--font-sans); /* Legal and metadata. The smallest body size permitted. */
+  --type-label: 600 14px/1.3 var(--font-sans); /* Field labels, status pills, tab labels. */
+  --type-data: 500 14px/1.4 var(--font-sans); /* Numbers in tables and stat cards. Set font-variant-numeric: tabular-nums with the .tabular class so columns align. */
+  --type-eyebrow: 500 12px/1 var(--font-sans); /* The brand's signature label. Always uppercased in markup or with text-transform; never set below 12px. */
+}
+
+.hero {
+  font-family: var(--font-display);
+  font-size: 120px;
+  line-height: 0.88;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.display-1 {
+  font-family: var(--font-display);
+  font-size: 80px;
+  line-height: 0.92;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+.display-2 {
+  font-family: var(--font-display);
+  font-size: 56px;
+  line-height: 0.92;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+.h1 {
+  font-family: var(--font-display);
+  font-size: 40px;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+.h3 {
+  font-family: var(--font-sans);
+  font-size: 24px;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.h4 {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.body-lg {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  line-height: 1.45;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+.body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.45;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+.body-sm {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+.body-xs {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.label {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.data {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+}
+
+/* Foundations: weights, leading, tracking, composite type and motion. Components depend on
+   these, so they live here and tokens.css is the only stylesheet a page needs. */
+:root {
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --leading-hero: 0.88;
+  --leading-tight: 0.92;
+  --leading-snug: 1.1;
+  --leading-heading: 1.25;
+  --leading-body: 1.45;
+  --leading-loose: 1.6;
+
+  --tracking-hero: -0.02em;
+  --tracking-display: -0.015em;
+  --tracking-heading: -0.01em;
+  --tracking-body: -0.005em;
+  --tracking-eyebrow: 0.16em;
+  --tracking-mono-label: 0.14em;
+
+  --type-body: var(--weight-regular) 16px / var(--leading-body) var(--font-sans);
+  --type-body-lg: var(--weight-regular) 20px / var(--leading-body) var(--font-sans);
+  --type-label: var(--weight-semibold) 14px / 1.3 var(--font-sans);
+  --type-mono: var(--weight-medium) 14px / 1.4 var(--font-mono);
+  --type-eyebrow: var(--weight-medium) 12px / 1 var(--font-mono);
+  --text-eyebrow: 12px; /* Eyebrow size, for components that compose their own font shorthand. */
+  --text-h4: 20px; /* H4 size, used by base.css. */
+
+  --duration-instant: 90ms;
+  --duration-fast: 150ms;
+  --duration-base: 220ms;
+  --duration-slow: 380ms;
+  --duration-reveal: 620ms;
+
+  --ease-standard: cubic-bezier(0.2, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  --transition-control: background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+  --transition-surface: box-shadow var(--duration-base) var(--ease-standard),
+    transform var(--duration-base) var(--ease-standard);
+
+  --press-scale: 0.985;
+
+  /* Tooltip entrance: spring, stiffness 380 · damping 19 · mass 1, sampled for CSS */
+  --spring-tooltip: linear(0.000, 0.022, 0.085, 0.176, 0.281, 0.396, 0.520, 0.641, 0.750, 0.849, 0.938, 1.013, 1.070, 1.115, 1.145, 1.164, 1.172, 1.171, 1.162, 1.148, 1.131, 1.112, 1.091, 1.069, 1.050, 1.032, 1.016, 1.002, 0.991, 0.983, 0.977, 0.973, 0.971, 0.970, 0.971, 0.973, 0.976, 0.980, 0.983, 0.987, 1.000);
+  --duration-tooltip: 450ms;
+  --duration-tooltip-fade: 150ms;
+  --tooltip-offset: 32px;
+  --tooltip-scale-from: 0.92;
+
+  /* Toast: same spring as the tooltip, over a much shorter travel */
+  --duration-toast: 7000ms;
+  --duration-toast-fade: 150ms;
+  --duration-toast-exit: 200ms;
+  --toast-offset: 8px;
+  --toast-inset: 16px;
+
+  /* Menu open */
+  --duration-menu: 200ms;
+  --duration-menu-close: 150ms;
+  --ease-menu: cubic-bezier(0.2, 0, 0, 1);
+  --menu-offset: 8px;
+  --menu-scale-from: 0.98;
+  --menu-row-offset: 4px;
+  --menu-row-delay: 60ms;
+  --menu-row-stagger: 20ms;
+}
+

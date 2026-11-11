@@ -1,0 +1,16 @@
+<!-- @dsCard group="Spacing" viewport="700x224" name="Motion" subtitle="150 / 220 / 380ms · cubic-bezier(.2,0,.2,1) · press .985 · tooltip spring · menu 200ms" -->
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>body{background:var(--surface-card);padding:18px 20px}.lbl{font:var(--type-eyebrow);letter-spacing:var(--tracking-mono-label);text-transform:uppercase;color:var(--text-subtle)}.ramp{display:flex;border-radius:var(--radius-sm);overflow:hidden;height:54px}.ramp div{flex:1}.hex{display:flex;justify-content:space-between;margin-top:7px;font:var(--type-mono);font-size:10px;color:var(--text-subtle)}.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}@keyframes slide{0%,12%{transform:translateX(0)}50%,62%{transform:translateX(120px)}100%{transform:translateX(0)}}table{width:100%;border-collapse:collapse}td{padding:4px 0;font:var(--type-body);font-size:13.5px;color:var(--text-body)}td.v{font:var(--type-mono);font-size:12px;color:var(--text-strong);text-align:right}</style>
+</head><body>
+<div style="height:26px;margin-bottom:12px"><div style="width:26px;height:26px;border-radius:var(--radius-sm);background:var(--sand-400);animation:slide 2.4s var(--ease-standard) infinite"></div></div>
+<table><tbody>
+<tr><td>instant · press</td><td class="v">90ms</td></tr>
+<tr><td>fast · hover, color</td><td class="v">150ms</td></tr>
+<tr><td>base · surface, toggle</td><td class="v">220ms</td></tr>
+<tr><td>slow · panels</td><td class="v">380ms</td></tr>
+<tr><td>--ease-standard / out</td><td class="v">.2,0,.2,1 / .16,1,.3,1</td></tr>
+<tr><td>tooltip · spring, 32px drop from 92%</td><td class="v">380 / 19 / 1 · ~450ms</td></tr>
+<tr><td>menu · 8px drop from 98%, rows 20ms apart</td><td class="v">200ms · .2,0,0,1</td></tr>
+</tbody></table>
+</body></html>

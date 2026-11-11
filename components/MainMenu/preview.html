@@ -1,0 +1,32 @@
+<!-- @dsCard group="Navigation" height=760 subtitle="Account menu · standard menu open, rows 20ms apart" -->
+<!doctype html>
+<meta charset="utf-8">
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;padding:16px;background:var(--surface-page,#EAEDEE);font:400 16px/1.45 var(--font-sans,"Inter",system-ui,sans-serif)}
+  #root{display:flex;justify-content:flex-end;max-width:440px}
+</style>
+<div id="root"></div>
+<script>
+  (function () {
+    var ns = window.InternalDesignSystem;
+    var items = [
+      { type: "feature", label: "New look", badge: "New", description: "Same features, refreshed interface. Switch back any time." },
+      { type: "value", label: "Theme", icon: "dark-mode", value: "System" },
+      { type: "divider", key: "d1" },
+      { label: "Your profile", icon: "users", href: "#profile" },
+      { label: "Organization", icon: "home", href: "#organization" },
+      { label: "Billing", icon: "billing", href: "#billing" },
+      { label: "Preferences", icon: "filter", href: "#preferences" },
+      { label: "Settings", icon: "settings-gear", href: "#settings" },
+      { label: "User activity", icon: "bar-chart", href: "#activity" },
+      { label: "Training material", icon: "documents", href: "#training" },
+      { label: "Welcome call", icon: "check", href: "#welcome-call" },
+      { type: "divider", key: "d2" },
+      { label: "Sign out", sublabel: "as SubcontractorHub Demo", icon: "arrow-right", href: "#signout" }
+    ];
+    ReactDOM.createRoot(document.getElementById("root")).render(
+      React.createElement(ns.MainMenu, { items: items, loop: true })
+    );
+  })();
+</script>

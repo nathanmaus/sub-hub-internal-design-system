@@ -1,0 +1,17 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; font: var(--type-body); letter-spacing: var(--tracking-body); color: var(--text-body); background: var(--surface-page); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+h1, h2, h3, h4 { margin: 0; color: var(--text-strong); }
+h1 { font: var(--type-h1); letter-spacing: var(--tracking-heading); }
+h2 { font: var(--type-h2); letter-spacing: var(--tracking-heading); }
+h3 { font: var(--type-h3); }
+h4 { font: var(--type-h4); }
+p { margin: 0; text-wrap: pretty; }
+a { color: var(--text-link); text-decoration: none; transition: color var(--duration-fast) var(--ease-standard); }
+a:hover { color: var(--text-link-hover); text-decoration: none; }
+button { font: inherit; }
+::selection { background: var(--sand-200); color: var(--teal-900); }
+:focus-visible { outline: none; box-shadow: var(--ring-focus); border-radius: var(--radius-sm); }
+/* Eyebrow: uppercase, wide-tracked Inter */
+.eyebrow { font: var(--type-eyebrow); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; }
+.tabular { font-variant-numeric: tabular-nums; }
