@@ -845,7 +845,7 @@ const __iconWarned = (typeof Set === "function") ? new Set() : null;
    GitHub repo: "icons/". Claude artifact: "assets/Icons/". Resolved at first use, in order:
    window.SUBHUB_ICON_BASE, the folder next to this bundle's own URL, the artifact's project/
    folder, then a plain relative path. */
-const __ICON_DIR = "icons/";
+const __ICON_DIR = "assets/Icons/";
 const __BUNDLE_SRC = (typeof document !== "undefined" && document.currentScript && document.currentScript.src) || "";
 let __iconBaseCache = null;
 function __iconBase() {
@@ -885,7 +885,7 @@ function iconUrl(name) {
 function Icon({
   name,
   size = 18,
-  color = "var(--icon-default)",
+  color = "currentColor",
   style,
   ...rest
 }) {
@@ -971,7 +971,7 @@ function Badge({
       whiteSpace: "nowrap",
       ...style
     }
-  }, rest), icon ? /*#__PURE__*/React.createElement(__ds_scope.Icon, { color: "currentColor",
+  }, rest), icon ? /*#__PURE__*/React.createElement(__ds_scope.Icon, {
     name: icon,
     size: 13
   }) : null, children);
@@ -1089,10 +1089,10 @@ function Button({
       transition: "var(--transition-control), transform var(--duration-instant) var(--ease-standard)",
       ...style
     }
-  }, rest), icon ? /*#__PURE__*/React.createElement(__ds_scope.Icon, { color: "currentColor",
+  }, rest), icon ? /*#__PURE__*/React.createElement(__ds_scope.Icon, {
     name: icon,
     size: s.icon
-  }) : null, children, iconTrailing ? /*#__PURE__*/React.createElement(__ds_scope.Icon, { color: "currentColor",
+  }) : null, children, iconTrailing ? /*#__PURE__*/React.createElement(__ds_scope.Icon, {
     name: iconTrailing,
     size: s.icon
   }) : null);
@@ -1167,7 +1167,7 @@ function IconButton({
       transition: "var(--transition-control)",
       ...style
     }
-  }, rest), /*#__PURE__*/React.createElement(__ds_scope.Icon, { color: "currentColor",
+  }, rest), /*#__PURE__*/React.createElement(__ds_scope.Icon, {
     name: icon,
     size: s.icon
   }));
@@ -1421,7 +1421,7 @@ function StatCard({
       fontSize: 13,
       color: good ? "var(--green-700)" : "var(--red-700)"
     }
-  }, /*#__PURE__*/React.createElement(__ds_scope.Icon, { color: "currentColor",
+  }, /*#__PURE__*/React.createElement(__ds_scope.Icon, {
     name: good ? "trending-up" : "trending-down",
     size: 14
   }), delta) : null), footnote ? /*#__PURE__*/React.createElement("span", {
@@ -2002,7 +2002,7 @@ function Toast({
     ...rest
   },
     React.createElement("style", null, TOAST_CSS),
-    showIcon ? React.createElement(Icon, { color: "currentColor", name: icon || t.icon, size: 20, "aria-hidden": "true", style: { flex: "0 0 auto" } }) : null,
+    showIcon ? React.createElement(Icon, { name: icon || t.icon, size: 20, "aria-hidden": "true", style: { flex: "0 0 auto" } }) : null,
     React.createElement("span", {
       style: { font: "var(--weight-regular) 16px/24px var(--font-sans)", minWidth: 0 }
     }, message || children),
