@@ -1554,6 +1554,8 @@ function Select({
     style: {
       display: "flex",
       alignItems: "center",
+      gap: 8,
+      minWidth: 0,
       height: "var(--field-height)",
       padding: "0 12px 0 14px",
       background: disabled ? "var(--surface-page)" : "var(--surface-card)",
@@ -1569,6 +1571,11 @@ function Select({
     onBlur: () => setFocus(false),
     style: {
       flex: 1,
+      width: 0,
+      minWidth: 0,
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
       appearance: "none",
       border: "none",
       outline: "none",
