@@ -23,7 +23,7 @@ SubcontractorHub sells one platform to installation contractors — not service-
 
 Cross-cutting facts that shape copy and UI: three trades in one login (solar tracks design → PTO, roofing tracks material delivery → final inspection, HVAC tracks permit → commissioning); embedded financing from **GoodLeap, Sungage, LightReach and Arcadia**; the **30% federal ITC** in every solar number; English and Spanish; Zapier integrations (Zoho, HubSpot, Salesforce, Keap); 500+ contractor teams.
 
-**Surfaces represented here:** the operator app (`ui_kits/platform/`) and the marketing site (`ui_kits/marketing/`).
+**Surfaces represented here:** internal tools (dashboards, trackers, review and planning boards). Click-through UI kits for the operator app and the marketing site live in the GitHub repo under `ui_kits/`; they are not shown on the Design System page.
 
 ### Sources used
 
@@ -127,7 +127,7 @@ Near-black grounds, dark teal panels, sand highlights. Warm and calm rather than
 
 **Primitives do not change between modes.** `teal-900` is `#0F3438` in both themes; only the semantic layer repoints. Dark grounds use the `night` ramp, so light-mode text colours are untouched by them.
 
-**Surfaces.** Dark: page `night-950` (near-black), app chrome such as the sidebar `night-900`, cards `night-850` (dark teal) with a `night-750` border, sunken wells and table headers `night-920`, hover `night-800`. Light: page `teal-050`, cards white, sunken wells `teal-025`.
+**Surfaces.** Dark: page `night-950` (near-black), app chrome such as the sidebar `night-900`, cards `night-850` (dark teal) with a `night-750` border, sunken wells and table headers `night-920`, hover `night-800`. Light: page `teal-025`, cards white, sunken wells `teal-025` (the same tone as the page, so a well reads as a cut into the white card).
 
 **Sand holds; its supporting cast moves.** `sand-400` is the primary fill in both themes with a `teal-900` label at 7.2:1. Links are `sand-400` in dark but `sand-700` in light, because `sand-400` on white is 1.9:1. Hover lightens to `sand-300` in both themes; pressed is `sand-500` in light and `sand-200` in dark.
 
@@ -161,20 +161,38 @@ Near-black grounds, dark teal panels, sand highlights. Warm and calm rather than
 
 ## 5 · Index
 
-| Path | What |
-| --- | --- |
-| `tokens.json` | Every token in both themes. The source the CSS is generated from. |
-| `components/bundle.css` | Fonts, weights, motion and element defaults, loaded after the generated tokens. |
-| `components/bundle.js` | All components in one script, exposed as `window.InternalDesignSystem`. |
-| `components/<Name>/` | Each component's guidelines (`README.md`), types (`.d.ts`) and preview. |
-| `components/core`, `forms`, `data`, `navigation`, `overlays`, `brand` | Component source. |
-| `assets/Icons/` | The SubHub Icon Library, one SVG per icon. |
-| `guidelines/` | Specimen cards for colour, type, spacing, radius, motion and motifs. |
-| `motion.md` | Motion specs for Tooltip, Toast and menus. |
+The Design System page builds its menu from these files: **Overview** (this README and the cover), **Colors**, **Typography**, **Spacing**, **Corner radius**, **Shadows** and **Effect** (all from `tokens.json`), **Components** (each `components/<Name>/` folder) and **Assets** (everything under `assets/`). Further `*.md` files at the root, such as `motion.md`, appear as extra sections.
 
-**Components:** Icon, Button, IconButton, Badge, StatusPill · Field, Input, Select, Switch · Card, StatCard, DataTable · Tabs, MainMenu · Tooltip, Toast · Logo, HeroBanner.
+### Root
+| File | What |
+| --- | --- |
+| `README.md` | This document: context, voice, visual foundations, iconography, index |
+| `tokens.json` | Every token in both themes, the source the CSS is generated from: 107 colours (the teal, sand and night ramps, status ramps, and the semantic `text-*`, `surface-*`, `border-*`, `action-*`, `status-*` and `chart-*` roles), 14 type styles, spacing, radius, shadow and effect |
+| `motion.md` | Motion specs for the Tooltip, Toast and menus |
+| `scripts/build-colour-tokens.mjs` | Rebuilds the colours in `tokens.css` from `tokens.json`. Run `node scripts/build-colour-tokens.mjs` after any colour change; add `--check` to only test. In the GitHub repo only. |
+| `design-system.json` | The page's index of this system (title, namespace, libraries, asset groups) |
+
+### `assets/`
+- `logo-dark` · `logo-light` · `logo-on-amber`: the SubHub lockup, each as SVG with a PNG fallback. See §4 and the Logo component.
+- `Icons/`: the SubHub Icon Library, one SVG per icon, with `README.md` listing every name and the legacy alias map.
+- No font files: Fraunces and Inter load from Google Fonts.
+
+### `components/` — 18 primitives
+Every component ships its source (`<group>/<Name>.jsx`), types (`<Name>/<Name>.d.ts`), guidelines (`<Name>/README.md`) and a live preview (`<Name>/preview.html`). All of them are bundled in `components/bundle.js` as `window.InternalDesignSystem`, with `components/bundle.css` for fonts, weights, motion and element defaults.
+
+**`core/`** — **Icon**, **Button**, **IconButton**, **Badge**, **StatusPill**
+**`forms/`** — **Field**, **Input**, **Select**, **Switch**
+**`data/`** — **Card**, **StatCard**, **DataTable**
+**`navigation/`** — **Tabs**, **MainMenu** (the account menu from the top-bar avatar; not a dropdown menu)
+**`overlays/`** — **Tooltip**, **Toast**
+**`brand/`** — **Logo**, **HeroBanner**
+
+`components/Cover/preview.html` is the cover on the Overview page, not a component.
 
 Not built yet (flag it rather than inventing one): Checkbox, Radio, Textarea, Dialog, Dropdown menu, Pagination, Breadcrumb, Sidebar nav, Avatar, Progress, Skeleton.
+
+### `guidelines/` — 22 specimen cards
+Brand (lockups, AI marker, 4 motifs) · Colours (primary, accent, neutrals, status, surfaces, chart) · Type (display, body, mono, roles) · Spacing (scale, layout, radii, elevation, motion, states)
 
 ---
 

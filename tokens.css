@@ -2,8 +2,8 @@
 
 /* Internal Design System, generated from tokens.json. Link this one file. */
 :root, [data-theme="light"] {
-  --teal-025: #F5F9F8; /* Sunken wells in light mode: table headers, inset panels. */
-  --teal-050: #EAF3F1; /* From the board: Text. Light page ground; strong text in dark. */
+  --teal-025: #F5F9F8; /* Light page ground (surface-page) and sunken wells in light mode: table headers, inset panels. */
+  --teal-050: #EAF3F1; /* From the board: Text. Strong text in dark; neutral pill fill in light. */
   --teal-100: #D6E4E1; /* Light borders and info/neutral fills; body text in dark. */
   --teal-200: #B5CBC7; /* Default control border in light; muted text in dark. */
   --teal-300: #93AFAA; /* Strong borders and subtle text in dark. */
@@ -14,6 +14,14 @@
   --teal-800: #1A4146; /* Lifted card surface in dark, one step above the page. */
   --teal-900: #0F3438; /* From the board: Background and Surface. Dark page, strong text in light, the label on sand. */
   --teal-950: #0A2427; /* Sunken wells in dark. */
+  --night-950: #0B0F0F; /* Dark page: near-black with a trace of teal. surface-page in dark. */
+  --night-930: #081313; /* Neutral pill and status-neutral fill on dark cards. */
+  --night-920: #071516; /* Sunken wells on dark cards: table header rows, inset panels. */
+  --night-900: #0F1414; /* Dark app chrome: sidebar and topbar, one step above the page. */
+  --night-850: #091D1E; /* Dark card: the dark teal that sits on the night-950 page. surface-card in dark. */
+  --night-800: #132728; /* Hover fill on dark chrome and cards; info status fill in dark. */
+  --night-750: #1A2E2F; /* Hairline card and divider border in dark. Carries card separation from the page. */
+  --night-600: #3B4B4C; /* Default control border in dark: outlined buttons, inputs. */
   --sand-100: #F8F1E6; /* Brand-subtle fill in light. */
   --sand-200: #EFE0C8; /* Pressed primary in dark; chart fills. */
   --sand-300: #E5CDA9; /* Hover on sand in dark; link hover in dark. */
@@ -27,20 +35,20 @@
   --yellow-800: #8A6208; /* Warning text in light. Darker than yellow-700 so the pill passes 4.5:1. */
   --white: #ffffff; /* Card surface, text on blue and ink fills, switch thumb. */
   --green-700: #07784f; /* Success text on green-100 and positive deltas. */
-  --green-900: #0b2f22; /* Deepest green. Success surfaces in dark. */
+  --green-900: #1F2F28; /* Success pill fill in dark. */
   --green-600: #0e9f6e; /* Success dot and chart positives. Not text on white. */
-  --green-300: #5fd6a6; /* Light green. Success text in dark. */
+  --green-300: #8FCCAF; /* Success text in dark. Softened. */
   --green-100: #ddf5ea; /* Success status background. */
   --yellow-700: #a8760a; /* Warning text. Same value as amber-700; kept as the status-ramp name. */
-  --yellow-900: #3a2a0a; /* Deepest yellow. Warning surfaces in dark. */
+  --yellow-900: #352C1E; /* Warning pill fill in dark. */
   --yellow-600: #e09e0a; /* Warning dot. Not text on white. */
   --yellow-100: #fff6e0; /* Warning status background. Same value as amber-100. */
   --red-700: #a81c1c; /* Danger text on red-100 and negative deltas. */
-  --red-900: #3a1c1c; /* Deepest red. Danger surfaces in dark. */
+  --red-900: #372524; /* Danger pill fill in dark. */
   --red-600: #dc2b2b; /* Invalid field border, required asterisk, danger dot. */
-  --red-300: #f08f8f; /* Light red. Danger text in dark. */
+  --red-300: #E0A29F; /* Danger text in dark. Softened so a danger pill reads clearly without shouting. */
   --red-100: #fce4e4; /* Danger status background. */
-  --yellow-300: #FFD166; /* Warning text in dark. */
+  --yellow-300: #E4CB95; /* Warning text in dark. Softened. */
   --text-strong: var(--teal-900); /* `teal-900` light · `teal-050` dark. Headings, emphasis, stat values. */
   --text-body: var(--teal-700); /* `teal-700` light · `teal-100` dark. Default paragraph and control text. */
   --text-muted: var(--teal-600); /* `teal-600` light · `teal-200` dark. Hints, footnotes, inactive tabs, quiet icon buttons. */
@@ -52,9 +60,9 @@
   --text-link: var(--sand-700); /* `sand-700` light · `sand-400` dark. Links and ghost button labels. */
   --text-link-hover: var(--sand-800); /* `sand-800` light · `sand-300` dark. Link hover. */
   --icon-default: var(--teal-900); /* `teal-900` light · `teal-050` dark. Fallback colour for an icon with no label beside it: a standalone Icon, or an SVG file used directly. Icons inside a control or next to text use currentColor instead, so they always match their label. */
-  --surface-page: var(--teal-050); /* `teal-050` light · `teal-900` dark. Page background. Dark is the board's Background. */
-  --surface-card: var(--white); /* `white` light · `teal-800` dark. Cards, tables, fields, menus. Lifted one step above the page in dark. */
-  --surface-sunken: var(--teal-025); /* `teal-025` light · `teal-950` dark. Table headers, inset wells, hover on light controls. */
+  --surface-page: var(--teal-025); /* `teal-025` light · `night-950` dark. Page background: the palest teal in light, near-black in dark. */
+  --surface-card: var(--white); /* `white` light · `night-850` dark. Cards and tables: dark teal on the near-black page. */
+  --surface-sunken: var(--teal-025); /* `teal-025` light · `night-920` dark. Table header rows and inset wells. */
   --surface-inverse: var(--teal-900); /* `teal-900` light · `teal-050` dark. Inverse panels: dark on a light page, light on a dark page. */
   --surface-ink: var(--teal-900); /* `teal-900` light · `teal-700` dark. Dark button and slab fills. */
   --surface-brand: var(--sand-400); /* `sand-400`, both modes. Brand fill. */
@@ -62,8 +70,8 @@
   --surface-accent: var(--sand-400); /* `sand-400`, both modes. Accent fill. Same as brand: Primary and Accent are one colour. */
   --surface-accent-subtle: var(--sand-100); /* `sand-100` light · `sand-900` dark. Accent and AI badge fill. */
   --surface-ai-subtle: var(--sand-100); /* `sand-100` light · `sand-900` dark. AI marker ground. */
-  --border-subtle: var(--teal-100); /* `teal-100` light · `teal-700` dark. Card edges, row rules. */
-  --border-default: var(--teal-200); /* `teal-200` light · `grey-500` dark. Resting border on inputs and outline buttons. Dark is the board's Border. */
+  --border-subtle: var(--teal-100); /* `teal-100` light · `night-750` dark. Card edges and row dividers; in dark it is what separates a card from the page. */
+  --border-default: var(--teal-200); /* `teal-200` light · `night-600` dark. Control borders. */
   --border-strong: var(--teal-500); /* `teal-500` light · `teal-300` dark. High-contrast dividers. */
   --border-brand: var(--sand-600); /* `sand-600` light · `sand-400` dark. Focused field border. */
   --border-accent: var(--sand-400); /* `sand-400`, both modes. Accent edge. */
@@ -86,9 +94,9 @@
   --status-danger-text: var(--red-700); /* `red-700` light · `red-300` dark. Danger labels and field errors. */
   --status-danger-bg: var(--red-100); /* `red-100` light · `red-900` dark. Danger fill. */
   --status-info-text: var(--teal-800); /* `teal-800` light · `teal-100` dark. Info labels. */
-  --status-info-bg: var(--teal-100); /* `teal-100` light · `teal-700` dark. Info fill. */
+  --status-info-bg: var(--teal-100); /* `teal-100` light · `night-800` dark. Info pill fill. */
   --status-neutral-text: var(--teal-600); /* `teal-600` light · `teal-200` dark. Draft and neutral labels. */
-  --status-neutral-bg: var(--teal-050); /* `teal-050` light · `teal-950` dark. Draft and neutral fill. Dark sits below the card so the pill stays visible. */
+  --status-neutral-bg: var(--teal-050); /* `teal-050` light · `night-930` dark. The default pill fill. */
   --chart-1: var(--sand-500); /* `sand-500` light · `sand-400` dark. First series. */
   --chart-2: var(--teal-700); /* `teal-700` light · `teal-200` dark. Second series. */
   --chart-3: var(--sand-300); /* `sand-300` light · `sand-600` dark. Third series. */
@@ -129,16 +137,16 @@
   --text-link: var(--sand-400);
   --text-link-hover: var(--sand-300);
   --icon-default: var(--teal-050);
-  --surface-page: var(--teal-900);
-  --surface-card: var(--teal-800);
-  --surface-sunken: var(--teal-950);
+  --surface-page: var(--night-950);
+  --surface-card: var(--night-850);
+  --surface-sunken: var(--night-920);
   --surface-inverse: var(--teal-050);
   --surface-ink: var(--teal-700);
   --surface-brand-subtle: var(--sand-900);
   --surface-accent-subtle: var(--sand-900);
   --surface-ai-subtle: var(--sand-900);
-  --border-subtle: var(--teal-700);
-  --border-default: var(--grey-500);
+  --border-subtle: var(--night-750);
+  --border-default: var(--night-600);
   --border-strong: var(--teal-300);
   --border-brand: var(--sand-400);
   --action-primary-active: var(--sand-200);
@@ -154,9 +162,9 @@
   --status-danger-text: var(--red-300);
   --status-danger-bg: var(--red-900);
   --status-info-text: var(--teal-100);
-  --status-info-bg: var(--teal-700);
+  --status-info-bg: var(--night-800);
   --status-neutral-text: var(--teal-200);
-  --status-neutral-bg: var(--teal-950);
+  --status-neutral-bg: var(--night-930);
   --chart-1: var(--sand-400);
   --chart-2: var(--teal-200);
   --chart-3: var(--sand-600);
