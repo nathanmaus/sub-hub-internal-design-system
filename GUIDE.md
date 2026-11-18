@@ -77,6 +77,8 @@ Use sand sparingly, as SubHub uses sand: zero or a couple of sand moments per sc
 ### Type
 Two faces. **Fraunces** for display and headings (hero to h2). **Inter** for everything else: body, buttons, UI labels, numbers, eyebrows. Buttons are Inter Medium at 12, 14 or 16px, not Fraunces; a serif on every control reads as decoration. Fraunces is a serif, so display type is tracked looser than a geometric sans would be: `-.02em` at hero, `-.015em` for display, `-.01em` at h1. Body is 16/1.45 at `-.005em`. The eyebrow stays: 12px Inter, uppercase, `.16em`.
 
+**Type tokens.** Every size comes from `tokens.json` and is the same in every file: hero 120, display-1 80, display-2 56, h1 40, h2 28, h3 24, h4 20, body-lg 20, body 16, body-sm 14, body-xs 12, label 14, data 14, eyebrow 12, all on the 4px grid. Set type with `font: var(--type-<style>)`, for example `var(--type-h1)` or `var(--type-body)`; `--size-<style>` is the size on its own. `tokens.css` also carries each style as `--text-<style>`. The default body style is called `body-md` in the spec so it can never overwrite the `text-body` colour; `--type-body` still works. The stylesheet's type block is generated from `tokens.json`, so never edit sizes there.
+
 ### Layout
 4px base grid. 1240px max container, 760px narrow measure. Marketing bands inset 32px on the page and pad 72–88px vertically; app pages pad 22–24px. Controls are 44px tall (34 dense, 52 hero). App chrome is fixed: 244px sidebar, 60px topbar, and the marketing header is sticky.
 

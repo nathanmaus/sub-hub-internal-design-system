@@ -1320,7 +1320,7 @@ function DataTable({
     style: {
       textAlign: c.align || "left",
       padding: "11px 18px",
-      font: "var(--weight-semibold) var(--text-eyebrow)/1 var(--font-sans)",
+      font: "var(--weight-semibold) var(--size-eyebrow, 12px)/1 var(--font-sans)",
       letterSpacing: "var(--tracking-eyebrow)",
       textTransform: "uppercase",
       color: "var(--text-subtle)",
@@ -1379,7 +1379,7 @@ function StatCard({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      font: "var(--weight-semibold) var(--text-eyebrow)/1 var(--font-sans)",
+      font: "var(--weight-semibold) var(--size-eyebrow, 12px)/1 var(--font-sans)",
       letterSpacing: "var(--tracking-eyebrow)",
       textTransform: "uppercase",
       color: "var(--text-subtle)"

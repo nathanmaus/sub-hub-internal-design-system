@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap");
 
-/* Internal Design System, generated from tokens.json. Link this one file. */
+/* Internal Design System — generated from tokens.json. Link this one file. */
 :root, [data-theme="light"] {
   --teal-025: #F5F9F8; /* Sunken wells in light mode: table headers, inset panels. */
   --teal-050: #EAF3F1; /* From the board: Text. Light page ground; strong text in dark. */
@@ -219,20 +219,20 @@
   --font-display: "Fraunces", Georgia, serif;
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "Inter", system-ui, sans-serif;
-  --type-hero: 700 120px/0.88 var(--font-display); /* One per page, on a banner only. Drops to 34px minimum as the banner narrows. */
-  --type-display-1: 700 80px/0.92 var(--font-display); /* Marketing section openers. */
-  --type-display-2: 700 56px/0.92 var(--font-display); /* Secondary marketing headline. The largest display size that fits a 393px screen. */
-  --type-h1: 700 40px/1.1 var(--font-display); /* Page title in the platform. */
-  --type-h2: 600 28px/1.25 var(--font-display); /* Section heading. */
-  --type-h3: 600 24px/1.25 var(--font-sans); /* Card and panel heading. Inter takes over from Fraunces below 24px. */
-  --type-h4: 600 20px/1.25 var(--font-sans); /* Sub-section heading inside a card. */
-  --type-body-lg: 400 20px/1.45 var(--font-sans); /* Marketing lede under a display headline. */
-  --type-body: 400 16px/1.45 var(--font-sans); /* Default paragraph and control text. */
-  --type-body-sm: 400 14px/1.45 var(--font-sans); /* Table cells, hints and footnotes. */
-  --type-body-xs: 400 12px/1.45 var(--font-sans); /* Legal and metadata. The smallest body size permitted. */
-  --type-label: 600 14px/1.3 var(--font-sans); /* Field labels, status pills, tab labels. */
-  --type-data: 500 14px/1.4 var(--font-sans); /* Numbers in tables and stat cards. Set font-variant-numeric: tabular-nums with the .tabular class so columns align. */
-  --type-eyebrow: 500 12px/1 var(--font-sans); /* The brand's signature label. Always uppercased in markup or with text-transform; never set below 12px. */
+  --text-hero: 700 120px/0.88 var(--font-display); /* One per page, on a banner only. Drops to 34px minimum as the banner narrows. */
+  --text-display-1: 700 80px/0.92 var(--font-display); /* Marketing section openers. */
+  --text-display-2: 700 56px/0.92 var(--font-display); /* Secondary marketing headline. The largest display size that fits a 393px screen. */
+  --text-h1: 700 40px/1.1 var(--font-display); /* Page title in the platform. */
+  --text-h2: 600 28px/1.25 var(--font-display); /* Section heading. */
+  --text-h3: 600 24px/1.25 var(--font-sans); /* Card and panel heading. Inter takes over from Fraunces below 24px. */
+  --text-h4: 600 20px/1.25 var(--font-sans); /* Sub-section heading inside a card. */
+  --text-body-lg: 400 20px/1.45 var(--font-sans); /* Marketing lede under a display headline. */
+  --text-body-md: 400 16px/1.45 var(--font-sans); /* Default paragraph and control text. Named body-md so it never collides with the text-body colour. */
+  --text-body-sm: 400 14px/1.45 var(--font-sans); /* Table cells, hints and footnotes. */
+  --text-body-xs: 400 12px/1.45 var(--font-sans); /* Legal and metadata. The smallest body size permitted. */
+  --text-label: 600 14px/1.3 var(--font-sans); /* Field labels, status pills, tab labels. */
+  --text-data: 500 14px/1.4 var(--font-sans); /* Numbers in tables and stat cards. Set font-variant-numeric: tabular-nums with the .tabular class so columns align. */
+  --text-eyebrow: 500 12px/1 var(--font-sans); /* The brand's signature label. Always uppercased in markup or with text-transform; never set below 12px. */
 }
 
 .hero {
@@ -291,7 +291,7 @@
   font-weight: 400;
   letter-spacing: -0.005em;
 }
-.body {
+.body-md {
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.45;
@@ -334,7 +334,7 @@
   letter-spacing: 0.16em;
 }
 
-/* Foundations: weights, leading, tracking, composite type and motion. Components depend on
+/* Foundations: motion and the extra leading and tracking steps. Type sizes and roles follow in the typography block. Components depend on
    these, so they live here and tokens.css is the only stylesheet a page needs. */
 :root {
   --weight-regular: 400;
@@ -356,13 +356,6 @@
   --tracking-eyebrow: 0.16em;
   --tracking-mono-label: 0.14em;
 
-  --type-body: var(--weight-regular) 16px / var(--leading-body) var(--font-sans);
-  --type-body-lg: var(--weight-regular) 20px / var(--leading-body) var(--font-sans);
-  --type-label: var(--weight-semibold) 14px / 1.3 var(--font-sans);
-  --type-mono: var(--weight-medium) 14px / 1.4 var(--font-mono);
-  --type-eyebrow: var(--weight-medium) 12px / 1 var(--font-mono);
-  --text-eyebrow: 12px; /* Eyebrow size, for components that compose their own font shorthand. */
-  --text-h4: 20px; /* H4 size, used by base.css. */
 
   --duration-instant: 90ms;
   --duration-fast: 150ms;
@@ -406,5 +399,71 @@
   --menu-row-offset: 4px;
   --menu-row-delay: 60ms;
   --menu-row-stagger: 20ms;
+}
+
+:root {
+  /* Internal Design System type. Generated from tokens.json (the spec), so every size here matches
+     api/tokens.md and tokens.css exactly. Change sizes in tokens.json, not here. */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "Inter", system-ui, sans-serif;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Size scale, on the 4px grid. Named --size-* so they never collide with the
+     --text-* style shorthands in tokens.css or the --text-* colour tokens. */
+  --size-hero: 120px;
+  --size-display-1: 80px;
+  --size-display-2: 56px;
+  --size-h1: 40px;
+  --size-h2: 28px;
+  --size-h3: 24px;
+  --size-h4: 20px;
+  --size-body-lg: 20px;
+  --size-body-md: 16px;
+  --size-body-sm: 14px;
+  --size-body-xs: 12px;
+  --size-label: 14px;
+  --size-data: 14px;
+  --size-eyebrow: 12px;
+
+  /* Line heights: display type is set tight, near-solid */
+  --leading-hero: 0.88;
+  --leading-tight: 0.92;
+  --leading-snug: 1.1;
+  --leading-heading: 1.25;
+  --leading-body: 1.45;
+  --leading-loose: 1.6;
+
+  /* Tracking */
+  --tracking-hero: -0.02em;
+  --tracking-display: -0.015em;
+  --tracking-heading: -0.01em;
+  --tracking-body: -0.005em;
+  --tracking-eyebrow: 0.16em;
+  --tracking-mono-label: 0.14em;
+
+  /* Composed roles: use these with `font:`. One per style in the spec, plus mono. */
+  --type-hero: var(--weight-bold) var(--size-hero) / 0.88 var(--font-display);
+  --type-display-1: var(--weight-bold) var(--size-display-1) / 0.92 var(--font-display);
+  --type-display-2: var(--weight-bold) var(--size-display-2) / 0.92 var(--font-display);
+  --type-h1: var(--weight-bold) var(--size-h1) / 1.1 var(--font-display);
+  --type-h2: var(--weight-semibold) var(--size-h2) / 1.25 var(--font-display);
+  --type-h3: var(--weight-semibold) var(--size-h3) / 1.25 var(--font-sans);
+  --type-h4: var(--weight-semibold) var(--size-h4) / 1.25 var(--font-sans);
+  --type-body-lg: var(--weight-regular) var(--size-body-lg) / 1.45 var(--font-sans);
+  --type-body-md: var(--weight-regular) var(--size-body-md) / 1.45 var(--font-sans);
+  --type-body-sm: var(--weight-regular) var(--size-body-sm) / 1.45 var(--font-sans);
+  --type-body-xs: var(--weight-regular) var(--size-body-xs) / 1.45 var(--font-sans);
+  --type-label: var(--weight-semibold) var(--size-label) / 1.3 var(--font-sans);
+  --type-data: var(--weight-medium) var(--size-data) / 1.4 var(--font-sans);
+  --type-eyebrow: var(--weight-medium) var(--size-eyebrow) / 1 var(--font-sans);
+  --type-display: var(--type-display-1); /* older name, kept so existing pages keep working */
+  --size-body: var(--size-body-md);
+  --type-body: var(--type-body-md); /* the default body style; components use this name */
+  --type-mono: var(--weight-medium) var(--size-data) / 1.4 var(--font-mono);
 }
 

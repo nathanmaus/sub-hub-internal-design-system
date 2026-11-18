@@ -70,6 +70,7 @@ The repo is private. Engineers are added as collaborators. AI agents (Claude, Gr
 - **Everything sits on a 4px grid**: spacing, radii, icon sizes, component sizes.
 - **Smallest screen is 393px wide.** Touch targets are at least 44px.
 - **Contrast**: 4.5:1 for primary and secondary text, 3:1 for tertiary labels.
+- **Type uses the tokens**: `font: var(--type-h1)`, `var(--type-body)` and so on. Sizes are on the 4px grid (40, 28, 24, 20, 16, 14, 12); never type a size by hand.
 - **Button labels are sentence case, in Inter Medium** at 12, 14 or 16px: "Create quote", not "Create Quote".
 - **No em dashes in product copy.**
 - **Sand fills take a dark teal label** (`text-on-brand`), never white. Teal ink fills take a light label (`text-on-ink`).

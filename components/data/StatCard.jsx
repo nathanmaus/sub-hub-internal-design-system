@@ -7,7 +7,7 @@ export function StatCard({ label, value, delta, deltaDirection = "up", icon, foo
   return (
     <Card padding="18px 20px" style={{ display: "grid", gap: 10, ...style }} {...rest}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-        <span style={{ font: "var(--weight-semibold) var(--text-eyebrow)/1 var(--font-sans)", letterSpacing: "var(--tracking-eyebrow)", textTransform: "uppercase", color: "var(--text-subtle)" }}>{label}</span>
+        <span style={{ font: "var(--weight-semibold) var(--size-eyebrow, 12px)/1 var(--font-sans)", letterSpacing: "var(--tracking-eyebrow)", textTransform: "uppercase", color: "var(--text-subtle)" }}>{label}</span>
         {icon ? <Icon name={icon} size={17} color="var(--text-subtle)" /> : null}
       </div>
       <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
