@@ -23,4 +23,4 @@ The SubHub lockup, recoloured for this system: the SubcontractorHub mark (two sk
 
 ## The consumer provides
 
-The variant for its ground, the height, and the `assetPath` when the lockup files are served from somewhere other than `../../assets/`.
+The variant for its ground and the height. The lockups are embedded in `bundle.js` (generated from `assets/` by `node scripts/build-assets.mjs`), so there are no files to copy. Pass `assetPath` only if you want to load the files from a folder instead.

@@ -1,0 +1,41 @@
+<!-- @dsCard group="Navigation" height=88 -->
+<!doctype html>
+<meta charset="utf-8">
+<style>
+  :root{
+    --weight-regular:400;--weight-medium:500;--weight-semibold:600;--weight-bold:700;
+    --tracking-eyebrow:.16em;--tracking-body:-.005em;--tracking-heading:-.02em;--tracking-hero:-.05em;
+    --duration-instant:90ms;--duration-fast:150ms;--duration-base:220ms;
+    --ease-standard:cubic-bezier(.2,0,.2,1);--ease-out:cubic-bezier(.16,1,.3,1);
+    --press-scale:.985;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;padding:16px;background:var(--surface-page,#EAEDEE);
+    font:400 16px/1.45 var(--font-sans,"Inter",system-ui,sans-serif);letter-spacing:-.005em;
+    color:var(--text-body,#5B6769);-webkit-font-smoothing:antialiased}
+  .row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .col{display:flex;flex-direction:column;gap:12px}
+  .cap{font:500 12px/1 var(--font-sans,"Inter",system-ui,sans-serif);letter-spacing:.16em;
+    text-transform:uppercase;color:var(--text-subtle,#8F9B9C)}
+  .tabular{font-variant-numeric:tabular-nums}
+  svg{display:block}
+</style>
+<style>
+  .tabs{display:flex;gap:24px;border-bottom:1px solid var(--border-subtle,#DBE1E2);
+    overflow-x:auto;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{display:inline-flex;align-items:center;gap:8px;padding:0 0 12px;background:none;border:none;
+    cursor:pointer;white-space:nowrap;
+    font:600 15px/1 var(--font-sans,"Inter",system-ui,sans-serif);color:var(--text-muted,#707A7B)}
+  .tab[aria-selected="true"]{color:var(--text-strong,#30393A);
+    box-shadow:inset 0 -2px 0 0 var(--action-primary,#39B8C6)}
+  .count{font-variant-numeric:tabular-nums;font:500 12px/1.4 var(--font-sans,"Inter",system-ui,sans-serif);
+    padding:4px 8px;border-radius:999px;background:var(--teal-100,#EAEDEE);color:var(--text-subtle,#8F9B9C)}
+  .tab[aria-selected="true"] .count{background:var(--sand-100,#ECF5F6);color:var(--sand-700,#2E939E)}
+</style>
+<div class="tabs" role="tablist">
+  <button class="tab" role="tab" aria-selected="true">Open<span class="count">38</span></button>
+  <button class="tab" role="tab" aria-selected="false">In review<span class="count">12</span></button>
+  <button class="tab" role="tab" aria-selected="false">Approved<span class="count">7</span></button>
+  <button class="tab" role="tab" aria-selected="false">Archived</button>
+</div>

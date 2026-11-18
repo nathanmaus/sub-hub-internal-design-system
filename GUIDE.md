@@ -19,7 +19,7 @@ SubcontractorHub sells one platform to installation contractors — not service-
 
 Cross-cutting facts that shape copy and UI: three trades in one login (solar tracks design → PTO, roofing tracks material delivery → final inspection, HVAC tracks permit → commissioning); embedded financing from **GoodLeap, Sungage, LightReach and Arcadia**; the **30% federal ITC** in every solar number; English and Spanish; Zapier integrations (Zoho, HubSpot, Salesforce, Keap); 500+ contractor teams.
 
-**Surfaces represented here:** internal tools (dashboards, trackers, review and planning boards). Click-through UI kits for the operator app and the marketing site live in the GitHub repo under `ui_kits/`; they are not shown on the Design System page.
+**Surfaces represented here:** the operator app (`ui_kits/platform/`) and the marketing site (`ui_kits/marketing/`).
 
 ### Sources used
 
@@ -66,7 +66,7 @@ Cross-cutting facts that shape copy and UI: three trades in one login (solar tra
 ## 3 · Visual foundations
 
 ### Color
-Two families and nothing else. **Sand `#D9B98A`** is the brand: primary actions, links in dark mode, the accent and the AI marker. Primary and accent are deliberately the same colour. **Teal** runs from `#EAF3F1` to `#0A2427` and carries all text, borders and light grounds; `#0F3438` is the strongest text in light. **Night** (`night-950` `#0B0F0F` to `night-600` `#3B4B4C`) is teal taken almost to black: it carries the dark-mode grounds, cards and borders, so dark screens read as near-black with dark teal cards, not as bright teal.
+Two families and nothing else. **Sand `#D9B98A`** is the brand: primary actions, links in dark mode, the accent and the AI marker. Primary and accent are deliberately the same colour. **Teal** runs from `#EAF3F1` to `#0A2427` and carries all text, borders and grounds; `#0F3438` is the page in dark mode and the strongest text in light. Borders in dark mode use the neutral `#545655`.
 
 Sand always takes a **teal label**, never white: white on sand is 1.9:1 and unreadable. That is what `text-on-brand` is for. Teal teal fills (dark buttons) take a light label, `text-on-teal`.
 
@@ -74,18 +74,8 @@ Status colours (green, yellow, red) are functional and shared with SubHub. Info 
 
 Use sand sparingly, as SubHub uses sand: zero or a couple of sand moments per screen beyond the primary action.
 
-### Color restraint
-Colour is a signal, so it is rationed. On dense screens (tables, lists, dashboards):
-
-- **One coloured pill per row, at most.** Everything else in the row uses the neutral pill (`status-neutral-bg` / `status-neutral-text`).
-- **Only urgent priority is coloured.** P0 uses the danger pill; P1, P2 and lower are neutral.
-- **Type, stage and category pills are always neutral.** They describe; they don't alert.
-- **Status gets colour only when it asks for action** (a warning such as "Revisit later", a failure), and only if the row has no other coloured pill.
-- **Active navigation is quiet:** `surface-brand-subtle` fill (`sand-900` in dark) with `sand-300` text, never a solid sand block. Solid sand is kept for the primary button.
-- In dark mode the status colours are deliberately softened (`red-300`, `yellow-300`, `green-300` on their `-900` fills, all 6.7:1 or better).
-
 ### Type
-Two faces. **Fraunces** for display and headings (hero to h2). **Inter** for everything else: body, buttons, UI labels, numbers, eyebrows. Buttons are Inter, not Fraunces; a serif on every control reads as decoration. Fraunces is a serif, so display type is tracked looser than a geometric sans would be: `-.02em` at hero, `-.015em` for display, `-.01em` at h1. Body is 16/1.45 at `-.005em`. The eyebrow stays: 12px Inter, uppercase, `.16em`.
+Two faces. **Fraunces** for display and headings (hero to h2). **Inter** for everything else: body, buttons, UI labels, numbers, eyebrows. Buttons are Inter Medium at 12, 14 or 16px, not Fraunces; a serif on every control reads as decoration. Fraunces is a serif, so display type is tracked looser than a geometric sans would be: `-.02em` at hero, `-.015em` for display, `-.01em` at h1. Body is 16/1.45 at `-.005em`. The eyebrow stays: 12px Inter, uppercase, `.16em`.
 
 ### Layout
 4px base grid. 1240px max container, 760px narrow measure. Marketing bands inset 32px on the page and pad 72–88px vertically; app pages pad 22–24px. Controls are 44px tall (34 dense, 52 hero). App chrome is fixed: 244px sidebar, 60px topbar, and the marketing header is sticky.
@@ -101,7 +91,7 @@ Grounds are **flat** — no soft gradients, no photo washes, no noise or paper t
 Illustration is **isometric line art** — the solar-array site drawing, the braced tower. Never stock photos, never 3D renders, never emoji. Radial glows exist *only* inside the blueprint motif; they are not a general gradient license.
 
 ### Cards & borders
-A card is **white, 14px radius, 1px `--border-subtle` (teal-200), `--shadow-sm`** — border and shadow always together. In dark mode the card is `night-850` on the `night-950` page; the two are close on purpose, so the `night-750` hairline border is what holds the card's edge. Never drop it in dark. Controls are 10px, panels 20px, pills 999px. Never a rounded card with a colored left border only. Borders are hairline (1px); `1.5px` exists only for a totals rule.
+A card is **white, 14px radius, 1px `--border-subtle` (teal-200), `--shadow-sm`** — border and shadow always together. Controls are 10px, panels 20px, pills 999px. Never a rounded card with a colored left border only. Borders are hairline (1px); `1.5px` exists only for a totals rule.
 
 ### Shadows
 Cool-tinted, shallow, layered. `--shadow-sm` at rest, `--shadow-md` on an interactive card's hover, `--shadow-overlay` for dialogs. Nothing floats far off the page; there is no glow, no colored shadow. The only inner shadow is a 10%-white top inset for dark surfaces.
@@ -116,14 +106,14 @@ Hover = **one step darker** in the same family (sand-400 → sand-700), or a fil
 Rare and specific. `--blur-panel` (14px) is used on the sticky marketing header over an 86%-white ground, and dialogs sit on a `--scrim-inverse` (62% teal) scrim. On dark surfaces, secondary fills are `rgba(255,255,255,.05–.12)`. Nothing else is translucent — no frosted cards, no glass.
 
 ### Imagery color vibe
-Near-black grounds, dark teal panels, sand highlights. Warm and calm rather than technical. When imagery is missing, use a flat `night-850` panel, not a placeholder gradient.
+Deep teal grounds, sand highlights. Warm and calm rather than technical. When imagery is missing, use a flat teal panel, not a placeholder gradient.
 
 ### Dark
 **Dark is this system's home theme**; the palette was defined dark-first and light mode is derived from it. Set `data-theme="dark"` on the root element.
 
-**Primitives do not change between modes.** `teal-900` is `#0F3438` in both themes; only the semantic layer repoints. Dark grounds use the `night` ramp, so light-mode text colours are untouched by them.
+**Primitives do not change between modes.** `teal-900` is `#0F3438` in both themes; only the semantic layer repoints.
 
-**Surfaces.** Dark: page `night-950` (near-black), app chrome such as the sidebar `night-900`, cards `night-850` (dark teal) with a `night-750` border, sunken wells and table headers `night-920`, hover `night-800`. Light: page `teal-025`, cards white, sunken wells `teal-025` (the same tone as the page, so a well reads as a cut into the white card).
+**Surfaces.** Dark: page `teal-900` (the board's Background), cards `teal-800` one step lighter so they separate, sunken wells `teal-950`. Light: page `teal-050`, cards white, sunken wells `teal-025`.
 
 **Sand holds; its supporting cast moves.** `sand-400` is the primary fill in both themes with a `teal-900` label at 7.2:1. Links are `sand-400` in dark but `sand-700` in light, because `sand-400` on white is 1.9:1. Hover lightens to `sand-300` in both themes; pressed is `sand-500` in light and `sand-200` in dark.
 
@@ -133,7 +123,7 @@ Near-black grounds, dark teal panels, sand highlights. Warm and calm rather than
 
 ## 4 · Iconography
 
-**The SubHub Icon Library — the only source of icons in this system.** All 271 icons are drawn in the Figma file "SubHub Icon Library" and exported at 24px. This system shares the library with the SubHub Design System. No Lucide, no third-party set.
+**The SubHub Icon Library — the only source of icons in this system.** All 272 icons are drawn in the Figma file "SubHub Icon Library" and exported at 24px. This system shares the library with the SubHub Design System. No Lucide, no third-party set. Every icon is embedded in `components/bundle.js`, so the components work in any project with no icons folder, CDN or asset store, and the weekly sync rebundles them so a redrawn icon updates everywhere at once.
 
 > ### The one rule
 >
@@ -151,7 +141,7 @@ Near-black grounds, dark teal panels, sand highlights. Warm and calm rather than
 - **Emoji:** never, anywhere.
 - **Illustration ≠ icon.** Larger line art (the isometric solar site, the braced tower, the node mesh) lives inside `HeroBanner` as inline SVG recreated from the supplied source. Don't draw new illustrations by hand; reuse those or leave the slot empty.
 
-**Logos:** the SubHub lockup in this system's colours, as SVGs with PNG fallbacks in `assets/`: `logo-dark` (light grounds: `teal-900` and `sand-600`), `logo-light` (dark grounds: `teal-300`, `teal-050` and `sand-400`), `logo-on-amber` (on `sand-400`: `teal-700` and `teal-900`). The mark is the SubcontractorHub mark, shape unchanged; the wordmark reads "SubHub" in Inter SemiBold, "Sub" and "Hub" in two tones. On teal, use `logo-light`. **Never redraw, recolour, outline or rebuild it.**
+**Logos:** the SubHub lockup in this system's colours, as SVGs with PNG fallbacks in `assets/`: `logo-dark` (light grounds: `teal-900` and `sand-600`), `logo-light` (dark grounds: `teal-300`, `teal-050` and `sand-400`), `logo-on-amber` (on `sand-400`: `teal-700` and `teal-900`). The mark is the SubcontractorHub mark, shape unchanged; the wordmark reads "SubHub" in Inter SemiBold, "Sub" and "Hub" in two tones. On teal, use `logo-light`. **Never redraw, recolour, outline or rebuild it.** The lockups are embedded in `components/bundle.js` as well, so `Logo` needs no files.
 
 ---
 
@@ -160,27 +150,16 @@ Near-black grounds, dark teal panels, sand highlights. Warm and calm rather than
 | Path | What |
 | --- | --- |
 | `tokens.json` | Every token in both themes. The source the CSS is generated from. |
-| `scripts/build-colour-tokens.mjs` | Rebuilds the colours in `tokens.css` from `tokens.json`. Run `node scripts/build-colour-tokens.mjs` after any colour change; add `--check` to only test. |
 | `tokens.css` | The tokens as CSS variables, plus fonts, weights and motion. The one stylesheet a page needs. |
 | `tokens/base.css` | Element defaults: body type, headings, links, focus ring. |
 | `components/bundle.js` | All components in one script, exposed as `window.InternalDesignSystem`. |
 | `components/<Name>/` | Each component's guidelines (`README.md`), types (`.d.ts`) and preview. |
 | `components/core`, `forms`, `data`, `navigation`, `overlays`, `brand` | Component source. |
 | `icons/` | The SubHub Icon Library, one SVG per icon; `icons/index.json` lists them. |
-| `guidelines/` | 22 specimen cards: brand (lockups, AI marker, 4 motifs), colours, type and spacing. |
-| `ui_kits/` | Click-through UI kits for the operator app (`platform/`) and the marketing site (`marketing/`). |
+| `guidelines/` | Specimen cards for colour, type, spacing, radius, motion and motifs. |
 | `motion.md` | Motion specs for Tooltip, Toast and menus. |
 
-**Components (18):**
-
-**`core/`** — **Icon**, **Button**, **IconButton**, **Badge**, **StatusPill**
-**`forms/`** — **Field**, **Input**, **Select**, **Switch**
-**`data/`** — **Card**, **StatCard**, **DataTable**
-**`navigation/`** — **Tabs**, **MainMenu** (the account menu from the top-bar avatar; not a dropdown menu)
-**`overlays/`** — **Tooltip**, **Toast**
-**`brand/`** — **Logo**, **HeroBanner**
-
-`components/Cover/preview.html` is the cover on the Design System page's Overview, not a component.
+**Components:** Icon, Button, IconButton, Badge, StatusPill · Field, Input, Select, Switch · Card, StatCard, DataTable · Tabs, MainMenu · Tooltip, Toast · Logo, HeroBanner.
 
 Not built yet (flag it rather than inventing one): Checkbox, Radio, Textarea, Dialog, Dropdown menu, Pagination, Breadcrumb, Sidebar nav, Avatar, Progress, Skeleton.
 
@@ -189,7 +168,7 @@ Not built yet (flag it rather than inventing one): Checkbox, Radio, Textarea, Di
 ## 6 · Open questions & flags
 
 1. **Logo recoloured, not redrawn.** The SubHub lockup uses the SubcontractorHub mark unchanged in shape, recoloured to teal and sand, with an Inter SemiBold "SubHub" wordmark. The original wordmark face was not labelled; Inter SemiBold was the closest match. Confirm it with whoever owns the brand files.
-2. **The palette was defined dark-first.** Light mode and the in-between ramp steps were derived, not supplied. Dark grounds moved to the `night` ramp (near-black page, dark teal cards) to cut saturation; `surface-ink`, `action-secondary` and `action-disabled-bg` still use `teal-700` in dark and may need the same treatment. Review against real screens.
+2. **The palette was defined dark-first.** Light mode, the in-between ramp steps and the lifted dark card (`teal-800`) were derived, not supplied. Review them against real screens.
 3. **Status colours are shared with SubHub.** Green, yellow and red are functional, not part of this palette. Info and neutral use teal.
 4. **Five icons are missing from the library.** `hard-hat`, `hourglass`, `kanban`, `layers` and `wallet` render the `placeholder` glyph until they are drawn in Figma.
 5. **HeroBanner's artwork and motifs come from SubHub.** They are recoloured to teal and sand but were designed for SubHub's brand.

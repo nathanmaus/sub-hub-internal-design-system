@@ -1,0 +1,3 @@
+/* Everything a page needs: tokens (both themes, fonts, motion) plus element defaults. */
+@import "../tokens.css";
+@import "../tokens/base.css";

@@ -1,0 +1,58 @@
+<!-- @dsCard group="Core" height=180 -->
+<!doctype html>
+<meta charset="utf-8">
+<style>
+  :root{
+    --weight-regular:400;--weight-medium:500;--weight-semibold:600;--weight-bold:700;
+    --tracking-eyebrow:.16em;--tracking-body:-.005em;--tracking-heading:-.02em;--tracking-hero:-.05em;
+    --duration-instant:90ms;--duration-fast:150ms;--duration-base:220ms;
+    --ease-standard:cubic-bezier(.2,0,.2,1);--ease-out:cubic-bezier(.16,1,.3,1);
+    --press-scale:.985;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;padding:16px;background:var(--surface-page,#EAEDEE);
+    font:400 16px/1.45 var(--font-sans,"Inter",system-ui,sans-serif);letter-spacing:-.005em;
+    color:var(--text-body,#5B6769);-webkit-font-smoothing:antialiased}
+  .row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .col{display:flex;flex-direction:column;gap:12px}
+  .cap{font:500 12px/1 var(--font-sans,"Inter",system-ui,sans-serif);letter-spacing:.16em;
+    text-transform:uppercase;color:var(--text-subtle,#8F9B9C)}
+  .tabular{font-variant-numeric:tabular-nums}
+  svg{display:block}
+</style>
+<style>
+  .ib{display:inline-flex;align-items:center;justify-content:center;
+    border-radius:var(--radius-control,10px);border:1px solid transparent;cursor:pointer;
+    transition:background-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard),border-color var(--duration-fast) var(--ease-standard)}
+  .ib-sm{width:32px;height:32px}.ib-md{width:40px;height:40px}.ib-lg{width:48px;height:48px}
+  .quiet{background:transparent;color:var(--text-muted,#707A7B)}
+  .quiet:hover{background:var(--teal-100,#EAEDEE)}
+  .outline{background:var(--surface-card,#fff);color:var(--text-body,#5B6769);
+    border-color:var(--border-default,#C6CECE)}
+  .outline:hover{background:var(--teal-025,#F8F9F9)}
+  .solid{background:var(--action-primary,#39B8C6);color:var(--text-on-brand,#fff)}
+  .solid:hover{background:var(--action-primary-hover,#2E939E)}
+  .ib.is-disabled{background:var(--action-disabled-bg,#DBE1E2);
+    color:var(--action-disabled-text,#8F9B9C);border-color:transparent;cursor:not-allowed}
+</style>
+<div class="col" style="gap:16px">
+  <div class="row">
+    <span class="cap" style="width:64px">Quiet</span>
+    <button class="ib ib-sm quiet" aria-label="Edit"><span aria-hidden="true" style="display:inline-block;flex:0 0 auto;width:16px;height:16px;background:currentColor;-webkit-mask:url(../../icons/pencil.svg) center/contain no-repeat;mask:url(../../icons/pencil.svg) center/contain no-repeat"></span></button>
+    <button class="ib ib-md quiet" aria-label="Edit"><span aria-hidden="true" style="display:inline-block;flex:0 0 auto;width:18px;height:18px;background:currentColor;-webkit-mask:url(../../icons/pencil.svg) center/contain no-repeat;mask:url(../../icons/pencil.svg) center/contain no-repeat"></span></button>
+    <button class="ib ib-lg quiet" aria-label="Edit"><span aria-hidden="true" style="display:inline-block;flex:0 0 auto;width:20px;height:20px;background:currentColor;-webkit-mask:url(../../icons/pencil.svg) center/contain no-repeat;mask:url(../../icons/pencil.svg) center/contain no-repeat"></span></button>
+  </div>
+  <div class="row">
+    <span class="cap" style="width:64px">Outline</span>
+    <button class="ib ib-sm outline" aria-label="More"><span aria-hidden="true" style="display:inline-block;flex:0 0 auto;width:16px;height:16px;background:currentColor;-webkit-mask:url(../../icons/menu-more-vertical.svg) center/contain no-repeat;mask:url(../../icons/menu-more-vertical.svg) center/contain no-repeat"></span></button>
+    <button class="ib ib-md outline" aria-label="More"><span aria-hidden="true" style="display:inline-block;flex:0 0 auto;width:18px;height:18px;background:currentColor;-webkit-mask:url(../../icons/menu-more-vertical.svg) center/contain no-repeat;mask:url(../../icons/menu-more-vertical.svg) center/contain no-repeat"></span></button>
+    <button class="ib ib-lg outline" aria-label="More"><span aria-hidden="true" style="display:inline-block;flex:0 0 auto;width:20px;height:20px;background:currentColor;-webkit-mask:url(../../icons/menu-more-vertical.svg) center/contain no-repeat;mask:url(../../icons/menu-more-vertical.svg) center/contain no-repeat"></span></button>
+  </div>
+  <div class="row">
+    <span class="cap" style="width:64px">Solid</span>
+    <button class="ib ib-sm solid" aria-label="Add"><span aria-hidden="true" style="display:inline-block;flex:0 0 auto;width:16px;height:16px;background:currentColor;-webkit-mask:url(../../icons/plus.svg) center/contain no-repeat;mask:url(../../icons/plus.svg) center/contain no-repeat"></span></button>
+    <button class="ib ib-md solid" aria-label="Add"><span aria-hidden="true" style="display:inline-block;flex:0 0 auto;width:18px;height:18px;background:currentColor;-webkit-mask:url(../../icons/plus.svg) center/contain no-repeat;mask:url(../../icons/plus.svg) center/contain no-repeat"></span></button>
+    <button class="ib ib-md is-disabled" aria-label="Delete" disabled><span aria-hidden="true" style="display:inline-block;flex:0 0 auto;width:18px;height:18px;background:currentColor;-webkit-mask:url(../../icons/trash.svg) center/contain no-repeat;mask:url(../../icons/trash.svg) center/contain no-repeat"></span></button>
+  </div>
+</div>

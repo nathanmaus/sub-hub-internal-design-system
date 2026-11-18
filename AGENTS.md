@@ -10,7 +10,7 @@ You are building with SubHub's Internal Design System. Follow these rules exactl
 
 ## Icons
 
-4. Every icon must come from `icons/` (the SubHub Icon Library). Use the `Icon` component with the icon's name; the full list is in `icons/index.json`. An icon beside a label takes `color="currentColor"` so it matches the text; a standalone icon uses the default, `var(--icon-default)`.
+4. Every icon must come from the SubHub Icon Library, which is built into `components/bundle.js`. Use the `Icon` component with the icon's name; the full list is in `icons/index.json` or `DS.Icon.names`. Never link to the `icons/` folder or an SVG file directly. An icon beside a label takes `color="currentColor"` so it matches the text; a standalone icon uses the default, `var(--icon-default)`.
 5. Never draw an icon, generate one, or take one from another set (Lucide, Heroicons, Material, Font Awesome, emoji or anything else), even if it looks close.
 6. If the icon you need does not exist, use `placeholder` and tell the person to contact Nathan Maus to have it drawn in Figma. Do not substitute a similar-looking icon.
 
@@ -25,7 +25,7 @@ You are building with SubHub's Internal Design System. Follow these rules exactl
 
 ## Copy
 
-13. Sentence case everywhere, including button labels: "Create quote".
+13. Sentence case everywhere, including button labels: "Create quote". Button labels are Inter Medium; use the Button component rather than restyling them.
 14. No em dashes in product copy.
 15. Sand is the brand colour. Beyond the primary action, zero or a couple of sand moments per screen.
 
@@ -37,3 +37,7 @@ You are building with SubHub's Internal Design System. Follow these rules exactl
 
 17. Format text fields for their purpose: phone, card number, expiry, tax ID, postcode and so on.
 18. Every dropdown shows a down caret icon (`chevron-down`).
+
+## Assets
+
+18. Icons and logos are embedded in `bundle.js`. Use `Icon` and `Logo`; do not copy `icons/` or `assets/` into a prototype. If you change anything in `icons/` or `assets/`, run `node scripts/build-assets.mjs`.
