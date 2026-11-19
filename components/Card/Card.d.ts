@@ -1,6 +1,6 @@
 import * as React from "react";
 
-/** The system's surface: 14px radius, hairline border, shallow cool shadow. */
+/** The system's surface: 16px radius (radius-card), hairline border, shallow cool shadow. */
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
   /** Any CSS padding. Defaults to var(--card-pad) = 24px. */

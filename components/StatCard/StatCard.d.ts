@@ -14,7 +14,7 @@ export interface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {
   delta?: string;
   /** Picks green + trending-up vs red + trending-down. */
   deltaDirection?: "up" | "down";
-  /** Lucide slug shown top-right in subtle ink. */
+  /** SubHub Icon Library name, shown top-right in subtle ink. */
   icon?: string;
   footnote?: string;
   /** Numbers, oldest first. Draws a Sparkline under the value. */

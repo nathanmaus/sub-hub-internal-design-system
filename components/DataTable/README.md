@@ -9,7 +9,7 @@ Each column takes `key`, `label` and optionally `align`, `width`, `mono`, `stron
 ## Rules
 
 - Numbers right-align, text left-aligns, and the header follows the cell. A right-aligned number under a left-aligned header reads as a mistake.
-- Row padding is 16px, `dense` drops it to 12px. Both are on the grid; nothing between them.
+- Row padding is 12px top and bottom, `dense` drops it to 8px. Both are on the grid; nothing between them.
 - Header labels are 12px uppercase at 0.16em on `text-subtle`. That is below 4.5:1 at small sizes by design for a non-essential label — keep the information in the cells, never only in the header.
 - Status belongs in a cell as a StatusPill, not as a tinted row. A coloured row background fails on print and is unreadable to anyone scanning the identifying column.
 - `render` receives the whole row, so a cell can hold a pill, a link or an IconButton.

@@ -26,7 +26,7 @@ export function Tabs({ tabs = [], value, defaultValue, onChange, style, ...rest 
           >
             {label}
             {count !== undefined ? (
-              <span className="tabular" style={{ font: "var(--type-mono)", fontSize: 12, color: on ? "var(--status-info-text)" : "var(--text-subtle)", background: on ? "var(--surface-brand-subtle)" : "var(--surface-page)", padding: "2px 7px", borderRadius: "var(--radius-pill)" }}>{count}</span>
+              <span className="tabular" style={{ font: "var(--type-mono)", fontSize: 12, color: on ? "var(--status-info-text)" : "var(--text-subtle)", background: on ? "var(--surface-brand-subtle)" : "var(--surface-hover)", padding: "2px 7px", borderRadius: "var(--radius-pill)" }}>{count}</span>
             ) : null}
           </button>
         );

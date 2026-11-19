@@ -1,6 +1,6 @@
 import * as React from "react";
 
-/** Native select in the field skin, with a Lucide chevron. */
+/** Native select in the field skin, with the library's chevron-down icon. */
 export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   /** Plain strings, or {value,label} pairs. */
   options?: Array<string | { value: string; label: string }>;

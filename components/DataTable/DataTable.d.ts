@@ -4,7 +4,7 @@ export interface DataTableColumn {
   key: string;
   label: string;
   align?: "left" | "right" | "center";
-  /** Set money, sizes and IDs in IBM Plex Mono, tabular. */
+  /** Set money, sizes and IDs in tabular figures (font-mono, which is Inter). */
   mono?: boolean;
   /** Semibold ink-900 — use on the identifying column only. */
   strong?: boolean;
@@ -21,7 +21,7 @@ export interface DataTableColumn {
 export interface DataTableProps extends React.HTMLAttributes<HTMLDivElement> {
   columns?: DataTableColumn[];
   rows?: any[];
-  /** 10px row padding and 14px text instead of 14/15. */
+  /** 8px row padding and 14px text instead of 12px and 16px. */
   dense?: boolean;
 }
 export declare function DataTable(props: DataTableProps): JSX.Element;

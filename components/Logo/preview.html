@@ -22,7 +22,7 @@
 </style>
 <style>
   .lock{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
-  .plate{display:flex;align-items:center;padding:24px;border-radius:var(--radius-card,14px);
+  .plate{display:flex;align-items:center;padding:24px;border-radius:var(--radius-card,16px);
     min-height:88px}
   .plate img{height:28px;width:auto;display:block}
   .note{font:400 13px/1.45 var(--font-sans,"Inter",system-ui,sans-serif);color:var(--text-muted,#707A7B)}
@@ -30,17 +30,17 @@
 </style>
 <div class="grid">
   <div class="lock">
-    <div class="plate" style="background:var(--surface-card,#fff);border:1px solid var(--border-subtle,#DBE1E2)">
+    <div class="plate" style="background:var(--white,#fff);border:1px solid var(--teal-100,#DBE2E2)" data-fixed-ground>
       <img src="../../assets/logo-dark.svg" alt="SubHub"></div>
     <span class="note"><code>dark</code> — on white and teal-050</span>
   </div>
   <div class="lock">
-    <div class="plate" style="background:var(--teal-900,#0F3438)">
+    <div class="plate" style="background:var(--teal-900,#0F3438)" data-fixed-ground>
       <img src="../../assets/logo-light.svg" alt="SubHub"></div>
     <span class="note"><code>light</code> — on teal-800, teal-900 and teal-950</span>
   </div>
   <div class="lock">
-    <div class="plate" style="background:var(--sand-400,#D9B98A)">
+    <div class="plate" style="background:var(--sand-400,#D9B98A)" data-fixed-ground>
       <img src="../../assets/logo-on-amber.svg" alt="SubHub"></div>
     <span class="note"><code>sand</code> — on sand-400 only</span>
   </div>

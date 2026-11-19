@@ -21,7 +21,7 @@
   svg{display:block}
 </style>
 <style>
-  .c{border-radius:var(--radius-card,14px);padding:var(--card-pad,24px);
+  .c{border-radius:var(--radius-card,16px);padding:var(--card-pad,24px);
     box-shadow:var(--shadow-sm,0 1px 2px rgba(14,21,32,.06),0 1px 3px rgba(14,21,32,.05));
     transition:box-shadow var(--duration-base) var(--ease-standard),
       transform var(--duration-base) var(--ease-standard)}
@@ -33,12 +33,12 @@
   .c-sunken{background:var(--surface-sunken,#F8F9F9);border:1px solid var(--border-subtle,#DBE1E2);
     color:var(--text-body,#5B6769)}
   .c-sunken h4{color:var(--text-strong,#30393A)}
-  .c-inverse{background:var(--surface-inverse,#1B2122);border:1px solid rgba(255,255,255,.12);
-    color:var(--teal-200,#DBE1E2)}
-  .c-inverse h4{color:var(--white,#fff)}
-  .c-brand{background:var(--surface-brand-subtle,#ECF5F6);border:1px solid var(--sand-200,#D0DFE1);
-    color:var(--sand-800,#226E77)}
-  .c-brand h4{color:var(--sand-800,#226E77)}
+  .c-inverse{background:var(--surface-inverse,#1B2122);border:1px solid var(--border-inverse,rgba(234,243,243,.14));
+    color:var(--text-on-inverse,#BDC8C8)}
+  .c-inverse h4{color:var(--text-inverse,#EAF3F3)}
+  .c-brand{background:var(--surface-brand-subtle,#ECF5F6);border:1px solid var(--border-brand-subtle,#EFE0C8);
+    color:var(--text-brand,#5A4322)}
+  .c-brand h4{color:var(--text-brand,#5A4322)}
   .c-int:hover{box-shadow:var(--shadow-md,0 2px 4px rgba(14,21,32,.05),0 8px 20px rgba(14,21,32,.07));
     transform:translateY(-2px);cursor:pointer}
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
@@ -54,7 +54,7 @@
   .sc-row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
   .delta{display:inline-flex;align-items:center;gap:4px;
     font:600 13px/1.3 var(--font-sans,"Inter",system-ui,sans-serif)}
-  .up{color:var(--green-700,#20585F)}.down{color:var(--red-700,#3B8188)}
+  .up{color:var(--status-success-text,#07784f)}.down{color:var(--status-danger-text,#a81c1c)}
   .foot{font:400 13px/1.45 var(--font-sans,"Inter",system-ui,sans-serif);color:var(--text-muted,#707A7B)}
 </style>
 <div class="grid">

@@ -9,9 +9,9 @@ const SIZES = {
 
 const VARIANTS = {
   primary: { background: "var(--action-primary)", color: "var(--text-on-brand)", border: "1px solid transparent", hover: "var(--action-primary-hover)", shadow: "var(--shadow-xs)" },
-  secondary: { background: "var(--surface-card)", color: "var(--text-strong)", border: "1px solid var(--border-default)", hover: "var(--surface-sunken)", shadow: "var(--shadow-xs)" },
+  secondary: { background: "var(--surface-card)", color: "var(--text-strong)", border: "1px solid var(--border-default)", hover: "var(--surface-hover)", shadow: "var(--shadow-xs)" },
   dark: { background: "var(--action-secondary)", color: "var(--text-on-ink)", border: "1px solid transparent", hover: "var(--action-secondary-hover)", shadow: "var(--shadow-xs)" },
-  accent: { background: "var(--action-accent)", color: "var(--teal-900)", border: "1px solid transparent", hover: "var(--action-accent-hover)", shadow: "var(--shadow-xs)" },
+  accent: { background: "var(--action-accent)", color: "var(--text-on-accent)", border: "1px solid transparent", hover: "var(--action-accent-hover)", shadow: "var(--shadow-xs)" },
   ghost: { background: "transparent", color: "var(--text-link)", border: "1px solid transparent", hover: "var(--surface-brand-subtle)", shadow: "none" },
 };
 

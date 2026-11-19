@@ -164,7 +164,7 @@ export function HeroBanner({
         {children || <MeshArt right={px(98)} top={py(56)} width={px(460)} height={py(260)} />}
         <div style={{ position: "absolute", left: px(120), top: 0, bottom: 0, width: px(700), display: "flex", flexDirection: "column", justifyContent: "center", gap: px(28) }}>
           {eyebrow ? (
-            <div style={{ display: "flex", alignItems: "center", gap: px(14), font: "var(--type-eyebrow)", fontSize: fs(13, 11), letterSpacing: "var(--tracking-eyebrow)", textTransform: "uppercase", color: "var(--sand-400)", whiteSpace: "nowrap" }}>{eyebrow}</div>
+            <div style={{ display: "flex", alignItems: "center", gap: px(14), font: "var(--type-eyebrow)", fontSize: fs(13, 11), letterSpacing: "var(--tracking-eyebrow)", textTransform: "uppercase", color: "var(--sand-700)", whiteSpace: "nowrap" }}>{eyebrow}</div>
           ) : null}
           <h1 style={{ margin: 0, position: "relative", font: "var(--weight-bold) " + fs(150, 34) + "px/0.86 var(--font-display)", letterSpacing: "var(--tracking-hero)", color: "var(--teal-900)" }}>{title}</h1>
           {subtitle ? (

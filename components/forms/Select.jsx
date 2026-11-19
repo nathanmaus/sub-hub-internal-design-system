@@ -7,7 +7,7 @@ export function Select({ options = [], placeholder, disabled = false, style, ...
     <div
       style={{
         display: "flex", alignItems: "center", height: "var(--field-height)", padding: "0 12px 0 14px",
-        background: disabled ? "var(--surface-page)" : "var(--surface-card)",
+        background: disabled ? "var(--surface-sunken)" : "var(--surface-card)",
         border: `1px solid ${focus ? "var(--border-brand)" : "var(--border-default)"}`,
         borderRadius: "var(--radius-control)", boxShadow: focus ? "var(--ring-focus)" : "none",
         transition: "var(--transition-control)", ...style,

@@ -113,6 +113,21 @@
   --chart-seq-3: var(--teal-500); /* Ordinal ramp, step 3 of 4. `teal-500` light · `teal-300` dark. */
   --chart-seq-4: var(--teal-300); /* Ordinal ramp, step 4 of 4 and any later stage. `teal-300` light · `teal-400` dark. */
   --border-inverse: rgba(234, 243, 243, 0.14); /* Dividers on inverse panels. */
+  --text-accent: var(--sand-700); /* Accent and AI label text on accent-subtle grounds. `sand-700` light · `sand-300` dark. */
+  --text-accent-inverse: var(--sand-400); /* The AI marker on an inverse panel. `sand-400` on teal-900 in light · `sand-700` on the light inverse panel in dark. */
+  --text-brand: var(--sand-800); /* Text on brand-subtle grounds: brand cards, menu feature rows. `sand-800` light · `sand-200` dark. */
+  --text-on-inverse: var(--teal-200); /* Body text on surface-inverse panels. `teal-200` light · `teal-700` dark, where the inverse panel turns light. */
+  --text-on-accent: var(--teal-900); /* Labels on sand fills (accent button). `teal-900` in both themes. */
+  --border-brand-subtle: var(--sand-200); /* Edge of brand-subtle surfaces: brand badges and cards. `sand-200` light · `sand-700` dark. */
+  --border-danger: var(--red-600); /* Invalid field border. `red-600` light · `red-300` dark. */
+  --surface-inverse-subtle: rgba(255, 255, 255, 0.12); /* Quiet fill for chips on a surface-inverse panel. White 12% light · teal-900 8% dark. */
+  --surface-hover: var(--teal-050); /* Hover fill on quiet controls and secondary buttons. `teal-050` light · `night-800` dark. */
+  --track-off: var(--teal-300); /* Switch track when off. The thumb stays white on it in both themes. */
+  --status-success-dot: var(--green-600); /* Status dot, approved and paid. */
+  --status-warning-dot: var(--yellow-600); /* Status dot, pending. */
+  --status-danger-dot: var(--red-600); /* Status dot, overdue. */
+  --status-info-dot: var(--teal-500); /* Status dot, in review. */
+  --status-neutral-dot: var(--teal-400); /* Status dot, draft. */
   --blueprint-rule-fine: rgba(234, 243, 243, 0.045); /* Minor grid on dark technical panels. */
   --blueprint-rule-major: rgba(217, 185, 138, 0.16); /* Major grid on dark technical panels. */
   --blueprint-glow-blue: rgba(97, 112, 112, 0.35); /* Radial teal glow behind blueprint artwork. Name kept for component compatibility. */
@@ -185,6 +200,16 @@
   --chart-seq-3: var(--teal-300);
   --chart-seq-4: var(--teal-400);
   --border-inverse: rgba(34, 49, 49, 0.14);
+  --text-accent: var(--sand-300);
+  --text-accent-inverse: var(--sand-700);
+  --text-brand: var(--sand-200);
+  --text-on-inverse: var(--teal-700);
+  --border-brand-subtle: var(--sand-700);
+  --border-danger: var(--red-300);
+  --surface-inverse-subtle: rgba(34, 49, 49, 0.08);
+  --surface-hover: var(--night-800);
+  --track-off: var(--night-600);
+  --status-info-dot: var(--teal-300);
 
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.40);
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.40), 0 1px 3px rgba(0, 0, 0, 0.32);

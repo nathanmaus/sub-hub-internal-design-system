@@ -65,9 +65,9 @@ function MainMenu({ items = [], animate = true, loop = false, width = 400, label
         React.createElement("span", { style: { flex: 1, minWidth: 0 } },
           React.createElement("span", { style: { display: "flex", alignItems: "center", gap: 8 } },
             React.createElement("span", { style: { font: "var(--weight-semibold) 16px/24px var(--font-sans)", color: "var(--text-strong)" } }, item.label),
-            item.badge ? React.createElement("span", { style: { font: "var(--weight-semibold) 12px/16px var(--font-sans)", color: "var(--text-inverse)", background: "var(--action-primary)", borderRadius: "var(--radius-pill)", padding: "2px 8px" } }, item.badge) : null
+            item.badge ? React.createElement("span", { style: { font: "var(--weight-semibold) 12px/16px var(--font-sans)", color: "var(--text-on-brand)", background: "var(--action-primary)", borderRadius: "var(--radius-pill)", padding: "2px 8px" } }, item.badge) : null
           ),
-          item.description ? React.createElement("span", { style: { display: "block", marginTop: 4, font: "var(--weight-regular) 14px/20px var(--font-sans)", color: "var(--sand-800)" } }, item.description) : null
+          item.description ? React.createElement("span", { style: { display: "block", marginTop: 4, font: "var(--weight-regular) 14px/20px var(--font-sans)", color: "var(--text-brand)" } }, item.description) : null
         )
       );
     }

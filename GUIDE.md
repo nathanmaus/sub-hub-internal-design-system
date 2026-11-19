@@ -131,6 +131,10 @@ Near-black grounds, dark teal panels, sand highlights. Warm and calm rather than
 
 **Contrast holds in both.** Every text pair meets 4.5:1, tertiary pairs meet 3:1. Disabled states and borders are deliberately lower.
 
+**Components use semantic tokens only.** Every component, its preview and the guideline cards colour themselves through semantic tokens, so they follow the theme with no extra work. Fifteen tokens were added for the places the older components reached for a ramp colour: `text-accent`, `text-accent-inverse`, `text-brand`, `text-on-inverse`, `text-on-accent`, `border-brand-subtle`, `border-danger`, `surface-inverse-subtle`, `surface-hover`, `track-off`, and a dot for each status (`status-success-dot` and so on). Ramp colours appear in only two places on purpose: fixed-ground brand art that looks the same in both themes (HeroBanner, Cover, the Logo plates, the motifs) and the white Switch thumb. If a new component needs a colour that no semantic token gives, add the token; do not use the ramp colour.
+
+**Every preview is checked in both themes.** Each text element is measured against the surface behind it, at 4.5:1 for primary and secondary text and 3:1 for tertiary and large text. The sand fills (primary buttons, the on Switch, the solid IconButton) and the inverse panel are the only light areas in dark mode, and both are intentional. A few fixes came out of it: sand labels on light grounds now use `text-accent` (5.5:1) instead of `sand-400` (1.9:1), the editorial HeroBanner eyebrow is `sand-700`, and the MainMenu badge label is `text-on-brand`.
+
 ---
 
 ## 4 · Iconography

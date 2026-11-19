@@ -14,7 +14,7 @@ export function StatCard({ label, value, delta, deltaDirection = "up", icon, foo
       <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
         <span className="tabular" style={{ font: "var(--weight-bold) 30px/1.1 var(--font-mono)", color: "var(--text-strong)" }}>{value}</span>
         {delta ? (
-          <span style={{ display: "inline-flex", alignItems: "center", gap: 3, font: "var(--type-label)", fontSize: 13, color: good ? "var(--green-700)" : "var(--red-700)" }}>
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 3, font: "var(--type-label)", fontSize: 13, color: good ? "var(--status-success-text)" : "var(--status-danger-text)" }}>
             <Icon color="currentColor" name={good ? "trending-up" : "trending-down"} size={14} />
             {delta}
           </span>

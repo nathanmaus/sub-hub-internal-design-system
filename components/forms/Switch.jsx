@@ -18,7 +18,7 @@ export function Switch({ label, checked, defaultChecked, onChange, disabled = fa
         role="switch" aria-checked={on}
         style={{
           width: 42, height: 24, borderRadius: "var(--radius-pill)", padding: 3, flex: "0 0 auto",
-          background: on ? "var(--action-primary)" : "var(--teal-300)",
+          background: on ? "var(--action-primary)" : "var(--track-off)",
           transition: "background-color var(--duration-base) var(--ease-standard)",
           display: "flex", justifyContent: on ? "flex-end" : "flex-start",
         }}

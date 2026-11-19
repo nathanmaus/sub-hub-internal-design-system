@@ -7,7 +7,7 @@ export function IconButton({ icon, label, size = "md", variant = "quiet", disabl
   const s = SIZES[size] || SIZES.md;
   const [hover, setHover] = React.useState(false);
   const skins = {
-    quiet: { bg: hover ? "var(--surface-page)" : "transparent", fg: "var(--text-muted)", border: "1px solid transparent" },
+    quiet: { bg: hover ? "var(--surface-hover)" : "transparent", fg: "var(--text-muted)", border: "1px solid transparent" },
     outline: { bg: hover ? "var(--surface-sunken)" : "var(--surface-card)", fg: "var(--text-body)", border: "1px solid var(--border-default)" },
     solid: { bg: hover ? "var(--action-primary-hover)" : "var(--action-primary)", fg: "var(--text-on-brand)", border: "1px solid transparent" },
   };

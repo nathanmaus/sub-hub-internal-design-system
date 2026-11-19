@@ -10,11 +10,11 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   children?: React.ReactNode;
   /** primary = sand · secondary = card/outline · dark = teal ink · accent = sand · ghost = text-only */
   variant?: "primary" | "secondary" | "dark" | "accent" | "ghost";
-  /** 34 / 44 / 52px control heights. */
+  /** 32 / 44 / 52px control heights. */
   size?: "sm" | "md" | "lg";
-  /** Lucide slug rendered before the label. */
+  /** SubHub Icon Library name, rendered before the label. */
   icon?: string;
-  /** Lucide slug rendered after the label — use for "arrow-right" style forward motion. */
+  /** SubHub Icon Library name, rendered after the label — use for "arrow-right" style forward motion. */
   iconTrailing?: string;
   fullWidth?: boolean;
   disabled?: boolean;

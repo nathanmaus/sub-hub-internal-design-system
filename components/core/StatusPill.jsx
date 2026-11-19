@@ -1,12 +1,12 @@
 import React from "react";
 
 const STATES = {
-  approved: { bg: "var(--status-success-bg)", fg: "var(--status-success-text)", dot: "var(--green-600)" },
-  paid: { bg: "var(--status-success-bg)", fg: "var(--status-success-text)", dot: "var(--green-600)" },
-  pending: { bg: "var(--status-warning-bg)", fg: "var(--status-warning-text)", dot: "var(--yellow-600)" },
-  overdue: { bg: "var(--status-danger-bg)", fg: "var(--status-danger-text)", dot: "var(--red-600)" },
-  review: { bg: "var(--status-info-bg)", fg: "var(--status-info-text)", dot: "var(--teal-500)" },
-  draft: { bg: "var(--status-neutral-bg)", fg: "var(--status-neutral-text)", dot: "var(--teal-400)" },
+  approved: { bg: "var(--status-success-bg)", fg: "var(--status-success-text)", dot: "var(--status-success-dot)" },
+  paid: { bg: "var(--status-success-bg)", fg: "var(--status-success-text)", dot: "var(--status-success-dot)" },
+  pending: { bg: "var(--status-warning-bg)", fg: "var(--status-warning-text)", dot: "var(--status-warning-dot)" },
+  overdue: { bg: "var(--status-danger-bg)", fg: "var(--status-danger-text)", dot: "var(--status-danger-dot)" },
+  review: { bg: "var(--status-info-bg)", fg: "var(--status-info-text)", dot: "var(--status-info-dot)" },
+  draft: { bg: "var(--status-neutral-bg)", fg: "var(--status-neutral-text)", dot: "var(--status-neutral-dot)" },
 };
 
 export function StatusPill({ state = "draft", children, showDot = true, style, ...rest }) {

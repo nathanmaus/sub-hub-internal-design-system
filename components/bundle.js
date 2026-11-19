@@ -581,7 +581,7 @@ function HeroBanner({
         fontSize: fs(13, 11),
         letterSpacing: "var(--tracking-eyebrow)",
         textTransform: "uppercase",
-        color: "var(--sand-400)",
+        color: "var(--sand-700)",
         whiteSpace: "nowrap"
       }
     }, eyebrow) : null, /*#__PURE__*/React.createElement("h1", {
@@ -914,24 +914,24 @@ const TONES = {
   brand: {
     bg: "var(--surface-brand-subtle)",
     fg: "var(--status-info-text)",
-    border: "1px solid var(--sand-200)"
+    border: "1px solid var(--border-brand-subtle)"
   },
   accent: {
     bg: "var(--surface-accent-subtle)",
-    fg: "var(--sand-700)"
+    fg: "var(--text-accent)"
   },
   ai: {
     bg: "var(--surface-accent-subtle)",
-    fg: "var(--sand-700)"
+    fg: "var(--text-accent)"
   },
   "ai-dark": {
     bg: "rgba(217,185,138,0.08)",
-    fg: "var(--sand-400)",
+    fg: "var(--text-accent-inverse)",
     border: "1px solid rgba(217,185,138,0.45)"
   },
   inverse: {
-    bg: "rgba(255,255,255,0.12)",
-    fg: "var(--white)"
+    bg: "var(--surface-inverse-subtle)",
+    fg: "var(--text-inverse)"
   }
 };
 function Badge({
@@ -1005,7 +1005,7 @@ const VARIANTS = {
     background: "var(--surface-card)",
     color: "var(--text-strong)",
     border: "1px solid var(--border-default)",
-    hover: "var(--surface-sunken)",
+    hover: "var(--surface-hover)",
     shadow: "var(--shadow-xs)"
   },
   dark: {
@@ -1017,7 +1017,7 @@ const VARIANTS = {
   },
   accent: {
     background: "var(--action-accent)",
-    color: "var(--teal-900)",
+    color: "var(--text-on-accent)",
     border: "1px solid transparent",
     hover: "var(--action-accent-hover)",
     shadow: "var(--shadow-xs)"
@@ -1118,7 +1118,7 @@ function IconButton({
   const [hover, setHover] = React.useState(false);
   const skins = {
     quiet: {
-      bg: hover ? "var(--surface-page)" : "transparent",
+      bg: hover ? "var(--surface-hover)" : "transparent",
       fg: "var(--text-muted)",
       border: "1px solid transparent"
     },
@@ -1170,32 +1170,32 @@ const STATES = {
   approved: {
     bg: "var(--status-success-bg)",
     fg: "var(--status-success-text)",
-    dot: "var(--green-600)"
+    dot: "var(--status-success-dot)"
   },
   paid: {
     bg: "var(--status-success-bg)",
     fg: "var(--status-success-text)",
-    dot: "var(--green-600)"
+    dot: "var(--status-success-dot)"
   },
   pending: {
     bg: "var(--status-warning-bg)",
     fg: "var(--status-warning-text)",
-    dot: "var(--yellow-600)"
+    dot: "var(--status-warning-dot)"
   },
   overdue: {
     bg: "var(--status-danger-bg)",
     fg: "var(--status-danger-text)",
-    dot: "var(--red-600)"
+    dot: "var(--status-danger-dot)"
   },
   review: {
     bg: "var(--status-info-bg)",
     fg: "var(--status-info-text)",
-    dot: "var(--teal-500)"
+    dot: "var(--status-info-dot)"
   },
   draft: {
     bg: "var(--status-neutral-bg)",
     fg: "var(--status-neutral-text)",
-    dot: "var(--teal-400)"
+    dot: "var(--status-neutral-dot)"
   }
 };
 function StatusPill({
@@ -1257,12 +1257,12 @@ function Card({
     inverse: {
       background: "var(--surface-inverse)",
       border: "1px solid var(--border-inverse)",
-      color: "var(--teal-200)"
+      color: "var(--text-on-inverse)"
     },
     brand: {
       background: "var(--surface-brand-subtle)",
-      border: "1px solid var(--sand-200)",
-      color: "var(--sand-800)"
+      border: "1px solid var(--border-brand-subtle)",
+      color: "var(--text-brand)"
     }
   };
   const t = tones[tone] || tones.default;
@@ -1591,7 +1591,7 @@ function StatCard({
       gap: 3,
       font: "var(--type-label)",
       fontSize: 13,
-      color: good ? "var(--green-700)" : "var(--red-700)"
+      color: good ? "var(--status-success-text)" : "var(--status-danger-text)"
     }
   }, /*#__PURE__*/React.createElement(__ds_scope.Icon, { color: "currentColor",
     name: good ? "trending-up" : "trending-down",
@@ -2203,7 +2203,7 @@ function Field({
     }
   }, label, required ? /*#__PURE__*/React.createElement("span", {
     style: {
-      color: "var(--red-600)",
+      color: "var(--status-danger-text)",
       marginLeft: 3
     }
   }, "*") : null) : null, children, error ? /*#__PURE__*/React.createElement("span", {
@@ -2235,7 +2235,7 @@ function Input({
   ...rest
 }) {
   const [focus, setFocus] = React.useState(false);
-  const border = invalid ? "var(--red-600)" : focus ? "var(--border-brand)" : "var(--border-default)";
+  const border = invalid ? "var(--border-danger)" : focus ? "var(--border-brand)" : "var(--border-default)";
   return /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
@@ -2243,7 +2243,7 @@ function Input({
       gap: 9,
       height: "var(--field-height)",
       padding: "0 14px",
-      background: disabled ? "var(--surface-page)" : "var(--surface-card)",
+      background: disabled ? "var(--surface-sunken)" : "var(--surface-card)",
       border: `1px solid ${border}`,
       borderRadius: "var(--radius-control)",
       boxShadow: focus ? "var(--ring-focus)" : "none",
@@ -2296,7 +2296,7 @@ function Select({
       alignItems: "center",
       height: "var(--field-height)",
       padding: "0 12px 0 14px",
-      background: disabled ? "var(--surface-page)" : "var(--surface-card)",
+      background: disabled ? "var(--surface-sunken)" : "var(--surface-card)",
       border: `1px solid ${focus ? "var(--border-brand)" : "var(--border-default)"}`,
       borderRadius: "var(--radius-control)",
       boxShadow: focus ? "var(--ring-focus)" : "none",
@@ -2374,7 +2374,7 @@ function Switch({
       borderRadius: "var(--radius-pill)",
       padding: 3,
       flex: "0 0 auto",
-      background: on ? "var(--action-primary)" : "var(--teal-300)",
+      background: on ? "var(--action-primary)" : "var(--track-off)",
       transition: "background-color var(--duration-base) var(--ease-standard)",
       display: "flex",
       justifyContent: on ? "flex-end" : "flex-start"
@@ -2452,7 +2452,7 @@ function Tabs({
         font: "var(--type-mono)",
         fontSize: 12,
         color: on ? "var(--status-info-text)" : "var(--text-subtle)",
-        background: on ? "var(--surface-brand-subtle)" : "var(--surface-page)",
+        background: on ? "var(--surface-brand-subtle)" : "var(--surface-hover)",
         padding: "2px 7px",
         borderRadius: "var(--radius-pill)"
       }
@@ -2529,7 +2529,7 @@ function MainMenu({ items = [], animate = true, loop = false, width = 400, label
             React.createElement("span", { style: { font: "var(--weight-semibold) 16px/24px var(--font-sans)", color: "var(--text-strong)" } }, item.label),
             item.badge ? React.createElement("span", { style: { font: "var(--weight-semibold) 12px/16px var(--font-sans)", color: "var(--text-on-brand)", background: "var(--action-primary)", borderRadius: "var(--radius-pill)", padding: "2px 8px" } }, item.badge) : null
           ),
-          item.description ? React.createElement("span", { style: { display: "block", marginTop: 4, font: "var(--weight-regular) 14px/20px var(--font-sans)", color: "var(--sand-800)" } }, item.description) : null
+          item.description ? React.createElement("span", { style: { display: "block", marginTop: 4, font: "var(--weight-regular) 14px/20px var(--font-sans)", color: "var(--text-brand)" } }, item.description) : null
         )
       );
     }

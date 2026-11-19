@@ -21,10 +21,10 @@
   svg{display:block}
 </style>
 <style>
-  .hb{position:relative;overflow:hidden;border-radius:var(--radius-card,14px);
+  .hb{position:relative;overflow:hidden;border-radius:var(--radius-card,16px);
     box-shadow:var(--shadow-lg,0 4px 8px rgba(14,21,32,.05),0 18px 40px rgba(14,21,32,.1));
     font-family:var(--font-display,"Poppins",system-ui,sans-serif)}
-  .bp{background:var(--surface-inverse,#1B2122);padding:32px 28px 24px;min-height:232px;
+  .bp{background:var(--teal-950,#172222); /* fixed dark in both themes, like the component */padding:32px 28px 24px;min-height:232px;
     display:flex;flex-direction:column;justify-content:center;gap:16px}
   .layer{position:absolute;inset:0;pointer-events:none}
   .g1{background-image:linear-gradient(var(--blueprint-rule-fine,rgba(255,255,255,.045)) 1px,transparent 1px),
@@ -52,14 +52,14 @@
     text-transform:uppercase;color:var(--teal-500,#8F9B9C)}
   .strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:16px}
   .ed{position:relative;overflow:hidden;background:var(--teal-025,#F8F9F9);padding:24px 20px 24px 36px;
-    min-height:120px;border-radius:var(--radius-card,14px);display:flex;flex-direction:column;
+    min-height:120px;border-radius:var(--radius-card,16px);display:flex;flex-direction:column;
     justify-content:center;gap:8px}
   .ed .bar{position:absolute;left:0;top:0;bottom:0;width:8px;background:var(--sand-400,#39B8C6)}
   .ed .bar2{position:absolute;left:8px;top:0;bottom:0;width:8px;background:var(--sand-400,#D9B98A)}
   .ed h2{margin:0;font:700 28px/0.92 var(--font-display,"Poppins",system-ui,sans-serif);
     letter-spacing:-.04em;color:var(--teal-900,#30393A)}
   .am{position:relative;overflow:hidden;background:var(--sand-400,#D9B98A);padding:24px 20px;
-    min-height:120px;border-radius:var(--radius-card,14px);display:flex;flex-direction:column;
+    min-height:120px;border-radius:var(--radius-card,16px);display:flex;flex-direction:column;
     justify-content:center;gap:8px}
   .am .skew{position:absolute;right:-24px;top:0;bottom:0;width:44%;background:var(--teal-900,#30393A);
     transform:skewX(-16deg)}
@@ -68,7 +68,7 @@
   .cap2{font:500 12px/1 var(--font-sans,"Inter",system-ui,sans-serif);letter-spacing:.16em;
     text-transform:uppercase}
 </style>
-<div class="hb bp">
+<div class="hb bp" data-fixed-ground>
   <div class="layer g1"></div><div class="layer g2"></div>
   <div class="layer g3"></div><div class="layer g4"></div>
   <div class="hb-in">
@@ -83,7 +83,7 @@
 </div>
 <div class="strip">
   <div class="ed"><span class="bar"></span><span class="bar2"></span>
-    <span class="cap2" style="color:var(--sand-400,#39B8C6)">Editorial</span>
+    <span class="cap2" style="color:var(--sand-700,#7A5C30)">Editorial</span>
     <h2>Pipeline</h2></div>
   <div class="am"><span class="skew"></span>
     <span class="cap2" style="color:var(--teal-900,#30393A);position:relative">Amber</span>

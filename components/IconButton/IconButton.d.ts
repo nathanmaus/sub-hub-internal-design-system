@@ -2,7 +2,7 @@ import * as React from "react";
 
 /** A square, label-less action — toolbar and table-row affordances. */
 export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  /** Lucide slug. */
+  /** SubHub Icon Library name. */
   icon: string;
   /** Required accessible name; also used as the tooltip. */
   label: string;

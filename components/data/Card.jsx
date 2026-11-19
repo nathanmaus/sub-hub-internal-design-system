@@ -5,8 +5,8 @@ export function Card({ children, padding = "var(--card-pad)", tone = "default", 
   const tones = {
     default: { background: "var(--surface-card)", border: "1px solid var(--border-subtle)", color: "var(--text-body)" },
     sunken: { background: "var(--surface-sunken)", border: "1px solid var(--border-subtle)", color: "var(--text-body)" },
-    inverse: { background: "var(--surface-inverse)", border: "1px solid var(--border-inverse)", color: "var(--teal-200)" },
-    brand: { background: "var(--surface-brand-subtle)", border: "1px solid var(--sand-200)", color: "var(--sand-800)" },
+    inverse: { background: "var(--surface-inverse)", border: "1px solid var(--border-inverse)", color: "var(--text-on-inverse)" },
+    brand: { background: "var(--surface-brand-subtle)", border: "1px solid var(--border-brand-subtle)", color: "var(--text-brand)" },
   };
   const t = tones[tone] || tones.default;
   return (

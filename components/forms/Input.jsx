@@ -3,12 +3,12 @@ import { Icon } from "../core/Icon.jsx";
 
 export function Input({ icon, suffix, invalid = false, disabled = false, style, ...rest }) {
   const [focus, setFocus] = React.useState(false);
-  const border = invalid ? "var(--red-600)" : focus ? "var(--border-brand)" : "var(--border-default)";
+  const border = invalid ? "var(--border-danger)" : focus ? "var(--border-brand)" : "var(--border-default)";
   return (
     <div
       style={{
         display: "flex", alignItems: "center", gap: 9, height: "var(--field-height)",
-        padding: "0 14px", background: disabled ? "var(--surface-page)" : "var(--surface-card)",
+        padding: "0 14px", background: disabled ? "var(--surface-sunken)" : "var(--surface-card)",
         border: `1px solid ${border}`, borderRadius: "var(--radius-control)",
         boxShadow: focus ? "var(--ring-focus)" : "none", transition: "var(--transition-control)", ...style,
       }}

@@ -86,6 +86,7 @@ The repo is private. Engineers are added as collaborators. AI agents (Claude, Gr
 - **No em dashes in product copy.**
 - **Sand fills take a dark teal label** (`text-on-brand`), never white. Teal ink fills take a light label (`text-on-ink`).
 - **Fraunces is for headlines only.** Body, buttons, labels and data are Inter.
+- **Use semantic tokens, not ramp colours, in components** (`text-accent`, `surface-hover`, `border-danger`), so everything follows light and dark on its own. Ramp colours like `sand-400` or `teal-100` stay the same in both themes and break one of them: `sand-400` text on white is 1.9:1. The only exceptions are fixed-ground brand art (HeroBanner, Cover, the logo plates, the motifs) and the white Switch thumb.
 
 ## Changing the system
 

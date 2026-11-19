@@ -7,7 +7,7 @@ export function Field({ label, hint, error, required = false, htmlFor, children,
       {label ? (
         <label htmlFor={htmlFor} style={{ font: "var(--type-label)", color: "var(--text-strong)" }}>
           {label}
-          {required ? <span style={{ color: "var(--red-600)", marginLeft: 3 }}>*</span> : null}
+          {required ? <span style={{ color: "var(--status-danger-text)", marginLeft: 3 }}>*</span> : null}
         </label>
       ) : null}
       {children}

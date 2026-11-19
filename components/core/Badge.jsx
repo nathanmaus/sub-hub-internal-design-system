@@ -3,11 +3,11 @@ import { Icon } from "./Icon.jsx";
 
 const TONES = {
   neutral: { bg: "var(--surface-page)", fg: "var(--status-neutral-text)", border: "1px solid var(--border-subtle)" },
-  brand: { bg: "var(--surface-brand-subtle)", fg: "var(--status-info-text)", border: "1px solid var(--sand-200)" },
-  accent: { bg: "var(--surface-accent-subtle)", fg: "var(--sand-700)" },
-  ai: { bg: "var(--surface-accent-subtle)", fg: "var(--sand-700)" },
-  "ai-dark": { bg: "rgba(217,185,138,0.08)", fg: "var(--sand-400)", border: "1px solid rgba(217,185,138,0.45)" },
-  inverse: { bg: "rgba(255,255,255,0.12)", fg: "var(--white)" },
+  brand: { bg: "var(--surface-brand-subtle)", fg: "var(--status-info-text)", border: "1px solid var(--border-brand-subtle)" },
+  accent: { bg: "var(--surface-accent-subtle)", fg: "var(--text-accent)" },
+  ai: { bg: "var(--surface-accent-subtle)", fg: "var(--text-accent)" },
+  "ai-dark": { bg: "rgba(217,185,138,0.08)", fg: "var(--text-accent-inverse)", border: "1px solid rgba(217,185,138,0.45)" },
+  inverse: { bg: "var(--surface-inverse-subtle)", fg: "var(--text-inverse)" },
 };
 
 export function Badge({ children, tone = "neutral", icon, uppercase = false, style, ...rest }) {
