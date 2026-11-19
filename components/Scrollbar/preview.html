@@ -1,0 +1,23 @@
+<!-- @dsCard group="Core" height=320 subtitle="Overlay thumb, no track · appears instantly · fades over 500ms after 2s still · scroll either box" -->
+<!doctype html>
+<meta charset="utf-8">
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;padding:16px;background:var(--surface-page);color:var(--text-body);font:400 14px/20px var(--font-sans,system-ui,sans-serif)}
+  .row{display:flex;flex-wrap:wrap;gap:16px}
+  .box{background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-card,16px)}
+  .v{width:240px;height:240px;overflow:auto}
+  .v ul{list-style:none;margin:0;padding:8px 0}
+  .v li{padding:8px 16px;border-bottom:1px solid var(--border-subtle)}
+  .h{width:280px;height:120px;overflow:auto}
+  .h div{display:flex;gap:8px;padding:16px;width:max-content}
+  .h span{display:grid;place-items:center;width:80px;height:72px;border-radius:8px;background:var(--surface-sunken);color:var(--text-strong)}
+</style>
+<div id="root" class="row">
+  <div class="box v" tabindex="0" aria-label="Vertical scroll example"><ul><li>Row 01</li><li>Row 02</li><li>Row 03</li><li>Row 04</li><li>Row 05</li><li>Row 06</li><li>Row 07</li><li>Row 08</li><li>Row 09</li><li>Row 10</li><li>Row 11</li><li>Row 12</li><li>Row 13</li><li>Row 14</li><li>Row 15</li><li>Row 16</li><li>Row 17</li><li>Row 18</li><li>Row 19</li><li>Row 20</li><li>Row 21</li><li>Row 22</li><li>Row 23</li><li>Row 24</li></ul></div>
+  <div class="box h" tabindex="0" aria-label="Horizontal scroll example"><div><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span></div></div>
+</div>
+<script>
+  /* Nothing to set up: bundle.js draws the thumbs for every scrolling element. */
+  window.InternalDesignSystem && window.InternalDesignSystem.Scrollbars;
+</script>

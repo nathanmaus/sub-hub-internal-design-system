@@ -1,9 +1,27 @@
-<!-- @dsCard group="Colors" viewport="700x130" name="Chart sequence" subtitle="Pipeline stage order: blue, amber, blue-300, ink, blue-200" -->
+<!-- @dsCard group="Colors" viewport="700x200" name="Chart colours" subtitle="Categorical chart-1 to 3 then Other · ordinal ramp chart-seq-1 to 4 for funnels" -->
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
-<style>body{background:var(--surface-card);padding:18px 20px}.lbl{font:var(--type-eyebrow);letter-spacing:var(--tracking-mono-label);text-transform:uppercase;color:var(--text-subtle)}.ramp{display:flex;border-radius:var(--radius-sm);overflow:hidden;height:54px}.ramp div{flex:1}.hex{display:flex;justify-content:space-between;margin-top:7px;font:var(--type-mono);font-size:10px;color:var(--text-subtle)}.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}</style>
+<html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="../tokens.css"><link rel="stylesheet" href="../components/bundle.css">
+<style>
+  body{margin:0;background:var(--surface-card);padding:20px;font-family:var(--font-sans,system-ui,sans-serif);color:var(--text-body)}
+  .lbl{font-weight:600;font-size:12px;line-height:16px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-subtle);margin:0 0 8px}
+  .row{display:flex;gap:8px;margin-bottom:20px}
+  .sw{flex:1;display:grid;gap:4px}
+  .chip{height:40px;border-radius:8px}
+  .name{font-size:12px;line-height:16px;color:var(--text-muted)}
+</style>
 </head><body>
-<div style="display:flex;align-items:flex-end;gap:12px;height:74px">
-<div style="flex:1;height:44px;background:var(--chart-1)"></div><div style="flex:1;height:74px;background:var(--chart-2)"></div><div style="flex:1;height:56px;background:var(--chart-3)"></div><div style="flex:1;height:34px;background:var(--chart-4)"></div><div style="flex:1;height:22px;background:var(--chart-5)"></div></div>
-<div class="hex"><span>--chart-1</span><span>--chart-2</span><span>--chart-3</span><span>--chart-4</span><span>--chart-5</span></div>
+<p class="lbl">Categorical · fixed order, never cycled</p>
+<div class="row">
+  <div class="sw"><div class="chip" style="background:var(--chart-1)"></div><span class="name">chart-1</span></div>
+  <div class="sw"><div class="chip" style="background:var(--chart-2)"></div><span class="name">chart-2</span></div>
+  <div class="sw"><div class="chip" style="background:var(--chart-3)"></div><span class="name">chart-3</span></div>
+  <div class="sw"><div class="chip" style="background:var(--chart-other)"></div><span class="name">chart-other</span></div>
+</div>
+<p class="lbl">Ordinal · funnel stages, most contrast first</p>
+<div class="row" style="margin:0">
+  <div class="sw"><div class="chip" style="background:var(--chart-seq-1)"></div><span class="name">chart-seq-1</span></div>
+  <div class="sw"><div class="chip" style="background:var(--chart-seq-2)"></div><span class="name">chart-seq-2</span></div>
+  <div class="sw"><div class="chip" style="background:var(--chart-seq-3)"></div><span class="name">chart-seq-3</span></div>
+  <div class="sw"><div class="chip" style="background:var(--chart-seq-4)"></div><span class="name">chart-seq-4</span></div>
+</div>
 </body></html>

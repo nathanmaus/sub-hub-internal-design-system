@@ -1,8 +1,9 @@
 import React from "react";
 import { Icon } from "../core/Icon.jsx";
 import { Card } from "./Card.jsx";
+import { Sparkline } from "../charts/Sparkline.jsx";
 
-export function StatCard({ label, value, delta, deltaDirection = "up", icon, footnote, style, ...rest }) {
+export function StatCard({ label, value, delta, deltaDirection = "up", icon, footnote, trend, trendLabels, style, ...rest }) {
   const good = deltaDirection === "up";
   return (
     <Card padding="18px 20px" style={{ display: "grid", gap: 10, ...style }} {...rest}>
@@ -19,6 +20,7 @@ export function StatCard({ label, value, delta, deltaDirection = "up", icon, foo
           </span>
         ) : null}
       </div>
+      {trend && trend.length > 1 ? <Sparkline data={trend} labels={trendLabels} height={32} ariaLabel={label + " trend"} /> : null}
       {footnote ? <span style={{ font: "var(--type-body)", fontSize: 13, color: "var(--text-muted)" }}>{footnote}</span> : null}
     </Card>
   );

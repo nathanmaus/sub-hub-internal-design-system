@@ -14,6 +14,10 @@ Eyebrow label (12px, 0.16em tracking, `text-subtle`) → value (30px bold, tabul
 - The footnote carries the period or denominator. A number with no period is unreadable: "$482,100" means nothing without "across 38 open quotes".
 - No delta is better than a meaningless one. Drop it for counts that have no comparison period.
 
+## Trend
+
+Pass `trend` (an array of numbers, oldest first) and StatCard draws a Sparkline under the value: a grey line with the latest point in chart-1. `trendLabels` names each point for the hover tooltip (month names, say). The trend shows direction only; the value and delta carry the numbers.
+
 ## At 393px
 
 One per row. Four stat cards stacked is fine; four squeezed into a 393px grid is not — the 30px value would have to shrink below its own scale step.

@@ -14,6 +14,11 @@
   --teal-800: #2D3E3E; /* Deep teal fill (hover on teal ink buttons in light). Dark-mode cards use night-850. */
   --teal-900: #223131; /* From the board: strongest text in light, the label on sand, teal ink fills. Dark-mode grounds use the night ramp. */
   --teal-950: #172222; /* Deepest teal: blueprint panel face. Dark-mode wells use night-920. */
+  --viz-teal-600: #00897B; /* Data-visualisation ramp. First chart series in light mode. Charts only, never UI. */
+  --viz-teal-400: #25A395; /* Data-visualisation ramp. First chart series in dark mode. Charts only, never UI. */
+  --clay-600: #B97A2E; /* Data-visualisation ramp. Second chart series, both modes. Charts only, never UI. */
+  --violet-600: #7A5BB0; /* Data-visualisation ramp. Third chart series in light mode. Charts only, never UI. */
+  --violet-400: #9A85D8; /* Data-visualisation ramp. Third chart series in dark mode. Charts only, never UI. */
   --night-950: #0C0F0F; /* Dark page: near-black with a trace of teal. surface-page in dark. */
   --night-930: #0E1212; /* Neutral pill and status-neutral fill on dark cards. */
   --night-920: #0E1313; /* Sunken wells on dark cards: table header rows, inset panels. */
@@ -97,11 +102,16 @@
   --status-info-bg: var(--teal-100); /* `teal-100` light · `night-800` dark. Info pill fill. */
   --status-neutral-text: var(--teal-600); /* `teal-600` light · `teal-200` dark. Draft and neutral labels. */
   --status-neutral-bg: var(--teal-050); /* `teal-050` light · `night-930` dark. The default pill fill. */
-  --chart-1: var(--sand-500); /* `sand-500` light · `sand-400` dark. First series. */
-  --chart-2: var(--teal-700); /* `teal-700` light · `teal-200` dark. Second series. */
-  --chart-3: var(--sand-300); /* `sand-300` light · `sand-600` dark. Third series. */
-  --chart-4: var(--teal-400); /* `teal-400`, both modes. Fourth series. */
-  --chart-5: var(--teal-200); /* `teal-200` light · `teal-600` dark. Fifth series. */
+  --chart-1: var(--viz-teal-600); /* `viz-teal-600` light · `viz-teal-400` dark. First series, and the accent point on a Sparkline. */
+  --chart-2: var(--clay-600); /* `clay-600`, both modes. Second series. */
+  --chart-3: var(--violet-600); /* `violet-600` light · `violet-400` dark. Third series. A fourth series never gets a new hue: it folds into chart-other. */
+  --chart-4: var(--teal-400); /* Legacy. New charts stop at chart-3, then chart-other. */
+  --chart-5: var(--teal-200); /* Legacy. New charts stop at chart-3, then chart-other. */
+  --chart-other: var(--teal-400); /* `teal-400` light · `teal-500` dark. "Other" and the 4th+ series folded together, and the Sparkline line. */
+  --chart-seq-1: var(--teal-900); /* Ordinal ramp, step 1 of 4 (FunnelChart top stage). `teal-900` light · `teal-050` dark: the most contrast. */
+  --chart-seq-2: var(--teal-700); /* Ordinal ramp, step 2 of 4. `teal-700` light · `teal-200` dark. */
+  --chart-seq-3: var(--teal-500); /* Ordinal ramp, step 3 of 4. `teal-500` light · `teal-300` dark. */
+  --chart-seq-4: var(--teal-300); /* Ordinal ramp, step 4 of 4 and any later stage. `teal-300` light · `teal-400` dark. */
   --border-inverse: rgba(234, 243, 243, 0.14); /* Dividers on inverse panels. */
   --blueprint-rule-fine: rgba(234, 243, 243, 0.045); /* Minor grid on dark technical panels. */
   --blueprint-rule-major: rgba(217, 185, 138, 0.16); /* Major grid on dark technical panels. */
@@ -109,6 +119,7 @@
   --blueprint-glow-amber: rgba(217, 185, 138, 0.16); /* Radial sand glow in a blueprint banner. Name kept for component compatibility. */
   --blueprint-line: #D9B98A; /* Linework stroke. */
   --blueprint-panel: #172222; /* Panel face in blueprint artwork. */
+  --scrollbar-thumb: var(--teal-400); /* `teal-400`, both themes. The overlay scroll thumb drawn by bundle.js. There is no track. */
 
   --shadow-none: none; /* Flat surfaces and ghost buttons. */
   --shadow-xs: 0 1px 2px rgba(34, 49, 49, 0.06); /* Buttons and the switch thumb. */
@@ -165,10 +176,14 @@
   --status-info-bg: var(--night-800);
   --status-neutral-text: var(--teal-200);
   --status-neutral-bg: var(--night-930);
-  --chart-1: var(--sand-400);
-  --chart-2: var(--teal-200);
-  --chart-3: var(--sand-600);
+  --chart-1: var(--viz-teal-400);
+  --chart-3: var(--violet-400);
   --chart-5: var(--teal-600);
+  --chart-other: var(--teal-500);
+  --chart-seq-1: var(--teal-050);
+  --chart-seq-2: var(--teal-200);
+  --chart-seq-3: var(--teal-300);
+  --chart-seq-4: var(--teal-400);
   --border-inverse: rgba(34, 49, 49, 0.14);
 
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.40);

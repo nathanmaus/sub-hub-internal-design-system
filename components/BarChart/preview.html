@@ -1,0 +1,44 @@
+<!-- @dsCard group="Charts" height=400 subtitle="Grouped bars · 24px max width, 4px rounded data end · hover or arrow keys for values" -->
+<!doctype html>
+<meta charset="utf-8">
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;padding:16px;background:var(--surface-page);color:var(--text-body);
+    font:400 16px/24px var(--font-sans,"Inter",system-ui,sans-serif);-webkit-font-smoothing:antialiased}
+  #root{display:grid;gap:16px;max-width:720px}
+</style>
+<div id="root"></div>
+<script>
+  (function () {
+    var ns = window.InternalDesignSystem, h = React.createElement;
+    var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    var money = function (v) { return "$" + Number(v).toLocaleString(); };
+    var k = function (v) { return "$" + (v >= 1000 ? (v / 1000).toFixed(v >= 10000 ? 0 : 1) + "K" : v); };
+
+    var revenue = [182, 196, 214, 205, 238, 262, 251, 279, 301, 296, 322, 348].map(function (v, i) {
+      return { label: MONTHS[i], thisYear: v * 1000, lastYear: Math.round(v * 1000 * (0.78 + (i % 3) * 0.03)) };
+    });
+    var byTrade = [
+      { label: "Q1", solar: 412000, roofing: 268000, hvac: 141000 },
+      { label: "Q2", solar: 488000, roofing: 302000, hvac: 176000 },
+      { label: "Q3", solar: 531000, roofing: 287000, hvac: 214000 },
+      { label: "Q4", solar: 602000, roofing: 341000, hvac: 198000 }
+    ];
+    var trades = [{ key: "solar", label: "Solar" }, { key: "roofing", label: "Roofing" }, { key: "hvac", label: "HVAC" }];
+    var stages = [
+      { label: "Leads", value: 1240 }, { label: "Consults booked", value: 612 },
+      { label: "Proposals sent", value: 388 }, { label: "Financing approved", value: 231 }, { label: "Signed", value: 164 }
+    ];
+    var sources = [
+      { label: "Referral", value: 412 }, { label: "Door to door", value: 318 },
+      { label: "Paid search", value: 274 }, { label: "Events", value: 96 }, { label: "Partners", value: 140 }
+    ];
+
+    var view = h(ns.ChartCard, {
+      title: "Signed revenue by trade", subtitle: "This year, by quarter",
+      table: { columns: [{ key: "label", label: "Quarter" }].concat(trades.map(function (t) { return { key: t.key, label: t.label, format: money }; })), rows: byTrade }
+    }, h(ns.BarChart, { data: byTrade, series: trades, valueFormat: money, tickFormat: k, height: 240 }));
+
+    ReactDOM.createRoot(document.getElementById("root")).render(view);
+  })();
+</script>

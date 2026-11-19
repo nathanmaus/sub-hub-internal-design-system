@@ -17,5 +17,9 @@ export interface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Lucide slug shown top-right in subtle ink. */
   icon?: string;
   footnote?: string;
+  /** Numbers, oldest first. Draws a Sparkline under the value. */
+  trend?: number[];
+  /** A name per trend point, shown on hover. */
+  trendLabels?: string[];
 }
 export declare function StatCard(props: StatCardProps): JSX.Element;

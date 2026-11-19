@@ -54,16 +54,26 @@ The repo is private. Engineers are added as collaborators. AI agents (Claude, Gr
 | `tokens.css` | The same tokens as CSS variables. Link this. |
 | `components/bundle.js` | All components in one script. Exposes `window.InternalDesignSystem`. |
 | `components/<Name>/` | Each component's README (how and when to use it), types (`.d.ts`) and a preview page. |
-| `components/core`, `forms`, `data`, … | Component source. |
+| `components/core`, `forms`, `data`, `charts`, … | Component source. |
+| `components/Dashboard/` | A dashboard page template built from the chart components. A showcase, not a bundle export. |
 | `icons/` | The SubHub Icon Library, 272 icons as 24px SVGs exported from Figma. The source for the embedded copy in `bundle.js`; `icons/index.json` lists them. |
 | `assets/` | Logo files. The source for the embedded copy in `bundle.js`. |
 | `scripts/build-assets.mjs` | Embeds `icons/` and the logos into `bundle.js`. Run it after any icon or logo change. |
 | `scripts/build-colour-tokens.mjs` | Rebuilds the colours in `tokens.css` from `tokens.json`. Run it after any colour change; add `--check` to only test. |
+| `scripts/build-charts.mjs` | Rebuilds the chart section of `bundle.js` after you edit `components/charts/*.jsx` (needs `esbuild`). |
 | `guidelines/` | Specimen cards for colour, type, spacing, radius, motion and motifs. |
 | `GUIDE.md` | The long-form system guide: voice, visual foundations, iconography. Read this before designing. |
 | `motion.md` | Motion specs for Tooltip, Toast and menus. |
 | `ui_kits/` | Example marketing and platform screens built from the system. |
 | `AGENTS.md` | Rules for AI tools building with this system. |
+
+## Charts
+
+`ChartCard`, `BarChart`, `LineChart`, `DonutChart`, `Progress`, `Sparkline` and `FunnelChart`, plain React and SVG with no chart library. Every chart has a hover tooltip and a table view through `ChartCard`, and `StatCard` takes a `trend` array for a sparkline. Series colours are `chart-1` teal, `chart-2` clay and `chart-3` violet, in that order and never cycled, then `chart-other` grey. Funnels use the one-hue ramp `chart-seq-1` to `chart-seq-4`. All of them were checked for colour-blind separation and contrast in both themes. Each component's README has the rules.
+
+## Scrollbars
+
+`bundle.js` replaces the browser scrollbars with an overlay thumb drawn above the page: no track, and nothing shifts when it appears. It is invisible until something scrolls, appears instantly, and fades out over 500ms once scrolling has stopped for 2000ms. Its colour is `scrollbar-thumb`. Add `data-native-scrollbar` to an element to keep the browser's own scrollbar there. See `components/Scrollbar/README.md`.
 
 ## The rules that are easiest to break
 

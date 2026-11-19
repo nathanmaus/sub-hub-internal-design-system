@@ -1,0 +1,96 @@
+<!-- @dsCard group="Templates" page height=1640 subtitle="KPI tiles with trends, line, bar, funnel, donut and progress · reflows to one column at 393px" -->
+<!doctype html>
+<meta charset="utf-8">
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;padding:16px;background:var(--surface-page);color:var(--text-body);
+    font:400 16px/24px var(--font-sans,"Inter",system-ui,sans-serif);-webkit-font-smoothing:antialiased}
+  #root{display:grid;gap:16px;max-width:1200px}
+</style>
+<div id="root"></div>
+<script>
+  (function () {
+    var ns = window.InternalDesignSystem, h = React.createElement;
+    var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    var money = function (v) { return "$" + Number(v).toLocaleString(); };
+    var k = function (v) { return "$" + (v >= 1000 ? (v / 1000).toFixed(v >= 10000 ? 0 : 1) + "K" : v); };
+
+    var revenue = [182, 196, 214, 205, 238, 262, 251, 279, 301, 296, 322, 348].map(function (v, i) {
+      return { label: MONTHS[i], thisYear: v * 1000, lastYear: Math.round(v * 1000 * (0.78 + (i % 3) * 0.03)) };
+    });
+    var byTrade = [
+      { label: "Q1", solar: 412000, roofing: 268000, hvac: 141000 },
+      { label: "Q2", solar: 488000, roofing: 302000, hvac: 176000 },
+      { label: "Q3", solar: 531000, roofing: 287000, hvac: 214000 },
+      { label: "Q4", solar: 602000, roofing: 341000, hvac: 198000 }
+    ];
+    var trades = [{ key: "solar", label: "Solar" }, { key: "roofing", label: "Roofing" }, { key: "hvac", label: "HVAC" }];
+    var stages = [
+      { label: "Leads", value: 1240 }, { label: "Consults booked", value: 612 },
+      { label: "Proposals sent", value: 388 }, { label: "Financing approved", value: 231 }, { label: "Signed", value: 164 }
+    ];
+    var sources = [
+      { label: "Referral", value: 412 }, { label: "Door to door", value: 318 },
+      { label: "Paid search", value: 274 }, { label: "Events", value: 96 }, { label: "Partners", value: 140 }
+    ];
+
+    var reps = [
+      { id: 1, rep: "Jamie Ortiz", deals: 21, signed: "$318,400", rate: "34%" },
+      { id: 2, rep: "Dana Fields", deals: 18, signed: "$276,900", rate: "29%" },
+      { id: 3, rep: "Marcus Lee", deals: 15, signed: "$241,300", rate: "31%" },
+      { id: 4, rep: "Priya Shah", deals: 12, signed: "$188,750", rate: "26%" }
+    ];
+    function Dashboard() {
+      var range = React.useState("12m");
+      var col = { display: "grid", gap: 16, alignContent: "start", minWidth: 0 };
+      return h("div", { style: { display: "grid", gap: 24 } },
+        h("header", { style: { display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 16 } },
+          h("div", { style: { display: "grid", gap: 4 } },
+            h("span", { style: { font: "var(--weight-semibold) 12px/16px var(--font-sans)", letterSpacing: "var(--tracking-eyebrow)", textTransform: "uppercase", color: "var(--text-subtle)" } }, "Sales"),
+            h("h1", { style: { margin: 0, font: "var(--weight-bold) 32px/40px var(--font-display, var(--font-sans))", color: "var(--text-strong)" } }, "Dashboard")
+          ),
+          h("div", { style: { width: 200 } },
+            h(ns.Select, { "aria-label": "Date range", value: range[0], onChange: function (e) { range[1](e.target.value); },
+              options: [{ value: "30d", label: "Last 30 days" }, { value: "90d", label: "Last 90 days" }, { value: "12m", label: "Last 12 months" }] }))
+        ),
+        h("section", { "aria-label": "Key numbers", style: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 232px), 1fr))", gap: 16 } },
+          h(ns.StatCard, { label: "Signed revenue", value: "$3.09M", delta: "+18%", footnote: "Last 12 months", trend: revenue.map(function (r) { return r.thisYear; }), trendLabels: MONTHS }),
+          h(ns.StatCard, { label: "Open pipeline", value: "$2.05M", delta: "+8%", footnote: "73 opportunities", trend: [1.61, 1.7, 1.66, 1.78, 1.82, 1.8, 1.91, 1.88, 1.97, 2.0, 1.98, 2.05], trendLabels: MONTHS }),
+          h(ns.StatCard, { label: "Close rate", value: "13.2%", delta: "+1.4 pts", footnote: "Lead to signed", trend: [10.1, 10.4, 10.9, 11.2, 11.0, 11.6, 11.8, 12.1, 12.4, 12.2, 12.9, 13.2], trendLabels: MONTHS }),
+          h(ns.StatCard, { label: "Avg. close time", value: "19 days", delta: "+3 days", deltaDirection: "down", footnote: "Solar, last 90 days", trend: [24, 23, 23, 22, 21, 22, 20, 19, 18, 17, 17, 19], trendLabels: MONTHS })
+        ),
+        h("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 440px), 1fr))", gap: 16 } },
+          h(ns.ChartCard, { title: "Monthly revenue", subtitle: "This year against last year",
+            table: { columns: [{ key: "label", label: "Month" }, { key: "thisYear", label: "This year", format: money }, { key: "lastYear", label: "Last year", format: money }], rows: revenue } },
+            h(ns.LineChart, { data: revenue, valueFormat: money, tickFormat: k, height: 240, series: [{ key: "thisYear", label: "This year" }, { key: "lastYear", label: "Last year" }] })),
+          h(ns.ChartCard, { title: "Signed revenue by trade", subtitle: "This year, by quarter",
+            table: { columns: [{ key: "label", label: "Quarter" }].concat(trades.map(function (t) { return { key: t.key, label: t.label, format: money }; })), rows: byTrade } },
+            h(ns.BarChart, { data: byTrade, series: trades, valueFormat: money, tickFormat: k, height: 240 }))
+        ),
+        h("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 320px), 1fr))", gap: 16, alignItems: "start" } },
+          h(ns.ChartCard, { title: "Sales funnel", subtitle: "Last 90 days", table: { columns: [{ key: "label", label: "Stage" }, { key: "value", label: "Count" }], rows: stages } },
+            h(ns.FunnelChart, { stages: stages })),
+          h("div", { style: col },
+            h(ns.ChartCard, { title: "Lead sources", subtitle: "Last 90 days", table: { columns: [{ key: "label", label: "Source" }, { key: "value", label: "Leads" }], rows: sources } },
+              h(ns.DonutChart, { data: sources, size: 128, thickness: 20, centerValue: "1,240", centerLabel: "leads" })),
+            h(ns.Card, { padding: "20px", style: { display: "grid", gap: 16 } },
+              h("h3", { style: { margin: 0, font: "var(--weight-semibold) 16px/24px var(--font-sans)", color: "var(--text-strong)" } }, "Targets"),
+              h(ns.Progress, { label: "Q4 revenue", value: 742, max: 1000, valueLabel: "$742K of $1M" }),
+              h(ns.Progress, { label: "Installs scheduled", value: 38, max: 50 })
+            )
+          )
+        ),
+        h("section", { "aria-label": "Top reps", style: { display: "grid", gap: 12 } },
+          h("h2", { style: { margin: 0, font: "var(--weight-semibold) 20px/28px var(--font-sans)", color: "var(--text-strong)" } }, "Top reps"),
+          h("div", { style: { overflowX: "auto" } },
+            h(ns.DataTable, { dense: true, rows: reps, columns: [
+              { key: "rep", label: "Rep", strong: true }, { key: "deals", label: "Deals", align: "right", mono: true },
+              { key: "signed", label: "Signed", align: "right", mono: true }, { key: "rate", label: "Close rate", align: "right", mono: true }] }))
+        )
+      );
+    }
+    var view = h(Dashboard);
+
+    ReactDOM.createRoot(document.getElementById("root")).render(view);
+  })();
+</script>

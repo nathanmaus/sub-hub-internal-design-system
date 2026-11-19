@@ -1,0 +1,26 @@
+<!-- @dsCard group="Charts" height=220 subtitle="Grey trend line, latest point in chart-1 · also a StatCard trend" -->
+<!doctype html>
+<meta charset="utf-8">
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;padding:16px;background:var(--surface-page);color:var(--text-body);
+    font:400 16px/24px var(--font-sans,"Inter",system-ui,sans-serif);-webkit-font-smoothing:antialiased}
+  #root{display:grid;gap:16px;max-width:720px}
+</style>
+<div id="root"></div>
+<script>
+  (function () {
+    var ns = window.InternalDesignSystem, h = React.createElement;
+    var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    var money = function (v) { return "$" + Number(v).toLocaleString(); };
+    var k = function (v) { return "$" + (v >= 1000 ? (v / 1000).toFixed(v >= 10000 ? 0 : 1) + "K" : v); };
+
+    var view = h("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))", gap: 16 } },
+      h(ns.StatCard, { label: "Signed this month", value: "$412K", delta: "+12%", footnote: "14 contracts",
+        trend: [281, 302, 296, 318, 344, 330, 362, 371, 358, 389, 402, 412], trendLabels: MONTHS }),
+      h(ns.StatCard, { label: "Avg. close time", value: "19 days", delta: "+3 days", deltaDirection: "down", footnote: "Solar, last 90 days",
+        trend: [24, 23, 23, 22, 21, 22, 20, 19, 18, 17, 17, 19], trendLabels: MONTHS }));
+
+    ReactDOM.createRoot(document.getElementById("root")).render(view);
+  })();
+</script>

@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"InternalDesignSystem","components":[{"name":"HeroBanner","sourcePath":"components/brand/HeroBanner.jsx"},{"name":"Logo","sourcePath":"components/brand/Logo.jsx"},{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"StatusPill","sourcePath":"components/core/StatusPill.jsx"},{"name":"Card","sourcePath":"components/data/Card.jsx"},{"name":"DataTable","sourcePath":"components/data/DataTable.jsx"},{"name":"StatCard","sourcePath":"components/data/StatCard.jsx"},{"name":"Field","sourcePath":"components/forms/Field.jsx"},{"name":"Input","sourcePath":"components/forms/Input.jsx"},{"name":"Select","sourcePath":"components/forms/Select.jsx"},{"name":"Switch","sourcePath":"components/forms/Switch.jsx"},{"name":"Tabs","sourcePath":"components/navigation/Tabs.jsx"},{"name":"MainMenu","sourcePath":"components/navigation/MainMenu.jsx"},{"name":"Tooltip","sourcePath":"components/overlays/Tooltip.jsx"},{"name":"Toast","sourcePath":"components/overlays/Toast.jsx"}],"sourceHashes":{"components/brand/HeroBanner.jsx":"d54fb3381574","components/brand/Logo.jsx":"ab8f07e600bc","components/core/Badge.jsx":"16dadbd2ca44","components/core/Button.jsx":"13486597e8ba","components/core/Icon.jsx":"2a9872b2da62","components/core/IconButton.jsx":"80cfd030f29f","components/core/StatusPill.jsx":"aabba9907016","components/data/Card.jsx":"778a37a9298d","components/data/DataTable.jsx":"e3b212356861","components/data/StatCard.jsx":"75d4641a62ad","components/forms/Field.jsx":"146f2755424d","components/forms/Input.jsx":"5068142b34db","components/forms/Select.jsx":"a49055057eae","components/forms/Switch.jsx":"227d2f1312fd","components/navigation/Tabs.jsx":"31f560b15ae4","components/navigation/MainMenu.jsx":"af3339eec7f2","components/overlays/Tooltip.jsx":"9233ec65fcfe","components/overlays/Toast.jsx":"01cdc7fe0dc5"},"inlinedExternals":[],"unexposedExports":[]} */
+/* @ds-bundle: {"format":4,"namespace":"InternalDesignSystem","components":[{"name":"HeroBanner","sourcePath":"components/brand/HeroBanner.jsx"},{"name":"Logo","sourcePath":"components/brand/Logo.jsx"},{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"IconButton","sourcePath":"components/core/IconButton.jsx"},{"name":"StatusPill","sourcePath":"components/core/StatusPill.jsx"},{"name":"Card","sourcePath":"components/data/Card.jsx"},{"name":"DataTable","sourcePath":"components/data/DataTable.jsx"},{"name":"StatCard","sourcePath":"components/data/StatCard.jsx"},{"name":"ChartCard","sourcePath":"components/charts/ChartKit.jsx"},{"name":"BarChart","sourcePath":"components/charts/BarChart.jsx"},{"name":"LineChart","sourcePath":"components/charts/LineChart.jsx"},{"name":"DonutChart","sourcePath":"components/charts/DonutChart.jsx"},{"name":"Progress","sourcePath":"components/charts/Progress.jsx"},{"name":"Sparkline","sourcePath":"components/charts/Sparkline.jsx"},{"name":"FunnelChart","sourcePath":"components/charts/FunnelChart.jsx"},{"name":"Field","sourcePath":"components/forms/Field.jsx"},{"name":"Input","sourcePath":"components/forms/Input.jsx"},{"name":"Select","sourcePath":"components/forms/Select.jsx"},{"name":"Switch","sourcePath":"components/forms/Switch.jsx"},{"name":"Tabs","sourcePath":"components/navigation/Tabs.jsx"},{"name":"MainMenu","sourcePath":"components/navigation/MainMenu.jsx"},{"name":"Tooltip","sourcePath":"components/overlays/Tooltip.jsx"},{"name":"Toast","sourcePath":"components/overlays/Toast.jsx"}],"sourceHashes":{"components/brand/HeroBanner.jsx":"d54fb3381574","components/brand/Logo.jsx":"ab8f07e600bc","components/core/Badge.jsx":"16dadbd2ca44","components/core/Button.jsx":"13486597e8ba","components/core/Icon.jsx":"2a9872b2da62","components/core/IconButton.jsx":"80cfd030f29f","components/core/StatusPill.jsx":"aabba9907016","components/data/Card.jsx":"778a37a9298d","components/data/DataTable.jsx":"e3b212356861","components/data/StatCard.jsx":"75d4641a62ad","components/forms/Field.jsx":"146f2755424d","components/forms/Input.jsx":"5068142b34db","components/forms/Select.jsx":"a49055057eae","components/forms/Switch.jsx":"227d2f1312fd","components/navigation/Tabs.jsx":"31f560b15ae4","components/navigation/MainMenu.jsx":"af3339eec7f2","components/overlays/Tooltip.jsx":"9233ec65fcfe","components/overlays/Toast.jsx":"01cdc7fe0dc5"},"inlinedExternals":[],"unexposedExports":[]} */
 
 (() => {
 
@@ -1349,6 +1349,188 @@ function DataTable({
 Object.assign(__ds_scope, { DataTable });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/data/DataTable.jsx", error: String((e && e.message) || e) }); }
 
+/* @scrollbars:start */
+// components/core/Scrollbars.js
+try { (() => {
+/* Overlay scrollbars. The native scrollbars are hidden (the script adds the CSS for that) so they never take layout space,
+   and this draws a thumb on a fixed layer above the page instead: no track, nothing shifts when it
+   appears. The thumb shows instantly when an element starts scrolling, stays while it scrolls,
+   and fades out over 500ms once scrolling has stopped for 2000ms. It works for the page and for any
+   scrolling element, vertical and horizontal, with no setup. Put `data-native-scrollbar` on an
+   element to keep the browser's own scrollbar there instead. */
+const Scrollbars = (function () {
+  const HOLD = 2000; // ms of no scrolling before the fade starts
+  const FADE = 500; // fade-out duration
+  const SIZE = 8; // thumb thickness
+  const INSET = 4; // gap between thumb and the scroller's edge
+  const MIN = 32; // shortest thumb
+  if (typeof window === "undefined" || typeof document === "undefined") return { refresh() {}, destroy() {} };
+  if (window.__dsScrollbars) return window.__dsScrollbars;
+
+  let layer = null;
+  const live = new Map(); // scroller -> { v, h, timer, raf, dragging }
+
+  function getLayer() {
+    if (layer && layer.isConnected) return layer;
+    layer = document.createElement("div");
+    layer.setAttribute("aria-hidden", "true");
+    layer.setAttribute("data-ds-scrollbars", "");
+    layer.style.cssText = "position:fixed;inset:0;pointer-events:none;z-index:2147483000;contain:strict;";
+    document.body.appendChild(layer);
+    return layer;
+  }
+
+  function scrollerOf(target) {
+    if (target === document || target === document.documentElement || target === document.body) {
+      return document.scrollingElement || document.documentElement;
+    }
+    return target && target.nodeType === 1 ? target : null;
+  }
+
+  function makeThumb(axis, el) {
+    const t = document.createElement("div");
+    t.style.cssText =
+      "position:absolute;left:0;top:0;border-radius:" + SIZE / 2 + "px;background:var(--scrollbar-thumb, rgba(127,127,127,.6));" +
+      "opacity:0;transition:none;pointer-events:none;touch-action:none;will-change:transform,opacity;" +
+      (axis === "v" ? "width:" + SIZE + "px;" : "height:" + SIZE + "px;");
+    // Dragging the thumb scrolls its element, for mouse users who grab it while it is visible.
+    t.addEventListener("pointerdown", (e) => {
+      const s = live.get(el);
+      if (!s) return;
+      e.preventDefault();
+      t.setPointerCapture(e.pointerId);
+      s.dragging = { axis, start: axis === "v" ? e.clientY : e.clientX, from: axis === "v" ? el.scrollTop : el.scrollLeft };
+      show(el);
+    });
+    t.addEventListener("pointermove", (e) => {
+      const s = live.get(el);
+      if (!s || !s.dragging || s.dragging.axis !== axis) return;
+      const g = geometry(el);
+      const track = axis === "v" ? g.trackV : g.trackH;
+      const len = axis === "v" ? g.thumbV : g.thumbH;
+      const range = axis === "v" ? el.scrollHeight - el.clientHeight : el.scrollWidth - el.clientWidth;
+      const delta = (axis === "v" ? e.clientY : e.clientX) - s.dragging.start;
+      const next = s.dragging.from + (delta / Math.max(1, track - len)) * range;
+      if (axis === "v") el.scrollTop = next; else el.scrollLeft = next;
+    });
+    const end = () => { const s = live.get(el); if (s) { s.dragging = null; scheduleHide(el); } };
+    t.addEventListener("pointerup", end);
+    t.addEventListener("pointercancel", end);
+    getLayer().appendChild(t);
+    return t;
+  }
+
+  function geometry(el) {
+    const isPage = el === (document.scrollingElement || document.documentElement);
+    const r = isPage ? { left: 0, top: 0, width: window.innerWidth, height: window.innerHeight } : el.getBoundingClientRect();
+    const vScroll = el.scrollHeight > el.clientHeight + 1;
+    const hScroll = el.scrollWidth > el.clientWidth + 1;
+    const both = vScroll && hScroll;
+    const trackV = r.height - INSET * 2 - (both ? SIZE + INSET : 0);
+    const trackH = r.width - INSET * 2 - (both ? SIZE + INSET : 0);
+    const thumbV = Math.max(MIN, (el.clientHeight / el.scrollHeight) * trackV);
+    const thumbH = Math.max(MIN, (el.clientWidth / el.scrollWidth) * trackH);
+    return { r, vScroll, hScroll, trackV, trackH, thumbV, thumbH };
+  }
+
+  function place(el) {
+    const s = live.get(el);
+    if (!s) return;
+    const g = geometry(el);
+    if (g.vScroll) {
+      if (!s.v) s.v = makeThumb("v", el);
+      const range = el.scrollHeight - el.clientHeight;
+      const y = g.r.top + INSET + (range > 0 ? (el.scrollTop / range) * (g.trackV - g.thumbV) : 0);
+      s.v.style.height = g.thumbV + "px";
+      s.v.style.transform = "translate(" + (g.r.left + g.r.width - INSET - SIZE) + "px," + y + "px)";
+    }
+    if (g.hScroll) {
+      if (!s.h) s.h = makeThumb("h", el);
+      const range = el.scrollWidth - el.clientWidth;
+      const x = g.r.left + INSET + (range > 0 ? (el.scrollLeft / range) * (g.trackH - g.thumbH) : 0);
+      s.h.style.width = g.thumbH + "px";
+      s.h.style.transform = "translate(" + x + "px," + (g.r.top + g.r.height - INSET - SIZE) + "px)";
+    }
+    if (s.v) s.v.style.display = g.vScroll ? "" : "none";
+    if (s.h) s.h.style.display = g.hScroll ? "" : "none";
+  }
+
+  function each(s, fn) { if (s.v) fn(s.v); if (s.h) fn(s.h); }
+
+  function show(el) {
+    const s = live.get(el);
+    each(s, (t) => { t.style.transition = "none"; t.style.opacity = "1"; t.style.pointerEvents = "auto"; });
+    clearTimeout(s.timer);
+  }
+
+  function scheduleHide(el) {
+    const s = live.get(el);
+    if (!s) return;
+    clearTimeout(s.timer);
+    s.timer = setTimeout(() => {
+      if (s.dragging) return;
+      each(s, (t) => { t.style.transition = "opacity " + FADE + "ms cubic-bezier(0.2, 0, 0.2, 1)"; t.style.opacity = "0"; t.style.pointerEvents = "none"; });
+      s.timer = setTimeout(() => forget(el), FADE + 50);
+    }, HOLD);
+  }
+
+  function forget(el) {
+    const s = live.get(el);
+    if (!s) return;
+    clearTimeout(s.timer);
+    cancelAnimationFrame(s.raf);
+    each(s, (t) => t.remove());
+    live.delete(el);
+  }
+
+  function onScroll(e) {
+    const el = scrollerOf(e.target);
+    if (!el || (el.closest && el.closest("[data-native-scrollbar]"))) return;
+    let s = live.get(el);
+    if (!s) { s = { v: null, h: null, timer: 0, raf: 0, dragging: null }; live.set(el, s); }
+    cancelAnimationFrame(s.raf);
+    place(el); // position first, so the thumb appears in the right place on the very first frame
+    show(el);
+    scheduleHide(el);
+  }
+
+  function onResize() { live.forEach((_, el) => (el.isConnected ? place(el) : forget(el))); }
+
+  // bundle.css hides the native scrollbars only while this attribute is present, so a page that
+  // loads the stylesheet without this script keeps its normal scrollbars.
+  document.documentElement.setAttribute("data-ds-scrollbars", "");
+  // The rules that hide the native scrollbars ship with the script, so pages that link only
+  // tokens.css still get them.
+  const style = document.createElement("style");
+  style.setAttribute("data-ds-scrollbars", "");
+  style.textContent =
+    "html[data-ds-scrollbars],html[data-ds-scrollbars] :where(*):not([data-native-scrollbar]){scrollbar-width:none}" +
+    "html[data-ds-scrollbars]::-webkit-scrollbar,html[data-ds-scrollbars] :where(*):not([data-native-scrollbar])::-webkit-scrollbar{display:none;width:0;height:0}";
+  (document.head || document.documentElement).appendChild(style);
+  window.addEventListener("scroll", onScroll, { capture: true, passive: true });
+  window.addEventListener("resize", onResize, { passive: true });
+
+  const api = {
+    /** Re-measure every visible thumb, e.g. after content changes size without scrolling. */
+    refresh: onResize,
+    /** Remove the listeners and every thumb. */
+    destroy() {
+      window.removeEventListener("scroll", onScroll, { capture: true });
+      window.removeEventListener("resize", onResize);
+      live.forEach((_, el) => forget(el));
+      if (layer) layer.remove();
+      document.documentElement.removeAttribute("data-ds-scrollbars");
+      style.remove();
+      window.__dsScrollbars = null;
+    },
+  };
+  window.__dsScrollbars = api;
+  return api;
+})();
+Object.assign(__ds_scope, { Scrollbars });
+})(); } catch (e) { __ds_ns.__errors.push({ path: "components/core/Scrollbars.js", error: String((e && e.message) || e) }); }
+/* @scrollbars:end */
+
 // components/data/StatCard.jsx
 try { (() => {
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
@@ -1359,6 +1541,8 @@ function StatCard({
   deltaDirection = "up",
   icon,
   footnote,
+  trend,
+  trendLabels,
   style,
   ...rest
 }) {
@@ -1412,7 +1596,12 @@ function StatCard({
   }, /*#__PURE__*/React.createElement(__ds_scope.Icon, { color: "currentColor",
     name: good ? "trending-up" : "trending-down",
     size: 14
-  }), delta) : null), footnote ? /*#__PURE__*/React.createElement("span", {
+  }), delta) : null), trend && trend.length > 1 ? /*#__PURE__*/React.createElement(__ds_scope.Sparkline, {
+    data: trend,
+    labels: trendLabels,
+    height: 32,
+    ariaLabel: label + " trend"
+  }) : null, footnote ? /*#__PURE__*/React.createElement("span", {
     style: {
       font: "var(--type-body)",
       fontSize: 13,
@@ -1422,6 +1611,569 @@ function StatCard({
 }
 Object.assign(__ds_scope, { StatCard });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/data/StatCard.jsx", error: String((e && e.message) || e) }); }
+
+/* @charts:start */
+// components/charts/ChartKit.jsx
+try { (() => {
+const { Card } = __ds_scope;
+const CHART_COLORS = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)"];
+const CHART_OTHER = "var(--chart-other)";
+const CHART_SEQ = ["var(--chart-seq-1)", "var(--chart-seq-2)", "var(--chart-seq-3)", "var(--chart-seq-4)"];
+function seriesColor(s, i) {
+  if (s && s.color) return s.color;
+  return i < CHART_COLORS.length ? CHART_COLORS[i] : CHART_OTHER;
+}
+const defaultFormat = (v) => v == null || isNaN(v) ? "–" : Number(v).toLocaleString();
+function formatCompact(v) {
+  const a = Math.abs(v);
+  if (a >= 1e9) return +(v / 1e9).toFixed(1) + "B";
+  if (a >= 1e6) return +(v / 1e6).toFixed(1) + "M";
+  if (a >= 1e3) return +(v / 1e3).toFixed(1) + "K";
+  return String(+v.toFixed(2));
+}
+function niceScale(maxValue, count = 4) {
+  const max = Math.max(0, maxValue || 0);
+  if (max === 0) return { max: 1, ticks: [0, 1] };
+  const raw = max / count;
+  const mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  const step = [1, 2, 2.5, 5, 10].map((m) => m * mag).find((s) => s >= raw);
+  const top = Math.ceil(max / step) * step;
+  const ticks = [];
+  for (let t = 0; t <= top + step / 2; t += step) ticks.push(+t.toFixed(10));
+  return { max: top, ticks };
+}
+const snap4 = (n) => Math.ceil(n / 4) * 4;
+function useChartWidth(initial = 0) {
+  const ref = React.useRef(null);
+  const [width, setWidth] = React.useState(initial);
+  React.useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return void 0;
+    const measure = () => setWidth(Math.round(el.getBoundingClientRect().width));
+    measure();
+    if (typeof ResizeObserver === "undefined") return void 0;
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  return [ref, width];
+}
+const label12 = "var(--weight-regular) 12px/16px var(--font-sans)";
+const axisText = { font: label12, fill: "var(--text-muted)", fontVariantNumeric: "tabular-nums" };
+function ChartTooltip({ x, y, containerWidth, title, rows = [] }) {
+  if (x == null) return null;
+  const W = 192;
+  const left = Math.max(0, Math.min(x - W / 2, (containerWidth || W) - W));
+  return /* @__PURE__ */ React.createElement(
+    "div",
+    {
+      role: "presentation",
+      style: {
+        position: "absolute",
+        left,
+        top: Math.max(0, y),
+        width: W,
+        transform: "translateY(-100%)",
+        pointerEvents: "none",
+        zIndex: 2,
+        boxSizing: "border-box",
+        background: "var(--surface-card)",
+        border: "1px solid var(--border-subtle)",
+        borderRadius: "var(--radius-sm, 8px)",
+        boxShadow: "var(--shadow-md)",
+        padding: "8px 12px",
+        display: "grid",
+        gap: 4
+      }
+    },
+    title != null ? /* @__PURE__ */ React.createElement("span", { style: { font: "var(--weight-semibold) 12px/16px var(--font-sans)", color: "var(--text-strong)" } }, title) : null,
+    rows.map((r, i) => /* @__PURE__ */ React.createElement("span", { key: i, style: { display: "flex", alignItems: "center", gap: 8, font: label12, color: "var(--text-body)" } }, r.color ? /* @__PURE__ */ React.createElement("span", { "aria-hidden": "true", style: { width: 8, height: 8, borderRadius: 2, background: r.color, flex: "none" } }) : null, /* @__PURE__ */ React.createElement("span", { style: { flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" } }, r.label), /* @__PURE__ */ React.createElement("span", { style: { fontWeight: "var(--weight-semibold)", color: "var(--text-strong)", fontVariantNumeric: "tabular-nums" } }, r.value)))
+  );
+}
+function ChartLegend({ items = [], style }) {
+  if (!items.length) return null;
+  return /* @__PURE__ */ React.createElement("ul", { style: { listStyle: "none", margin: 0, padding: 0, display: "flex", flexWrap: "wrap", gap: "4px 16px", ...style } }, items.map((it) => /* @__PURE__ */ React.createElement("li", { key: it.label, style: { display: "inline-flex", alignItems: "center", gap: 8, font: "var(--weight-medium) 12px/16px var(--font-sans)", color: "var(--text-body)" } }, /* @__PURE__ */ React.createElement("span", { "aria-hidden": "true", style: { width: 12, height: it.line ? 2 : 12, borderRadius: it.line ? 1 : 4, background: it.color } }), it.label)));
+}
+function ChartTable({ columns = [], rows = [], caption }) {
+  return /* @__PURE__ */ React.createElement("div", { style: { overflowX: "auto" } }, /* @__PURE__ */ React.createElement("table", { style: { width: "100%", borderCollapse: "collapse" } }, caption ? /* @__PURE__ */ React.createElement("caption", { style: { position: "absolute", width: 1, height: 1, overflow: "hidden", clip: "rect(0 0 0 0)" } }, caption) : null, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", null, columns.map((c, i) => /* @__PURE__ */ React.createElement("th", { key: c.key, scope: "col", style: {
+    textAlign: c.align || (i === 0 ? "left" : "right"),
+    padding: "8px 12px",
+    font: "var(--weight-semibold) 12px/16px var(--font-sans)",
+    letterSpacing: "var(--tracking-eyebrow)",
+    textTransform: "uppercase",
+    color: "var(--text-subtle)",
+    borderBottom: "1px solid var(--border-subtle)"
+  } }, c.label)))), /* @__PURE__ */ React.createElement("tbody", null, rows.map((r, ri) => /* @__PURE__ */ React.createElement("tr", { key: ri }, columns.map((c, i) => /* @__PURE__ */ React.createElement("td", { key: c.key, style: {
+    textAlign: c.align || (i === 0 ? "left" : "right"),
+    padding: "8px 12px",
+    font: "var(--weight-regular) 14px/20px var(--font-sans)",
+    fontVariantNumeric: "tabular-nums",
+    color: i === 0 ? "var(--text-body)" : "var(--text-strong)",
+    borderBottom: ri === rows.length - 1 ? "none" : "1px solid var(--border-subtle)"
+  } }, c.format ? c.format(r[c.key], r) : r[c.key])))))));
+}
+function ViewToggle({ view, onChange }) {
+  const opt = (id, text) => {
+    const on = view === id;
+    return /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        type: "button",
+        "aria-pressed": on,
+        onClick: () => onChange(id),
+        style: { appearance: "none", border: 0, background: "none", padding: 0, height: 44, cursor: "pointer", display: "inline-flex", alignItems: "center" }
+      },
+      /* @__PURE__ */ React.createElement("span", { style: {
+        display: "inline-flex",
+        alignItems: "center",
+        height: 32,
+        padding: "0 12px",
+        borderRadius: "var(--radius-sm, 8px)",
+        font: "var(--weight-medium) 12px/16px var(--font-sans)",
+        background: on ? "var(--surface-card)" : "transparent",
+        color: on ? "var(--text-strong)" : "var(--text-muted)",
+        boxShadow: on ? "var(--shadow-sm)" : "none"
+      } }, text)
+    );
+  };
+  return /* @__PURE__ */ React.createElement("div", { role: "group", "aria-label": "Chart view", style: { display: "inline-flex", alignItems: "center", gap: 0, padding: "0 4px", height: 44, borderRadius: "var(--radius-sm, 8px)", background: "var(--surface-sunken)", flex: "none" } }, opt("chart", "Chart"), opt("table", "Table"));
+}
+function ChartCard({ title, subtitle, value, action, table, defaultView = "chart", children, style, ...rest }) {
+  const [view, setView] = React.useState(defaultView);
+  return /* @__PURE__ */ React.createElement(Card, { padding: "20px", style: { display: "grid", gap: 16, minWidth: 0, ...style }, ...rest }, title || action || table ? /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12, flexWrap: "wrap" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gap: 4, minWidth: 0 } }, title ? /* @__PURE__ */ React.createElement("h3", { style: { margin: 0, font: "var(--weight-semibold) 16px/24px var(--font-sans)", color: "var(--text-strong)" } }, title) : null, subtitle ? /* @__PURE__ */ React.createElement("span", { style: { font: "var(--weight-regular) 14px/20px var(--font-sans)", color: "var(--text-muted)" } }, subtitle) : null, value ? /* @__PURE__ */ React.createElement("span", { style: { font: "var(--weight-bold) 24px/32px var(--font-mono)", color: "var(--text-strong)", fontVariantNumeric: "tabular-nums" } }, value) : null), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8 } }, action, table ? /* @__PURE__ */ React.createElement(ViewToggle, { view, onChange: setView }) : null)) : null, table && view === "table" ? /* @__PURE__ */ React.createElement(ChartTable, { caption: title, ...table }) : children);
+}
+function cartesianLayout({ width, height, data, series, tickFormat = formatCompact }) {
+  let maxV = 0;
+  data.forEach((d) => series.forEach((s) => {
+    maxV = Math.max(maxV, +d[s.key] || 0);
+  }));
+  const { max, ticks } = niceScale(maxV, 4);
+  const tickLabels = ticks.map((t) => String(tickFormat(t)));
+  const left = snap4(Math.ceil(Math.max(...tickLabels.map((t) => t.length)) * 7.5) + 12);
+  const m = { top: 8, right: 8, bottom: 28, left };
+  const plotW = Math.max(0, width - m.left - m.right);
+  const plotH = Math.max(0, height - m.top - m.bottom);
+  const y = (v) => m.top + plotH - Math.max(0, +v || 0) / max * plotH;
+  return { m, plotW, plotH, y, ticks, tickLabels, max };
+}
+function GridAndYAxis({ L, width }) {
+  return /* @__PURE__ */ React.createElement("g", { "aria-hidden": "true" }, L.ticks.map((t, i) => /* @__PURE__ */ React.createElement("g", { key: t }, /* @__PURE__ */ React.createElement(
+    "line",
+    {
+      x1: L.m.left,
+      x2: width - L.m.right,
+      y1: Math.round(L.y(t)) + 0.5,
+      y2: Math.round(L.y(t)) + 0.5,
+      stroke: i === 0 ? "var(--border-default)" : "var(--border-subtle)",
+      strokeWidth: "1"
+    }
+  ), /* @__PURE__ */ React.createElement("text", { x: L.m.left - 8, y: L.y(t), dy: "4", textAnchor: "end", style: axisText }, L.tickLabels[i]))));
+}
+function XLabels({ labels, xAt, L, band }) {
+  const longest = Math.max(1, ...labels.map((l) => String(l).length)) * 7 + 8;
+  const every = Math.max(1, Math.ceil(longest / Math.max(1, band)));
+  return /* @__PURE__ */ React.createElement("g", { "aria-hidden": "true" }, labels.map((l, i) => i % every === 0 ? /* @__PURE__ */ React.createElement("text", { key: i, x: xAt(i), y: L.m.top + L.plotH + 20, textAnchor: "middle", style: axisText }, l) : null));
+}
+function useActiveIndex(count) {
+  const [active, setActive] = React.useState(null);
+  const onKeyDown = (e) => {
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+      e.preventDefault();
+      const d = e.key === "ArrowRight" ? 1 : -1;
+      setActive((a) => a == null ? d > 0 ? 0 : count - 1 : Math.max(0, Math.min(count - 1, a + d)));
+    } else if (e.key === "Escape") setActive(null);
+  };
+  return { active, setActive, keyProps: { tabIndex: 0, onKeyDown, onBlur: () => setActive(null) } };
+}
+Object.assign(__ds_scope, { CHART_COLORS, CHART_OTHER, CHART_SEQ, seriesColor, formatCompact, niceScale, snap4, useChartWidth, axisText, ChartTooltip, ChartLegend, ChartTable, ChartCard, cartesianLayout, GridAndYAxis, XLabels, useActiveIndex, formatNumber: defaultFormat });
+})(); } catch (e) { __ds_ns.__errors.push({ path: "components/charts/ChartKit.jsx", error: String((e && e.message) || e) }); }
+
+// components/charts/BarChart.jsx
+try { (() => {
+const { seriesColor, formatNumber, formatCompact, useChartWidth, cartesianLayout, GridAndYAxis, XLabels, ChartTooltip, ChartLegend, useActiveIndex } = __ds_scope;
+function barPath(x, y, w, h) {
+  if (h <= 0) return "";
+  const r = Math.min(4, w / 2, h);
+  return `M${x},${y + h}V${y + r}Q${x},${y} ${x + r},${y}H${x + w - r}Q${x + w},${y} ${x + w},${y + r}V${y + h}Z`;
+}
+function BarChart({
+  data = [],
+  series = [],
+  height = 240,
+  valueFormat = formatNumber,
+  tickFormat = formatCompact,
+  legend,
+  ariaLabel,
+  style,
+  ...rest
+}) {
+  const [ref, width] = useChartWidth();
+  const { active, setActive, keyProps } = useActiveIndex(data.length);
+  const L = cartesianLayout({ width, height, data, series, tickFormat });
+  const n = Math.max(1, data.length);
+  const band = L.plotW / n;
+  const ns = Math.max(1, series.length);
+  const gap = 2;
+  const barW = Math.max(4, Math.min(24, (band * 0.64 - gap * (ns - 1)) / ns));
+  const groupW = barW * ns + gap * (ns - 1);
+  const xAt = (i) => L.m.left + band * i + band / 2;
+  const showLegend = legend != null ? legend : series.length > 1;
+  const onMove = (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    const i = Math.floor((e.clientX - r.left - L.m.left) / band);
+    setActive(i >= 0 && i < data.length ? i : null);
+  };
+  const tip = active != null && data[active] ? {
+    x: xAt(active),
+    y: L.y(Math.max(...series.map((s) => +data[active][s.key] || 0))) - 8,
+    title: data[active].label,
+    rows: series.map((s, si) => ({ label: s.label, color: seriesColor(s, si), value: valueFormat(data[active][s.key]) }))
+  } : null;
+  return /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gap: 12, minWidth: 0, ...style }, ...rest }, showLegend ? /* @__PURE__ */ React.createElement(ChartLegend, { items: series.map((s, i) => ({ label: s.label, color: seriesColor(s, i) })) }) : null, /* @__PURE__ */ React.createElement("div", { ref, style: { position: "relative", width: "100%", height } }, width > 0 ? /* @__PURE__ */ React.createElement(
+    "svg",
+    {
+      width,
+      height,
+      role: "img",
+      ...keyProps,
+      "aria-label": ariaLabel || "Bar chart: " + series.map((s) => s.label).join(", ") + " by " + data.map((d) => d.label).join(", "),
+      onPointerMove: onMove,
+      onPointerLeave: () => setActive(null),
+      style: { display: "block", outline: "none", touchAction: "pan-y" }
+    },
+    /* @__PURE__ */ React.createElement(GridAndYAxis, { L, width }),
+    active != null ? /* @__PURE__ */ React.createElement("rect", { x: L.m.left + band * active, y: L.m.top, width: band, height: L.plotH, fill: "var(--surface-hover, var(--surface-sunken))", opacity: "0.6" }) : null,
+    data.map((d, i) => series.map((s, si) => {
+      const x = xAt(i) - groupW / 2 + si * (barW + gap);
+      const y = L.y(d[s.key]);
+      return /* @__PURE__ */ React.createElement("path", { key: i + "-" + s.key, d: barPath(x, y, barW, L.m.top + L.plotH - y), fill: seriesColor(s, si) });
+    })),
+    /* @__PURE__ */ React.createElement(XLabels, { labels: data.map((d) => d.label), xAt, L, band })
+  ) : null, tip ? /* @__PURE__ */ React.createElement(ChartTooltip, { ...tip, containerWidth: width }) : null));
+}
+Object.assign(__ds_scope, { BarChart });
+})(); } catch (e) { __ds_ns.__errors.push({ path: "components/charts/BarChart.jsx", error: String((e && e.message) || e) }); }
+
+// components/charts/LineChart.jsx
+try { (() => {
+const { seriesColor, formatNumber, formatCompact, useChartWidth, cartesianLayout, GridAndYAxis, XLabels, ChartTooltip, ChartLegend, useActiveIndex } = __ds_scope;
+function LineChart({
+  data = [],
+  series = [],
+  height = 240,
+  valueFormat = formatNumber,
+  tickFormat = formatCompact,
+  area,
+  legend,
+  ariaLabel,
+  style,
+  ...rest
+}) {
+  const [ref, width] = useChartWidth();
+  const { active, setActive, keyProps } = useActiveIndex(data.length);
+  const L = cartesianLayout({ width, height, data, series, tickFormat });
+  const n = data.length;
+  const inset = 8;
+  const step = n > 1 ? (L.plotW - inset * 2) / (n - 1) : 0;
+  const xAt = (i) => L.m.left + inset + (n > 1 ? step * i : (L.plotW - inset * 2) / 2);
+  const showArea = area != null ? area : series.length === 1;
+  const showLegend = legend != null ? legend : series.length > 1;
+  const baseY = L.m.top + L.plotH;
+  const onMove = (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    const i = Math.round((e.clientX - r.left - L.m.left - inset) / (step || 1));
+    setActive(n ? Math.max(0, Math.min(n - 1, i)) : null);
+  };
+  const tip = active != null && data[active] ? {
+    x: xAt(active),
+    y: Math.min(...series.map((s) => L.y(data[active][s.key]))) - 12,
+    title: data[active].label,
+    rows: series.map((s, si) => ({ label: s.label, color: seriesColor(s, si), value: valueFormat(data[active][s.key]) }))
+  } : null;
+  return /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gap: 12, minWidth: 0, ...style }, ...rest }, showLegend ? /* @__PURE__ */ React.createElement(ChartLegend, { items: series.map((s, i) => ({ label: s.label, color: seriesColor(s, i), line: true })) }) : null, /* @__PURE__ */ React.createElement("div", { ref, style: { position: "relative", width: "100%", height } }, width > 0 ? /* @__PURE__ */ React.createElement(
+    "svg",
+    {
+      width,
+      height,
+      role: "img",
+      ...keyProps,
+      "aria-label": ariaLabel || "Line chart: " + series.map((s) => s.label).join(", ") + ", " + (data[0] ? data[0].label : "") + " to " + (data[n - 1] ? data[n - 1].label : ""),
+      onPointerMove: onMove,
+      onPointerLeave: () => setActive(null),
+      style: { display: "block", outline: "none", touchAction: "pan-y" }
+    },
+    /* @__PURE__ */ React.createElement(GridAndYAxis, { L, width }),
+    series.map((s, si) => {
+      const pts = data.map((d, i) => [xAt(i), L.y(d[s.key])]);
+      const line = pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1)).join("");
+      const color = seriesColor(s, si);
+      return /* @__PURE__ */ React.createElement("g", { key: s.key }, showArea && pts.length ? /* @__PURE__ */ React.createElement("path", { d: line + `L${pts[pts.length - 1][0]},${baseY}L${pts[0][0]},${baseY}Z`, fill: color, opacity: "0.1" }) : null, /* @__PURE__ */ React.createElement("path", { d: line, fill: "none", stroke: color, strokeWidth: "2", strokeLinejoin: "round", strokeLinecap: "round" }));
+    }),
+    active != null ? /* @__PURE__ */ React.createElement("g", { "aria-hidden": "true" }, /* @__PURE__ */ React.createElement("line", { x1: Math.round(xAt(active)) + 0.5, x2: Math.round(xAt(active)) + 0.5, y1: L.m.top, y2: baseY, stroke: "var(--border-default)", strokeWidth: "1" }), series.map((s, si) => /* @__PURE__ */ React.createElement("circle", { key: s.key, cx: xAt(active), cy: L.y(data[active][s.key]), r: "5", fill: seriesColor(s, si), stroke: "var(--surface-card)", strokeWidth: "2" }))) : (
+      // At rest, mark only the latest point of each series.
+      n ? series.map((s, si) => /* @__PURE__ */ React.createElement("circle", { key: s.key, cx: xAt(n - 1), cy: L.y(data[n - 1][s.key]), r: "5", fill: seriesColor(s, si), stroke: "var(--surface-card)", strokeWidth: "2" })) : null
+    ),
+    /* @__PURE__ */ React.createElement(XLabels, { labels: data.map((d) => d.label), xAt, L, band: n > 1 ? step : L.plotW })
+  ) : null, tip ? /* @__PURE__ */ React.createElement(ChartTooltip, { ...tip, containerWidth: width }) : null));
+}
+Object.assign(__ds_scope, { LineChart });
+})(); } catch (e) { __ds_ns.__errors.push({ path: "components/charts/LineChart.jsx", error: String((e && e.message) || e) }); }
+
+// components/charts/DonutChart.jsx
+try { (() => {
+const { CHART_COLORS, CHART_OTHER, formatNumber, ChartTooltip } = __ds_scope;
+function arc(cx, cy, r0, r1, a0, a1) {
+  const p = (r, a) => [cx + r * Math.sin(a), cy - r * Math.cos(a)];
+  const large = a1 - a0 > Math.PI ? 1 : 0;
+  const [x0, y0] = p(r1, a0), [x1, y1] = p(r1, a1), [x2, y2] = p(r0, a1), [x3, y3] = p(r0, a0);
+  return `M${x0},${y0}A${r1},${r1} 0 ${large} 1 ${x1},${y1}L${x2},${y2}A${r0},${r0} 0 ${large} 0 ${x3},${y3}Z`;
+}
+function DonutChart({
+  data = [],
+  size = 160,
+  thickness = 24,
+  centerValue,
+  centerLabel,
+  valueFormat = formatNumber,
+  otherLabel = "Other",
+  legend = true,
+  ariaLabel,
+  style,
+  ...rest
+}) {
+  const [active, setActive] = React.useState(null);
+  const parts = React.useMemo(() => {
+    const named = data.slice(0, 3).map((d, i) => ({ ...d, color: d.color || CHART_COLORS[i] }));
+    const restSum = data.slice(3).reduce((a2, d) => a2 + (+d.value || 0), 0);
+    if (data.length > 3) named.push({ label: otherLabel, value: restSum, color: CHART_OTHER });
+    return named;
+  }, [data, otherLabel]);
+  const total = parts.reduce((a2, d) => a2 + (+d.value || 0), 0) || 1;
+  const c = size / 2, r1 = c, r0 = c - thickness;
+  let a = 0;
+  const segs = parts.map((d) => {
+    const sweep = (+d.value || 0) / total * Math.PI * 2;
+    const s = { ...d, a0: a, a1: a + sweep, pct: (+d.value || 0) / total };
+    a += sweep;
+    return s;
+  });
+  const pct = (p) => Math.round(p * 100) + "%";
+  const act = active != null ? segs[active] : null;
+  const mid = act ? (act.a0 + act.a1) / 2 : 0;
+  return /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexWrap: "wrap", alignItems: "center", gap: 24, minWidth: 0, ...style }, ...rest }, /* @__PURE__ */ React.createElement("div", { style: { position: "relative", width: size, height: size, flex: "none" } }, /* @__PURE__ */ React.createElement(
+    "svg",
+    {
+      width: size,
+      height: size,
+      role: "img",
+      style: { display: "block", overflow: "visible" },
+      "aria-label": ariaLabel || segs.map((s) => s.label + " " + pct(s.pct)).join(", "),
+      onPointerLeave: () => setActive(null)
+    },
+    /* @__PURE__ */ React.createElement("circle", { cx: c, cy: c, r: c - thickness / 2, fill: "none", stroke: "var(--track-default, var(--border-subtle))", strokeWidth: thickness }),
+    segs.map((s, i) => s.pct > 0 ? /* @__PURE__ */ React.createElement(
+      "path",
+      {
+        key: s.label,
+        d: s.pct >= 0.9999 ? arc(c, c, r0, r1, 0, Math.PI * 2 - 1e-4) : arc(c, c, r0, r1, s.a0, s.a1),
+        fill: s.color,
+        stroke: "var(--surface-card)",
+        strokeWidth: "2",
+        strokeLinejoin: "round",
+        opacity: active == null || active === i ? 1 : 0.4,
+        onPointerEnter: () => setActive(i)
+      }
+    ) : null)
+  ), centerValue != null || centerLabel ? /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", inset: thickness, display: "grid", placeContent: "center", textAlign: "center", gap: 0, pointerEvents: "none" } }, centerValue != null ? /* @__PURE__ */ React.createElement("span", { style: { font: "var(--weight-bold) 20px/28px var(--font-mono)", color: "var(--text-strong)", fontVariantNumeric: "tabular-nums" } }, centerValue) : null, centerLabel ? /* @__PURE__ */ React.createElement("span", { style: { font: "var(--weight-regular) 12px/16px var(--font-sans)", color: "var(--text-muted)" } }, centerLabel) : null) : null, act ? /* @__PURE__ */ React.createElement(
+    ChartTooltip,
+    {
+      x: c + Math.sin(mid) * (c - thickness / 2),
+      y: c - Math.cos(mid) * (c - thickness / 2) - 12,
+      containerWidth: size,
+      title: act.label,
+      rows: [{ label: pct(act.pct) + " of total", value: valueFormat(act.value) }]
+    }
+  ) : null), legend ? /* @__PURE__ */ React.createElement("ul", { style: { listStyle: "none", margin: 0, padding: 0, display: "grid", gap: 8, flex: "1 1 160px", minWidth: 0 } }, segs.map((s, i) => /* @__PURE__ */ React.createElement(
+    "li",
+    {
+      key: s.label,
+      onPointerEnter: () => setActive(i),
+      onPointerLeave: () => setActive(null),
+      style: { display: "flex", alignItems: "center", gap: 8, font: "var(--weight-regular) 14px/20px var(--font-sans)", color: "var(--text-body)" }
+    },
+    /* @__PURE__ */ React.createElement("span", { "aria-hidden": "true", style: { width: 12, height: 12, borderRadius: 4, background: s.color, flex: "none" } }),
+    /* @__PURE__ */ React.createElement("span", { style: { flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" } }, s.label),
+    /* @__PURE__ */ React.createElement("span", { style: { color: "var(--text-strong)", fontWeight: "var(--weight-semibold)", fontVariantNumeric: "tabular-nums" } }, valueFormat(s.value)),
+    /* @__PURE__ */ React.createElement("span", { style: { width: 40, textAlign: "right", color: "var(--text-muted)", fontVariantNumeric: "tabular-nums" } }, pct(s.pct))
+  ))) : null);
+}
+Object.assign(__ds_scope, { DonutChart });
+})(); } catch (e) { __ds_ns.__errors.push({ path: "components/charts/DonutChart.jsx", error: String((e && e.message) || e) }); }
+
+// components/charts/Progress.jsx
+try { (() => {
+function Progress({
+  value = 0,
+  max = 100,
+  variant = "bar",
+  label,
+  valueLabel,
+  size = 64,
+  thickness,
+  color,
+  style,
+  ...rest
+}) {
+  const p = Math.max(0, Math.min(1, (+value || 0) / (max || 1)));
+  const shown = valueLabel != null ? valueLabel : Math.round(p * 100) + "%";
+  const fill = color || "var(--track-fill, var(--chart-1))";
+  const track = "var(--track-default, var(--border-subtle))";
+  const aria = { role: "progressbar", "aria-valuemin": 0, "aria-valuemax": max, "aria-valuenow": value, "aria-label": label, "aria-valuetext": String(shown) };
+  if (variant === "ring") {
+    const t = thickness || 8;
+    const r = (size - t) / 2;
+    const C = 2 * Math.PI * r;
+    return /* @__PURE__ */ React.createElement("div", { style: { display: "inline-flex", alignItems: "center", gap: 12, ...style }, ...rest }, /* @__PURE__ */ React.createElement("div", { style: { position: "relative", width: size, height: size, flex: "none" }, ...aria }, /* @__PURE__ */ React.createElement("svg", { width: size, height: size, "aria-hidden": "true", style: { display: "block", transform: "rotate(-90deg)" } }, /* @__PURE__ */ React.createElement("circle", { cx: size / 2, cy: size / 2, r, fill: "none", stroke: track, strokeWidth: t }), p > 0 ? /* @__PURE__ */ React.createElement(
+      "circle",
+      {
+        cx: size / 2,
+        cy: size / 2,
+        r,
+        fill: "none",
+        stroke: fill,
+        strokeWidth: t,
+        strokeLinecap: "round",
+        strokeDasharray: `${C * p} ${C}`
+      }
+    ) : null), /* @__PURE__ */ React.createElement("span", { style: { position: "absolute", inset: 0, display: "grid", placeItems: "center", font: "var(--weight-semibold) " + (size >= 80 ? "16px/24px" : "12px/16px") + " var(--font-sans)", color: "var(--text-strong)", fontVariantNumeric: "tabular-nums" } }, shown)), label ? /* @__PURE__ */ React.createElement("span", { style: { font: "var(--weight-regular) 14px/20px var(--font-sans)", color: "var(--text-body)" } }, label) : null);
+  }
+  const h = thickness || 8;
+  return /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gap: 8, minWidth: 0, ...style }, ...rest }, label || shown ? /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12 } }, /* @__PURE__ */ React.createElement("span", { style: { font: "var(--weight-regular) 14px/20px var(--font-sans)", color: "var(--text-body)" } }, label), /* @__PURE__ */ React.createElement("span", { style: { font: "var(--weight-semibold) 14px/20px var(--font-sans)", color: "var(--text-strong)", fontVariantNumeric: "tabular-nums" } }, shown)) : null, /* @__PURE__ */ React.createElement("div", { ...aria, style: { height: h, borderRadius: h / 2, background: track, overflow: "hidden" } }, /* @__PURE__ */ React.createElement("div", { style: { width: p * 100 + "%", height: "100%", borderRadius: h / 2, background: fill } })));
+}
+Object.assign(__ds_scope, { Progress });
+})(); } catch (e) { __ds_ns.__errors.push({ path: "components/charts/Progress.jsx", error: String((e && e.message) || e) }); }
+
+// components/charts/Sparkline.jsx
+try { (() => {
+const { formatNumber, useChartWidth, ChartTooltip } = __ds_scope;
+function Sparkline({
+  data = [],
+  labels,
+  height = 32,
+  valueFormat = formatNumber,
+  color = "var(--chart-other)",
+  accent = "var(--chart-1)",
+  ariaLabel,
+  style,
+  ...rest
+}) {
+  const [ref, width] = useChartWidth();
+  const [active, setActive] = React.useState(null);
+  const vals = data.map((v) => +v || 0);
+  const n = vals.length;
+  const min = Math.min(...vals), max = Math.max(...vals);
+  const pad = 6;
+  const x = (i) => pad + (n > 1 ? i / (n - 1) * (width - pad * 2) : (width - pad * 2) / 2);
+  const y = (v) => pad + (max === min ? (height - pad * 2) / 2 : (1 - (v - min) / (max - min)) * (height - pad * 2));
+  const d = vals.map((v, i) => (i ? "L" : "M") + x(i).toFixed(1) + "," + y(v).toFixed(1)).join("");
+  const focus = active != null ? active : n - 1;
+  const onMove = (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    setActive(Math.max(0, Math.min(n - 1, Math.round((e.clientX - r.left - pad) / Math.max(1, width - pad * 2) * (n - 1)))));
+  };
+  const name = (i) => labels && labels[i] != null ? labels[i] : null;
+  return /* @__PURE__ */ React.createElement("div", { ref, style: { position: "relative", width: "100%", height, minWidth: 0, ...style }, ...rest }, width > 0 && n ? /* @__PURE__ */ React.createElement(
+    "svg",
+    {
+      width,
+      height,
+      role: "img",
+      style: { display: "block", overflow: "visible", touchAction: "pan-y" },
+      "aria-label": ariaLabel || "Trend from " + valueFormat(vals[0]) + " to " + valueFormat(vals[n - 1]),
+      onPointerMove: onMove,
+      onPointerLeave: () => setActive(null)
+    },
+    /* @__PURE__ */ React.createElement("path", { d, fill: "none", stroke: color, strokeWidth: "2", strokeLinejoin: "round", strokeLinecap: "round" }),
+    /* @__PURE__ */ React.createElement("circle", { cx: x(focus), cy: y(vals[focus]), r: "5", fill: accent, stroke: "var(--surface-card)", strokeWidth: "2" })
+  ) : null, active != null ? /* @__PURE__ */ React.createElement(
+    ChartTooltip,
+    {
+      x: x(active),
+      y: y(vals[active]) - 12,
+      containerWidth: width,
+      title: name(active),
+      rows: [{ label: name(active) == null ? "Value" : "", value: valueFormat(vals[active]) }]
+    }
+  ) : null);
+}
+Object.assign(__ds_scope, { Sparkline });
+})(); } catch (e) { __ds_ns.__errors.push({ path: "components/charts/Sparkline.jsx", error: String((e && e.message) || e) }); }
+
+// components/charts/FunnelChart.jsx
+try { (() => {
+const { CHART_SEQ, formatNumber, ChartTooltip, useChartWidth } = __ds_scope;
+function FunnelChart({ stages = [], valueFormat = formatNumber, showConversion = true, ariaLabel, style, ...rest }) {
+  const [ref, width] = useChartWidth();
+  const [active, setActive] = React.useState(null);
+  const first = +(stages[0] && stages[0].value) || 1;
+  const max = Math.max(1, ...stages.map((s) => +s.value || 0));
+  const pct = (a, b) => b ? Math.round(a / b * 100) + "%" : "–";
+  const ROW = 48;
+  const GAP = 12;
+  return /* @__PURE__ */ React.createElement(
+    "div",
+    {
+      ref,
+      role: "list",
+      "aria-label": ariaLabel || "Funnel: " + stages.map((s) => s.label + " " + valueFormat(s.value)).join(", "),
+      style: { position: "relative", display: "grid", gap: GAP, minWidth: 0, ...style },
+      ...rest,
+      onPointerLeave: () => setActive(null)
+    },
+    stages.map((s, i) => {
+      const prev = i ? +stages[i - 1].value || 0 : null;
+      const w = Math.max(2, (+s.value || 0) / max * 100);
+      return /* @__PURE__ */ React.createElement(
+        "div",
+        {
+          key: s.label,
+          role: "listitem",
+          tabIndex: 0,
+          onFocus: () => setActive(i),
+          onBlur: () => setActive(null),
+          onPointerEnter: () => setActive(i),
+          style: { display: "grid", gap: 4, outline: "none", minHeight: ROW }
+        },
+        /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "baseline", gap: 8, font: "var(--weight-regular) 14px/20px var(--font-sans)" } }, /* @__PURE__ */ React.createElement("span", { style: { color: "var(--text-body)", flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" } }, s.label), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--text-strong)", fontWeight: "var(--weight-semibold)", fontVariantNumeric: "tabular-nums" } }, valueFormat(s.value)), showConversion && i ? /* @__PURE__ */ React.createElement("span", { style: { width: 48, textAlign: "right", font: "var(--weight-regular) 12px/16px var(--font-sans)", color: "var(--text-muted)", fontVariantNumeric: "tabular-nums" } }, pct(+s.value || 0, prev)) : showConversion ? /* @__PURE__ */ React.createElement("span", { style: { width: 48 } }) : null),
+        /* @__PURE__ */ React.createElement("div", { style: { height: 24, background: "var(--surface-sunken)", borderRadius: 4 } }, /* @__PURE__ */ React.createElement("div", { style: {
+          width: w + "%",
+          height: "100%",
+          borderRadius: "0 4px 4px 0",
+          background: s.color || CHART_SEQ[Math.min(i, CHART_SEQ.length - 1)],
+          opacity: active == null || active === i ? 1 : 0.4,
+          transition: "opacity var(--duration-fast, 150ms) var(--ease-standard, ease)"
+        } }))
+      );
+    }),
+    active != null && stages[active] ? /* @__PURE__ */ React.createElement(
+      ChartTooltip,
+      {
+        x: Math.min(width - 96, Math.max(96, (+stages[active].value || 0) / max * width / 2)),
+        y: active * (ROW + GAP) - 4,
+        containerWidth: width,
+        title: stages[active].label,
+        rows: [
+          { label: "Count", value: valueFormat(stages[active].value) },
+          ...active ? [{ label: "Of previous stage", value: pct(+stages[active].value || 0, +stages[active - 1].value || 0) }] : [],
+          ...active ? [{ label: "Of " + stages[0].label, value: pct(+stages[active].value || 0, first) }] : []
+        ]
+      }
+    ) : null
+  );
+}
+Object.assign(__ds_scope, { FunnelChart });
+})(); } catch (e) { __ds_ns.__errors.push({ path: "components/charts/FunnelChart.jsx", error: String((e && e.message) || e) }); }
+/* @charts:end */
 
 // components/forms/Field.jsx
 try { (() => {
@@ -2047,6 +2799,22 @@ __ds_ns.Card = __ds_scope.Card;
 __ds_ns.DataTable = __ds_scope.DataTable;
 
 __ds_ns.StatCard = __ds_scope.StatCard;
+
+__ds_ns.Scrollbars = __ds_scope.Scrollbars;
+
+__ds_ns.ChartCard = __ds_scope.ChartCard;
+
+__ds_ns.BarChart = __ds_scope.BarChart;
+
+__ds_ns.LineChart = __ds_scope.LineChart;
+
+__ds_ns.DonutChart = __ds_scope.DonutChart;
+
+__ds_ns.Progress = __ds_scope.Progress;
+
+__ds_ns.Sparkline = __ds_scope.Sparkline;
+
+__ds_ns.FunnelChart = __ds_scope.FunnelChart;
 
 __ds_ns.Field = __ds_scope.Field;
 

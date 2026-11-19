@@ -1,0 +1,30 @@
+<!-- @dsCard group="Charts" height=300 subtitle="Bar and ring · track-default with a single fill" -->
+<!doctype html>
+<meta charset="utf-8">
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;padding:16px;background:var(--surface-page);color:var(--text-body);
+    font:400 16px/24px var(--font-sans,"Inter",system-ui,sans-serif);-webkit-font-smoothing:antialiased}
+  #root{display:grid;gap:16px;max-width:720px}
+</style>
+<div id="root"></div>
+<script>
+  (function () {
+    var ns = window.InternalDesignSystem, h = React.createElement;
+    var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    var money = function (v) { return "$" + Number(v).toLocaleString(); };
+    var k = function (v) { return "$" + (v >= 1000 ? (v / 1000).toFixed(v >= 10000 ? 0 : 1) + "K" : v); };
+
+    var view = h(ns.Card, { padding: "20px", style: { display: "grid", gap: 24 } },
+      h("div", { style: { display: "grid", gap: 16 } },
+        h(ns.Progress, { label: "Quarterly target", value: 742, max: 1000, valueLabel: "$742K of $1M" }),
+        h(ns.Progress, { label: "Installs scheduled", value: 38, max: 50 })
+      ),
+      h("div", { style: { display: "flex", flexWrap: "wrap", gap: 24 } },
+        h(ns.Progress, { variant: "ring", value: 74, label: "Of target" }),
+        h(ns.Progress, { variant: "ring", value: 9, max: 12, valueLabel: "9/12", size: 80, label: "Permits approved" })
+      ));
+
+    ReactDOM.createRoot(document.getElementById("root")).render(view);
+  })();
+</script>
