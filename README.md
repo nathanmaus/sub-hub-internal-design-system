@@ -1,6 +1,6 @@
 # Internal Design System
 
-SubHub's internal design system: the SubHub components, icon library and rules, with its own palette (deep teal and sand) and Fraunces headlines. **This repo is the source of truth for it.**
+SubHub's internal design system: the SubHub components, icon library and rules, with its own palette (desaturated teal, near-black night greys and sand) and Fraunces headlines. **This repo is the source of truth for it.**
 
 Owner: Nathan Maus (Principal UX Designer). Questions, missing icons, or anything that seems wrong: ask Nathan.
 
@@ -58,6 +58,7 @@ The repo is private. Engineers are added as collaborators. AI agents (Claude, Gr
 | `icons/` | The SubHub Icon Library, 272 icons as 24px SVGs exported from Figma. The source for the embedded copy in `bundle.js`; `icons/index.json` lists them. |
 | `assets/` | Logo files. The source for the embedded copy in `bundle.js`. |
 | `scripts/build-assets.mjs` | Embeds `icons/` and the logos into `bundle.js`. Run it after any icon or logo change. |
+| `scripts/build-colour-tokens.mjs` | Rebuilds the colours in `tokens.css` from `tokens.json`. Run it after any colour change; add `--check` to only test. |
 | `guidelines/` | Specimen cards for colour, type, spacing, radius, motion and motifs. |
 | `GUIDE.md` | The long-form system guide: voice, visual foundations, iconography. Read this before designing. |
 | `motion.md` | Motion specs for Tooltip, Toast and menus. |

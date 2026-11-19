@@ -66,13 +66,23 @@ Cross-cutting facts that shape copy and UI: three trades in one login (solar tra
 ## 3 · Visual foundations
 
 ### Color
-Two families and nothing else. **Sand `#D9B98A`** is the brand: primary actions, links in dark mode, the accent and the AI marker. Primary and accent are deliberately the same colour. **Teal** runs from `#EAF3F1` to `#0A2427` and carries all text, borders and grounds; `#0F3438` is the page in dark mode and the strongest text in light. Borders in dark mode use the neutral `#545655`.
+Two families and nothing else. **Sand `#D9B98A`** is the brand: primary actions, links in dark mode, the accent and the AI marker. Primary and accent are deliberately the same colour. **Teal** runs from `#F5F9F9` to `#172222` and carries all text, borders and light grounds; `#223131` is the strongest text in light. It is a desaturated, slate-leaning teal: every step keeps its lightness but carries about half the colour strength of the original board, so large dark areas never read as bright teal. **Night** (`night-950` `#0C0F0F` to `night-600` `#434949`) is that teal taken almost to black and almost to neutral: it carries the dark-mode grounds, cards and borders, so dark screens read as near-black with a trace of teal.
 
 Sand always takes a **teal label**, never white: white on sand is 1.9:1 and unreadable. That is what `text-on-brand` is for. Teal teal fills (dark buttons) take a light label, `text-on-teal`.
 
 Status colours (green, yellow, red) are functional and shared with SubHub. Info and neutral statuses use teal, since the palette has no sand.
 
 Use sand sparingly, as SubHub uses sand: zero or a couple of sand moments per screen beyond the primary action.
+
+### Color restraint
+Colour is a signal, so it is rationed. On dense screens (tables, lists, dashboards):
+
+- **One coloured pill per row, at most.** Everything else in the row uses the neutral pill (`status-neutral-bg` / `status-neutral-text`).
+- **Only urgent priority is coloured.** P0 uses the danger pill; P1, P2 and lower are neutral.
+- **Type, stage and category pills are always neutral.** They describe; they don't alert.
+- **Status gets colour only when it asks for action** (a warning such as "Revisit later", a failure), and only if the row has no other coloured pill.
+- **Active navigation is quiet:** `surface-brand-subtle` fill (`sand-900` in dark) with `sand-300` text, never a solid sand block. Solid sand is kept for the primary button.
+- In dark mode the status colours are deliberately softened (`red-300`, `yellow-300`, `green-300` on their `-900` fills, all 6.7:1 or better).
 
 ### Type
 Two faces. **Fraunces** for display and headings (hero to h2). **Inter** for everything else: body, buttons, UI labels, numbers, eyebrows. Buttons are Inter Medium at 12, 14 or 16px, not Fraunces; a serif on every control reads as decoration. Fraunces is a serif, so display type is tracked looser than a geometric sans would be: `-.02em` at hero, `-.015em` for display, `-.01em` at h1. Body is 16/1.45 at `-.005em`. The eyebrow stays: 12px Inter, uppercase, `.16em`.
@@ -93,10 +103,10 @@ Grounds are **flat** — no soft gradients, no photo washes, no noise or paper t
 Illustration is **isometric line art** — the solar-array site drawing, the braced tower. Never stock photos, never 3D renders, never emoji. Radial glows exist *only* inside the blueprint motif; they are not a general gradient license.
 
 ### Cards & borders
-A card is **white, 14px radius, 1px `--border-subtle` (teal-200), `--shadow-sm`** — border and shadow always together. Controls are 10px, panels 20px, pills 999px. Never a rounded card with a colored left border only. Borders are hairline (1px); `1.5px` exists only for a totals rule.
+A card is **white, 14px radius, 1px `--border-subtle` (teal-200), `--shadow-sm`** — border and shadow always together. In dark mode the card is `night-850` on the `night-950` page; the two are close on purpose, so the `night-750` hairline border is what holds the card's edge. Never drop it in dark. Controls are 10px, panels 20px, pills 999px. Never a rounded card with a colored left border only. Borders are hairline (1px); `1.5px` exists only for a totals rule.
 
 ### Shadows
-Cool-tinted, shallow, layered. `--shadow-sm` at rest, `--shadow-md` on an interactive card's hover, `--shadow-overlay` for dialogs. Nothing floats far off the page; there is no glow, no colored shadow. The only inner shadow is a 10%-white top inset for dark surfaces.
+Shallow and layered, tinted with the current teals: `teal-900` in light (`teal-950` for the overlay) and pure black in dark, so no shadow carries a colour the palette no longer has. `--shadow-sm` at rest, `--shadow-md` on an interactive card's hover, `--shadow-overlay` for dialogs. Nothing floats far off the page; there is no glow, no colored shadow. The only inner shadow is a 10%-white top inset for dark surfaces.
 
 ### Motion
 Fast and mechanical. 90ms press · 150ms color/hover · 220ms surface and toggle · 380ms panels. Easing is `cubic-bezier(.2,0,.2,1)` almost everywhere, `cubic-bezier(.16,1,.3,1)` for things that settle. No long fades, no scroll-triggered reveals. **Springs and bounces belong only to the components that specify them** — today, the Tooltip's entrance (stiffness 380, damping 19, mass 1; `--spring-tooltip`). Don't reach for them anywhere else; where else they're used will be defined as the system grows. The MainMenu opens in 200ms on `--ease-menu` with rows staggered 20ms apart. Both entrances are specified in full in the Motion section (`motion.md`).
@@ -108,16 +118,16 @@ Hover = **one step darker** in the same family (sand-400 → sand-700), or a fil
 Rare and specific. `--blur-panel` (14px) is used on the sticky marketing header over an 86%-white ground, and dialogs sit on a `--scrim-inverse` (62% teal) scrim. On dark surfaces, secondary fills are `rgba(255,255,255,.05–.12)`. Nothing else is translucent — no frosted cards, no glass.
 
 ### Imagery color vibe
-Deep teal grounds, sand highlights. Warm and calm rather than technical. When imagery is missing, use a flat teal panel, not a placeholder gradient.
+Near-black grounds, dark teal panels, sand highlights. Warm and calm rather than technical. When imagery is missing, use a flat `night-850` panel, not a placeholder gradient.
 
 ### Dark
 **Dark is this system's home theme**; the palette was defined dark-first and light mode is derived from it. Set `data-theme="dark"` on the root element.
 
-**Primitives do not change between modes.** `teal-900` is `#0F3438` in both themes; only the semantic layer repoints.
+**Primitives do not change between modes.** `teal-900` is `#223131` in both themes; only the semantic layer repoints. Dark grounds use the `night` ramp, so light-mode text colours are untouched by them.
 
-**Surfaces.** Dark: page `teal-900` (the board's Background), cards `teal-800` one step lighter so they separate, sunken wells `teal-950`. Light: page `teal-050`, cards white, sunken wells `teal-025`.
+**Surfaces.** Dark: page `night-950` (near-black), app chrome such as the sidebar `night-900`, cards `night-850` (dark teal) with a `night-750` border, sunken wells and table headers `night-920`, hover `night-800`. Light: page `teal-025`, cards white, sunken wells `teal-025` (the same tone as the page, so a well reads as a cut into the white card).
 
-**Sand holds; its supporting cast moves.** `sand-400` is the primary fill in both themes with a `teal-900` label at 7.2:1. Links are `sand-400` in dark but `sand-700` in light, because `sand-400` on white is 1.9:1. Hover lightens to `sand-300` in both themes; pressed is `sand-500` in light and `sand-200` in dark.
+**Sand holds; its supporting cast moves.** `sand-400` is the primary fill in both themes with a `teal-900` label at 7.3:1. Links are `sand-400` in dark but `sand-700` in light, because `sand-400` on white is 1.9:1. Hover lightens to `sand-300` in both themes; pressed is `sand-500` in light and `sand-200` in dark.
 
 **Contrast holds in both.** Every text pair meets 4.5:1, tertiary pairs meet 3:1. Disabled states and borders are deliberately lower.
 
@@ -170,7 +180,7 @@ Not built yet (flag it rather than inventing one): Checkbox, Radio, Textarea, Di
 ## 6 · Open questions & flags
 
 1. **Logo recoloured, not redrawn.** The SubHub lockup uses the SubcontractorHub mark unchanged in shape, recoloured to teal and sand, with an Inter SemiBold "SubHub" wordmark. The original wordmark face was not labelled; Inter SemiBold was the closest match. Confirm it with whoever owns the brand files.
-2. **The palette was defined dark-first.** Light mode, the in-between ramp steps and the lifted dark card (`teal-800`) were derived, not supplied. Review them against real screens.
+2. **The palette was defined dark-first.** Light mode and the in-between ramp steps were derived, not supplied. Dark grounds moved to the `night` ramp (near-black page, dark teal cards) to cut saturation; `surface-ink`, `action-secondary` and `action-disabled-bg` still use `teal-700` in dark and may need the same treatment. Review against real screens.
 3. **Status colours are shared with SubHub.** Green, yellow and red are functional, not part of this palette. Info and neutral use teal.
 4. **Five icons are missing from the library.** `hard-hat`, `hourglass`, `kanban`, `layers` and `wallet` render the `placeholder` glyph until they are drawn in Figma.
 5. **HeroBanner's artwork and motifs come from SubHub.** They are recoloured to teal and sand but were designed for SubHub's brand.
